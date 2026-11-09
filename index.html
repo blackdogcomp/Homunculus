@@ -119,11 +119,55 @@ details.wmt{margin-top:12px}details.wmt summary{cursor:pointer;font-weight:700}
 .mgcard .ex{border-inline-start:4px solid #000;background:var(--key);padding:6px 10px;margin:8px 0;line-height:1.55}
 .mgcard .ds p{margin:6px 0;line-height:1.5}.mgcard .ds ul,.mgcard .ds ol{margin:6px 0;padding-inline-start:20px;line-height:1.45}
 .mgcard details{margin-top:8px}.mgcard summary{cursor:pointer;font-weight:700;font-size:14px}
+.rsearch{display:flex;flex-direction:column;gap:3px;margin-bottom:10px;font-size:13px;font-weight:800}
+.rsearch input{font:inherit;font-size:15px;padding:7px;border:1.5px solid #000;border-radius:4px;background:#fff;color:#000}
+.rbody details{border:1.5px solid #000;border-radius:6px;padding:6px 12px;margin-bottom:8px}
+.rbody summary{cursor:pointer;font-family:var(--display);font-weight:900;font-size:18px;padding:2px 0}
+.rbody h4{margin:12px 0 4px;font-size:16px}
+.rbody p,.rbody li{line-height:1.55}
+.rbody ul,.rbody ol{padding-inline-start:22px;margin:6px 0}
+.rbody table{margin:4px 0 8px}
+@media print{.rsearch{display:none!important}.rbody details{break-inside:avoid}}
+.gsearch{margin:6px 0 14px;position:relative}
+.gsearch label{display:block;font-weight:800;margin-bottom:4px}
+.gsearch input{width:100%;box-sizing:border-box;font:inherit;font-size:17px;padding:10px 12px;border:2px solid var(--ink);border-radius:6px;background:var(--paper);color:var(--ink)}
+#gRes{border:2px solid var(--ink);border-top:0;border-radius:0 0 6px 6px;max-height:60vh;overflow:auto;background:var(--paper);padding:4px 8px}
+#gRes ol{list-style:none;margin:0;padding:0}
+#gRes li{border-bottom:1px solid rgba(0,0,0,.15)}
+#gRes li button{all:unset;display:block;width:100%;box-sizing:border-box;padding:7px 4px;cursor:pointer;text-align:right}
+#gRes li button:hover,#gRes li button:focus-visible{background:rgba(0,0,0,.06);outline:none}
+#gRes small{display:block;opacity:.8;line-height:1.4}
+#gRes .tag{display:inline-block;border:1px solid var(--ink);border-radius:999px;padding:0 8px;font-size:12px}
+#gRes .itemd{padding:4px 10px 10px;border-inline-start:3px solid var(--ink);margin:0 4px 8px}
+mark{background:#ffe680;color:inherit}
+.hint2{font-size:14px;opacity:.8;margin:4px 0}
+.gen{border:1px dashed var(--ink);border-radius:6px;padding:8px 12px;margin:10px 0}
+.gen h3{margin:0 0 6px;font-size:18px}
+.gen label,.calc label{display:inline-flex;gap:6px;align-items:center;margin-inline-end:10px;font-weight:700}
+.gen select,.calc select{font:inherit;padding:6px;border:2px solid var(--ink);border-radius:4px;background:var(--paper);color:var(--ink)}
+#pTreasure .act,#pDungeon .act,#pDm .act{display:inline-block!important}
+.gen .row,.calc{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:6px 0}
+ul.res{padding-inline-start:20px;line-height:1.6}
+.miss{opacity:.55}
+.rooms{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:8px;margin-top:8px}
+.room{border:2px solid var(--ink);border-radius:6px;padding:6px 10px;cursor:pointer}
+.room h4{margin:2px 0 4px}
+.room p{margin:4px 0;line-height:1.45}
+.lnk{font:inherit;font-size:13px;border:1px solid var(--ink);border-radius:999px;background:var(--paper);color:var(--ink);padding:1px 10px;cursor:pointer}
+a.xl{color:inherit;text-decoration:underline dotted;text-underline-offset:3px}
+a.xl:hover{text-decoration-style:solid}
+ul.tl{padding-inline-start:20px}ul.tl li{margin:6px 0;line-height:1.5}
+@keyframes fl{0%{background:#ffe680}100%{background:transparent}}
+.flash{animation:fl 2s ease-out}
+#homuBack{position:fixed;bottom:16px;inset-inline-start:16px;z-index:50;font:inherit;font-weight:800;font-size:16px;padding:10px 18px;border:2px solid var(--ink);border-radius:999px;background:var(--ink);color:var(--paper);cursor:pointer;box-shadow:0 2px 8px rgba(0,0,0,.25)}
+@media print{.gsearch,#homuBack,.gen{display:none!important}}
+
 </style>
 <meta name="claude:viewport-fit-sides" content="cover">
 <div class="wrap" dir="rtl" lang="he">
 <h1>הומונקולוס - כלי למנחה</h1>
-<p class="sub">מפגשים, מפלצות, אתרי הרפתקה, דמויות ללא שחקן, קסם פראי, לחשים וחפצים קסומים · סכנות ומפלצות</p>
+<p class="sub">מפגשים, מפלצות, אתרי הרפתקה, דמויות ללא שחקן, קסם פראי, לחשים, חפצים קסומים, חוקים, מקצועות, אוצר, מלכודות ונספחים · סכנות ומפלצות 1.6.1</p>
+<div class="gsearch" role="search"><label for="gQ">חיפוש בכל הספר</label><input id="gQ" type="search" autocomplete="off" placeholder="מפלצת, לחש, חפץ קסם, חוק, טבלה… (למשל: טרול, הפתעה, טבלה 8)"><div id="gRes" hidden></div></div>
 
 <div id="steps">
 <div class="panel">
@@ -131,13 +175,17 @@ details.wmt{margin-top:12px}details.wmt summary{cursor:pointer;font-weight:700}
  <div class="opts" id="optWhere" role="group" aria-label="טבלה">
   <button type="button" data-v="dungeon" aria-pressed="false">מפלצות משוטטות במבוך</button>
   <button type="button" data-v="wild" aria-pressed="false">מפלצות משוטטות בפרא</button>
-  <button type="button" data-v="vivand" aria-pressed="false">מפלצות משוטטות בויואנד</button>
   <button type="button" data-v="hd" aria-pressed="false">מפלצות לפי קוביות פגיעה</button>
   <button type="button" data-v="site" aria-pressed="false">מחולל יישוב, מבוך וטירה</button>
   <button type="button" data-v="npc" aria-pressed="false">מחולל דמויות ללא שחקן</button>
   <button type="button" data-v="wm" aria-pressed="false">תקלת קסם פראי</button>
    <button type="button" data-v="spells" aria-pressed="false">לחשים</button>
    <button type="button" data-v="magic" aria-pressed="false">גלגל חפצים קסומים</button>
+   <button type="button" data-v="rules" aria-pressed="false">חוקים כלליים</button>
+   <button type="button" data-v="classes" aria-pressed="false">מקצועות השחקן</button>
+   <button type="button" data-v="treasure" aria-pressed="false">אוצר</button>
+   <button type="button" data-v="rooms" aria-pressed="false">חדרים, תחבולות ומלכודות</button>
+   <button type="button" data-v="dm" aria-pressed="false">למנחה ונספחים</button>
  </div>
 </div>
 
@@ -159,6 +207,560 @@ details.wmt{margin-top:12px}details.wmt summary{cursor:pointer;font-weight:700}
 </div>
 
 
+<div class="panel hide" id="pRules">
+ <h2><span class="no">2</span>חוקים כלליים</h2>
+ <div class="rsearch"><label for="rulesQ">חיפוש בחוקים</label><input id="rulesQ" type="search" placeholder="למשל: הפתעה, לפיד, נקודות מזל"></div>
+ <div class="rbody" id="rulesBody">
+
+ <details open><summary>חוקי קרב</summary>
+ <ul>
+  <li><b>ירי לתוך קרב:</b> לכל המשתתפים בקרב יש סיכוי לספוג את הירייה לפי גודלם: יצור קטן 1, אדם 2, גדול 3, ענק 4. למשל, אם גמד (1), אורק (2) ועוג (3) נלחמים ומישהו יורה לתוך הקרב, המנחה מגלגל ק6: 1 – הגמד, 2–3 – האורק, 4–6 – העוג.</li>
+  <li><b>התמקדות בירי:</b> דמות שלא רוצה לפגוע בחבריה יכולה לכוון סבב אחד. בסבב הבא היא יורה במי שבחרה, בלי סכנה של "אש ידידותית".</li>
+  <li><b>מוראל (רוח לחימה):</b> כשמפלצת או דמות ללא שחקן נפצעת, או לפי שיקול המנחה, מגלגלים 2ק6. תוצאה גבוהה מערך המוראל – היא נכנעת או בורחת.</li>
+  <li><b>התקפה בנגיעה:</b> כדי רק לגעת ביריב (לחש במגע, שיקוי שנשפך עליו) מגלגלים התקפה רגילה מול דרג שריון 10. מוסיפים רק את תוסף הזריזות והקסם של היריב, בלי שריון ומגן.</li>
+  <li><b>להילחם עם לפיד:</b> לפיד דולק גורם ק4, כבוי גורם ק2. נשק ליד אחת לקרב פנים אל פנים, מחיר 2 מ"כ. אם הדמות השליכה קודם חומר בערה על היריב (גלגול התקפה רגיל) ואז לפיד – ק8 נזק בסבב הראשון, ועוד ק8 בסבב השני אם המטרה לא השקיעה סבב בכיבוי האש.</li>
+  <li><b>מים קדושים:</b> צלוחית שבירה שמטילים ביריב. ק8 נזק לאל־מתים ולשדים (המנחה יודע על אילו יצורים עוד). טווח: קצר עד 4 מ׳, בינוני עד 10 מ׳, ארוך עד 16 מ׳. מחיר 25 מ"ז. רק כוהן בדרגה 9 ומעלה יכול להכין מים קדושים.</li>
+  <li><b>התקפות מרובות:</b> לוחם מקבל 3 התקפות ב־2 סבבים בדרגה 7, ו־2 התקפות בסבב בדרגה 12.</li>
+  <li><b>חוק טווח (רשות):</b> בטווח קרוב +1 להתקפה, בבינוני בלי תוסף, ברחוק −1. המנחה רשאי לוותר על החוק אם הוא מסורבל.</li>
+  <li><b>לחימה בשני כלי נשק:</b> מותרת לכל מקצוע. הנשק השני חייב להיות קטן מהראשון (חוץ מצמד פגיונות). −2 לנשק הראשי ו־−5 לנשק השני.</li>
+  <li><b>בולה:</b> רשת חבלים עם אבן בכל פינה, שמסובבים ומשליכים על היריב. בפגיעה, יריב עד 5 קב"פ מגלגל הצלה מפני מוות או מסתבך (לא פועל באותו סבב). יריב עם 6 קב"פ ומעלה מגלגל הצלה מפני מוות או מואט (פועל, אבל נע בחצי מהירות ועם עונש להתקפה).</li>
+  <li><b>הפתעה:</b> מגלגלים ק6. בתוצאה של 1–2 הדמות מופתעת (יש מפלצות שהסיכוי שלהן גבוה יותר). דמות מופתעת מפסידה אוטומטית ביוזמה, אבל לא את הסבב.</li>
+  <li><b>נסיגה:</b> דמות שנסוגה תוך שמירה על עצמה מקבלת −2 ליוזמה. אם אחרי סבב כזה לפחות היא בורחת, ההתקפה נגדה היא בלי התוספים של "הימלטות".</li>
+  <li><b>הימלטות:</b> מי שבורח סופג התקפת הזדמנות: +2 להתקפה, ובלי להתחשב במגן בדרג השריון.</li>
+ </ul>
+ </details>
+
+ <details><summary>תנועה, מחייה, ריפוי והחייאה</summary>
+ <ul>
+  <li><b>תנועה במבוך:</b> 12 מ׳ לסבב לאדם, 9 מ׳ לסבב לגמדים ולבני מחצית.</li>
+  <li><b>תנועה בפרא:</b> 20–30 ק"מ ביום בשטח נוח, פי 2 על דרך מתוחזקת.</li>
+  <li><b>עלות מחייה חודשית:</b> חיים צנועים 10 מ"ז, רגילים 30 מ"ז, חיי מותרות 90 מ"ז ומעלה. כולל מזון ולינה.</li>
+  <li><b>ריפוי טבעי:</b> ק4 נק"פ לכל יום מנוחה מלא, בלי מסע ובלי קרב.</li>
+  <li><b>החייאה:</b> הלחש "החייאת מת", מכוהן בדרגה 10 ומעלה. המת חוזר עם נקודת פגיעה אחת, וצריך שבועיים במיטה לפני שיוכל להילחם או להטיל לחשים. עלות: תרומה של 1,000 מ"ז לכל דרגה של המת למקדש, או שליחות עבורו. אחרי החייאה החוסן יורד בנקודה. אפשר לחזור לחיים מספר פעמים כמו ערך החוסן המקורי.</li>
+  <li><b>לחשים ושינה:</b> כשקוסם או כוהן נרדמים, הלחשים שלא הוטלו נשכחים, וחוזרים רק אחרי שינון מחדש או תפילת בוקר – כשעה. קוסם שהתעורר בבהלה ממפלצת משוטטת אינו מחזיק לחשים, אלא אם יש לו מגילה.</li>
+ </ul>
+ </details>
+
+ <details><summary>משחק 1 על 1 (מנחה מול שחקן)</summary>
+ <h4>1. הדמות שורדת יותר</h4>
+ <ul>
+  <li><b>מלווה חינם:</b> הדמות מתחילה עם מלווה אחד, לוחם בדרגה 1. השחקן מפעיל אותו בקרב, והמנחה קובע את אופיו ומשמיע את קולו. המלווה מקבל חצי נק"ן, ונאמנותו לפי טבלת הכריזמה.</li>
+  <li><b>נק"פ מרביות בדרגה 1:</b> הדמות מקבלת בדרגה הראשונה את המספר המרבי בקוביית הפגיעה, ועוד תוסף החוסן. אפשר גם להתחיל ישר בדרגה 2.</li>
+  <li><b>סף המוות:</b> דמות שיורדת ל־0 נק"פ לא מתה מיד. היא מחוסרת הכרה ומגלגלת הצלה מפני מוות או רעל בכל סבב. בהצלחה היא נשארת חיה עם 1 נק"פ. בכישלון השלישי היא מתה.</li>
+ </ul>
+ <h4>2. נקודות מזל</h4>
+ <ul>
+  <li>בכל הרפתקה השחקן מקבל 3 נקודות מזל, ועוד תוסף הכריזמה אם הוא חיובי.</li>
+  <li>נקודה אחת מאפשרת לגלגל מחדש קובייה אחת של השחקן: התקפה, הצלה או יכולת גנב.</li>
+  <li>אפשר גם לבזבז נקודה כדי להפוך מכה קטלנית לפגיעה רגילה.</li>
+  <li>נקודות שלא נוצלו אובדות בסוף ההרפתקה.</li>
+ </ul>
+ <h4>3. התאמת המפגשים</h4>
+ <ul>
+  <li><b>מספר מופיעים:</b> המספר הנמוך ביותר, או לגלגל ולחלק בשניים.</li>
+  <li><b>מפלצות משוטטות:</b> בדיקה כל 4 תורות במבוך, במקום כל 2.</li>
+  <li><b>מוראל:</b> בודקים כבר אחרי הפגיעה הראשונה במפלצת. כך יותר קרבות נגמרים בבריחה ולא בהרג.</li>
+  <li><b>בריחה:</b> אם הדמות יכולה להגיע למקום אחר במבוך, המפלצת רודפת אחריה רק בתוצאה של 1–3 בק6.</li>
+ </ul>
+ <h4>4. הדמות לא תלויה בחבורה</h4>
+ <ul>
+  <li><b>יכולות בסיס לכולם:</b> כל דמות יכולה לנסות לפתוח מנעול, למצוא מלכודת או להקשיב ליד דלת. הצלחה בתוצאה של 1 בק6. גנב משתמש בטבלה שלו.</li>
+  <li><b>ריפוי קצר:</b> פעם ביום, אחרי תור שלם של מנוחה, הדמות מרפאה ק4 נק"פ.</li>
+  <li><b>קוסם או כוהן לבד:</b> בדרגה 1 הקוסם יודע לחש נוסף אחד, והכוהן מטיל לחש אחד בעוצמה 1 כבר מדרגה 1.</li>
+ </ul>
+ </details>
+
+ <details><summary>נספח: גזע הראקאסטה</summary>
+ <p>הראקאסטה נראים כמו הכלאה בין בני אדם לחתולים גדולים. בסכנות ומפלצות הם גזע־מקצוע, כמו גמד או אלף. הם הולכים זקופים, גובהם כ־1.7 מ׳ ומשקלם כ־60 ק"ג, במבנה דק וחינני כמו של אלף. הם טורפים ואוכלים רק בשר; לעתים רחוקות הם טועמים צמחי מרפא או עשבים, בגלל טעמם או סגולתם.</p>
+ <p>הראקאסטה לא יוצאים להרפתקאות בשביל אוצר, אלא כדי להוכיח גבורה וכישורי קרב. הם אינם עם רשע, אבל גאים ואוהבים קרב, מעריכים מאוד כבוד אישי ומוניטין, וממהרים להילחם כשהם מרגישים שנעלבו או שנעשה להם עוול.</p>
+ <h4>קוביות פגיעה ומגבלות</h4>
+ <ul>
+  <li><b>תכונה ראשית:</b> זריזות. <b>דרישה:</b> כוח 9 לפחות. <b>קוביית פגיעה:</b> ק8. <b>דרגה מרבית:</b> 10.</li>
+  <li><b>שריון:</b> לא לובשים שריון לוחות. שריון שרשראות ושריון עור מותרים. סגנון הלחימה וקוד הכבוד אוסרים מגן בקרב.</li>
+  <li><b>נשק:</b> לעולם לא נשק קהה (כמו פטישים) או נשק קיצוץ (כמו גרזנים) – בעיניהם אלה כלי עבודה.</li>
+ </ul>
+ <div class="tw"><table>
+  <tr><th>דרגה</th><th>תואר</th><th>נק"ן</th><th>קב"פ</th><th>תוסף קרב</th></tr>
+  <tr><td>1</td><td>הייטאי</td><td>0</td><td>ק8</td><td>0</td></tr>
+  <tr><td>2</td><td>גונסו</td><td>2,200</td><td>2ק8</td><td>0</td></tr>
+  <tr><td>3</td><td>שיקישה</td><td>4,400</td><td>3ק8</td><td>0</td></tr>
+  <tr><td>4</td><td>טאישו</td><td>8,800</td><td>4ק8</td><td>+2</td></tr>
+  <tr><td>5</td><td>צ'יו</td><td>17,000</td><td>5ק8</td><td>+2</td></tr>
+  <tr><td>6</td><td>האטאמוטו</td><td>35,000</td><td>6ק8</td><td>+2</td></tr>
+  <tr><td>7</td><td>קאשירה</td><td>70,000</td><td>7ק8</td><td>+4</td></tr>
+  <tr><td>8</td><td>יוריקי</td><td>130,000</td><td>8ק8</td><td>+4</td></tr>
+  <tr><td>9</td><td>טונו</td><td>260,000</td><td>9ק8</td><td>+4</td></tr>
+  <tr><td>10</td><td>דאימיו</td><td>390,000</td><td>9ק8 +2</td><td>+6</td></tr>
+ </table></div>
+ <h4>טורצומה ונשקים</h4>
+ <p>הנשק האהוב של הראקאסטה הוא הטורצומה: כפפות עור עם שורת להבי מתכת חדים על האצבעות. ראקאסטה עם טורצומה תוקף פעמיים בכל סבב; כל התקפה +1 לפגיעה וק4 נזק. מי שאינו ראקאסטה יכול להילחם בטורצומה, אבל תוקף פעם אחת בסבב. בלי טורצומה, הראקאסטה מעדיפים טאנטו, ואקיזאשי וקטאנה.</p>
+ <div class="tw"><table>
+  <tr><th>נשק</th><th>נזק</th><th>גודל</th><th>משקל</th><th>מחיר</th></tr>
+  <tr><td>טאנטו (פגיון)</td><td>ק4</td><td>קטן</td><td>0.5 ק"ג</td><td>3 מ"ז</td></tr>
+  <tr><td>ואקיזאשי (חרב קצרה)</td><td>ק6</td><td>קטן</td><td>1.5 ק"ג</td><td>7 מ"ז</td></tr>
+  <tr><td>קטאנה (חרב ארוכה)</td><td>ק8</td><td>בינוני</td><td>3 ק"ג</td><td>10 מ"ז</td></tr>
+  <tr><td>טורצומה (כפפות טפרים)</td><td>ק4</td><td>קטן</td><td>0.25 ק"ג</td><td>15 מ"ז</td></tr>
+ </table></div>
+ <h4>יכולות מיוחדות</h4>
+ <div class="tw"><table>
+  <tr><th>דרגה</th><th>יכולת</th><th>מה היא עושה</th></tr>
+  <tr><td>1</td><td>ראייה בחושך</td><td>18 מ׳, כמו לגמדים ולאלפים.</td></tr>
+  <tr><td>2</td><td>נשיכה</td><td>בנוסף להתקפות הטורצומה, אבל לא עם שום התקפה אחרת. רק נגד אויב בלי שריון. נזק ק4.</td></tr>
+  <tr><td>4</td><td>נחיתת חתול</td><td>תמיד נוחת על הרגליים. נזק נפילה בחצי, מעוגל כלפי מטה.</td></tr>
+  <tr><td>6</td><td>חושי צייד</td><td>מופתע רק בתוצאה של 1 בק6, ולא 1–2.</td></tr>
+  <tr><td>8</td><td>אמן הטורצומה</td><td>נזק כל התקפת טורצומה עולה ל־ק6.</td></tr>
+ </table></div>
+ <p class="note"><b>קוד הכבוד:</b> ראקאסטה שבורח מקרב שיכול היה לנצח בו, תוקף יריב שהשתחווה לו בלי להשתחוות בחזרה, או מפר הבטחה – מאבד את חושי הצייד ואת אמנות הטורצומה עד שיכפר על כך במעשה גבורה שהמנחה קובע.</p>
+ <h4>גלגולי הצלה</h4>
+ <div class="tw"><table>
+  <tr><th>דרגות</th><th>מוות או רעל</th><th>שרביט קסם</th><th>שיתוק או התאבנות</th><th>נשיפת דרקון</th><th>מוט, מטה או לחש</th></tr>
+  <tr><td>1–3</td><td>13</td><td>14</td><td>13</td><td>16</td><td>15</td></tr>
+  <tr><td>4–5</td><td>11</td><td>12</td><td>11</td><td>14</td><td>13</td></tr>
+  <tr><td>6–8</td><td>9</td><td>10</td><td>9</td><td>12</td><td>11</td></tr>
+  <tr><td>9–10</td><td>7</td><td>8</td><td>7</td><td>10</td><td>9</td></tr>
+ </table></div>
+ </details>
+ </div>
+ <p class="hint" id="rulesNone" hidden>לא נמצא חוק שמתאים לחיפוש.</p>
+</div>
+
+<div class="panel hide" id="pClasses">
+ <h2><span class="no">2</span>מקצועות השחקן</h2>
+ <div class="rsearch"><label for="clsQ">חיפוש</label><input id="clsQ" type="search" placeholder="למשל: גנב, דרג שריון, גירוש"></div>
+ <div class="rbody" id="clsBody">
+
+ <details><summary>מדריך ליצירת דמות</summary>
+ <p>יצירת דמות ראשונה נמשכת כשעה; אחרי שמתרגלים, 10 עד 30 דקות. המנחה צריך לראות את כל הגלגולים. כדאי ליצור דמויות לפני מפגש המשחק.</p>
+ <ol>
+  <li><b>גלגול תכונות:</b> 3ק6 לכל אחת משש התכונות, ערך 3 עד 18 (טבלה 1). כוח – פגיעה ונזק בקרב פנים אל פנים, ופריצת דלתות. תבונה – שפות. חוכמה – הצלות מפני לחשים. זריזות – פגיעה בנשק ירי ודרג שריון. חוסן – נק"פ לכל קוביית פגיעה. כריזמה – תגובת דמויות המנחה, מספר המלווים ונאמנותם.</li>
+  <li><b>בחירת מקצוע:</b> 11 מקצועות. בני אדם: כוהן, לוחם, קוסם, גנב (פתוחים לכולם) ודרואיד, סייר, פלדין, מיסטיקן (בתנאים; המנחה רשאי לא לאפשר). דמויי־אדם: גמד, אלף, בן־מחצית – הגזע הוא המקצוע; נדירים יותר, דורשים תכונות גבוהות ומגיעים לדרגה מרבית נמוכה. לכל מקצוע תכונה ראשית (או שתיים) שמשפיעה על הנק"ן (חוץ ממיסטיקן, סייר ופלדין).</li>
+  <li><b>התאמת תכונות (רשות, רק עכשיו):</b> כל 2 נקודות שיורדות מתכונה מעלות את התכונה הראשית בנקודה. אסור להוריד חוסן או כריזמה. אסור להוריד זריזות, אבל גנב ובן־מחצית רשאים להעלות אותה. שום תכונה לא יורדת מתחת ל־9, ותכונה שערכה 10 או פחות לא יורדת בכלל.</li>
+  <li><b>נקודות פגיעה:</b> קוביית הפגיעה של המקצוע (טבלה 4) ועוד תוסף החוסן, לפחות 1 בכל גלגול. קובייה נוספת בכל דרגה עד 9; מדרגה 10 מספר קבוע לכל דרגה, בלי תוסף חוסן.</li>
+  <li><b>כסף התחלתי:</b> 3ק6 כפול 10 מ"ז. 1 מ"ז = 10 מ"כ = 100 מ"נ. הדמות מתחילה עם בגדים רגילים בלבד.</li>
+  <li><b>קניית ציוד:</b> לפי מגבלות המקצוע (קוסם לא לובש שריון, גנב צריך כלי גנב). מה שלא נקנה לא יהיה בהרפתקה. <b>לחשים:</b> קוסם ואלף יודעים לחש אחד בדרגה 1 ומקבלים ספר לחשים מהמורה. כוהן ודרואיד מקבלים את הלחש הראשון בדרגה 2, בלי ספר.</li>
+  <li><b>דרג שריון (עולה):</b> בלי שריון 10. השריון קובע את הבסיס, מגן +1, ומוסיפים את תוסף הזריזות (או מורידים את העונש). דוגמה: שריון שרשראות (14), מגן (+1) וזריזות 15 (+1) = 16. דרג שריון ישן הופכים כך: 19 פחות המספר שבספר.</li>
+  <li><b>התקפה:</b> ק20 + תוסף קרב (טבלה 8) + תוסף כוח בקרב פנים אל פנים או תוסף זריזות בנשק ירי + תוסף קסם. שווה לדרג השריון או יותר – פגיעה. 1 טבעי תמיד מחטיא, 20 טבעי תמיד פוגע. נזק: קוביית הנשק ועוד תוסף הכוח בקרב פנים אל פנים.</li>
+  <li><b>גלגולי הצלה:</b> ק20, צריך להגיע למספר שבטבלה 9 או יותר. חמישה סוגים: מוות או רעל; שרביט קסם (וגם רוב המלכודות); שיתוק או התאבנות; נשיפת דרקון (נזק סביבתי כמו כדור אש); מוט, מטה או לחש. תוסף החוכמה חל על הצלות מפני לחשים.</li>
+  <li><b>נטייה:</b> חוק (סדר, אמת, הבטחות), ניטרליות (איזון, קודם כל עצמו), תוהו (היחיד קודם, הבטחות לא חשובות). השחקן מגלה למנחה, לא חייב לגלות לשאר השחקנים.</li>
+  <li><b>שם, אופי ורקע:</b> שם שמתאים לעולם, ורקע שקובעים יחד עם המנחה.</li>
+  <li><b>נק"ן ועלייה בדרגה:</b> בסוף מפגש או הרפתקה מוסיפים את תוסף הנק"ן (טבלה 5); מגיעים למספר שבטבלה 6 – עולים בדרגה. לא יותר מדרגה אחת בהרפתקה; העודף נעצר נקודה לפני הדרגה הבאה. דרגה מרבית 14; גמד 12, אלף 10, בן־מחצית 8.</li>
+ </ol>
+ </details>
+
+ <details><summary>המקצועות</summary>
+ <h4>כוהן</h4>
+ <p>הקדיש את חייו למטרה נעלה, לרוב לנטייתו. כל שריון ומגן. רק נשק בלי להב ובלי חוד (גם לא קשת או רובה קשת). מגרש אל־מתים (טבלה 7), ומדרגה 2 מטיל לחשי כוהן בלי ספר לחשים.</p>
+ <h4>לוחם</h4>
+ <p>מומחה לקרב, הרבה נק"פ. כל שריון, מגן וכל נשק. 3 התקפות ב־2 סבבים בדרגה 7, ושתי התקפות בסבב בדרגה 12.</p>
+ <h4>קוסם</h4>
+ <p>חלש בהתחלה וחזק מאוד בהמשך. בלי שריון ובלי מגן; נשק: פגיון בלבד. מטיל לחשי קוסם מתוך ספר לחשים (טבלה 11).</p>
+ <h4>גנב</h4>
+ <p>מומחה להתגנבות, למנעולים ולמלכודות. שריון עור בלבד, בלי מגן. כל נשק ירי וכל נשק קרב ביד אחת.</p>
+ <ul>
+  <li><b>יכולות גנב (טבלה 12):</b> ק100, הצלחה בתוצאה שווה לאחוז או נמוכה ממנו.</li>
+  <li><b>דקירה מאחור:</b> נגד קורבן מופתע, +4 להתקפה ונזק כפול.</li>
+  <li><b>דרגה 4:</b> קורא שפות בסיכוי 80%. <b>דרגה 10:</b> מטיל לחשי קוסם ממגילות, עם 10% שהלחש ישתבש.</li>
+ </ul>
+ <h4>דרואיד</h4>
+ <p>שומר הטבע. מתחיל בדרגה 1 ומתקדם כמו כוהן (נק"ן, קוביות פגיעה, תוסף קרב, הצלות). נטיית ניטרליות בלבד.</p>
+ <ul>
+  <li><b>שריון ונשק:</b> שריון עור ומגן מעץ ועור. נשק בלי להב, בלי חוד ובלי מתכת.</li>
+  <li><b>לחשים:</b> מספר לחשים ביום כמו כוהן, מרשימת הכוהן ומרשימת הדרואיד, בלי לחשים שפועלים על טוב ורע.</li>
+  <li><b>מגבלות:</b> אינו מגרש אל־מתים, וחי בטבע.</li>
+ </ul>
+ <h4>סייר</h4>
+ <p>בן הטבע והגבול, צייד וגשש. דורש חוסן 9 וחוכמה 9. מתקדם כמו לוחם בנק"ן ובתוסף קרב, ומגלגל הצלות כמו גנב. כל שריון חוץ משריון לוחות, מגן, וכל נשק.</p>
+ <ul>
+  <li><b>ערנות:</b> מופתע רק בתוצאה של 1.</li>
+  <li><b>ליקוט וציד:</b> ליקוט מזון 2 מתוך 6, ציד 5 מתוך 6, לכל החבורה.</li>
+  <li><b>התקפת הפתעה:</b> בטבע, מתגנב אל המטרה ב־3 מתוך 6.</li>
+  <li><b>הרגעת חיות:</b> 10% לכל דרגה להרגיע חיית פרא בטריטוריה שלה. לוקח סבב.</li>
+  <li><b>גששות:</b> בסיס 30%. קרקע רכה עד +20%, קשה עד −50%. +2% לכל יצור מעבר לראשון. עקבות מעורבבות −50%. −5% לכל 12 שעות. גשם −25% לכל שעה. ניסיון להסתיר −25%.</li>
+  <li><b>רכוש מוגבל:</b> רק מה שנושאים על הגוף או על חיית הרכיבה. העודף נתרם, לא לדמויות שחקן.</li>
+  <li><b>שיתוף פעולה עם הרשע:</b> מאבד את כל יכולותיו והופך ללוחם רגיל, עד שישלים משימה קשה במיוחד.</li>
+ </ul>
+ <h4>פלדין</h4>
+ <p>לוחם קדוש של החוק. דורש כוח 13 וכריזמה 17. בכל השאר כמו לוחם (נק"ן, קוביות פגיעה, תוסף קרב, הצלות, שריון ונשק).</p>
+ <ul>
+  <li><b>הנחת ידיים:</b> פעם ביום, 2 נק"פ לכל דרגה.</li>
+  <li><b>זיהוי רשע:</b> לוקח תור.</li>
+  <li><b>גירוש אל־מתים:</b> כמו כוהן בשתי דרגות פחות, מדרגה 3.</li>
+  <li><b>חסינות למחלות</b>, ו־+2 לכל גלגולי ההצלה.</li>
+  <li><b>מגבלות:</b> נשק קסום אחד ושריון קסום אחד, ועד 4 חפצים קסומים. קוד כבוד נוקשה, נטיית חוק בלבד.</li>
+ </ul>
+ <h4>מיסטיקן</h4>
+ <p>נזיר לוחם שנלחם בידיים. דורש חוכמה 13 וזריזות 13. בלי שריון ובלי מגן; דרג השריון עולה עם הדרגה (טבלה 13).</p>
+ <ul>
+  <li><b>קרב בידיים:</b> התקפות ונזק לפי טבלה 13. מדרגה 2 פוגע כנשק כסף, ומדרגה 5 כנשק קסום.</li>
+  <li><b>יכולות גנב:</b> מציאת מלכודות ופירוקן, טיפוס, תנועה בדממה והסתתרות בצללים, כמו גנב באותה דרגה.</li>
+  <li><b>דרגה 2, ערנות:</b> מופתע רק בתוצאה של 1 בק6. <b>דרגה 4, ריפוי עצמי:</b> פעם ביום, נק"פ כמספר הדרגה.</li>
+  <li><b>דרגה 6:</b> דיבור עם בעלי חיים, 10 דקות פעם ביום. <b>דרגה 8, עמידות:</b> חצי נזק מלחשים ומנשיפות.</li>
+  <li><b>דרגה 10:</b> דיבור עם כל יצור חי, כולל צמחים, 10 דקות פעם ביום. <b>דרגה 12, חסימת תודעה:</b> חסין לקריאת מחשבות, להקסמה ולשיתוק.</li>
+  <li><b>דרגה 14, היעלמות:</b> פעם ביום, לפי הלחש.</li>
+ </ul>
+ <h4>גמד</h4>
+ <p>נמוך וחסון, עמיד לקסם. דורש חוסן 9. כל שריון ומגן.</p>
+ <ul>
+  <li><b>נשק:</b> כל נשק קרב קטן או בינוני, קשת קצרה ורובה קשת. בלי קשת ארוכה.</li>
+  <li><b>ראיית חום:</b> עד 20 מ׳.</li>
+  <li><b>גילוי:</b> מלכודות בבנייה, קירות זזים, מעברים משופעים ובנייה חדשה, בתוצאה של 1–2 בק6, רק כשמחפש.</li>
+  <li><b>שפות:</b> גמדית, שפת הגנומים, גובלינית, שפת הקובולדים. <b>דרגה 12:</b> שתי התקפות בסבב.</li>
+ </ul>
+ <h4>אלף</h4>
+ <p>חיבור של לוחם וקוסם. דורש תבונה 9. כל שריון, מגן וכל נשק, ומטיל לחשי קוסם גם בשריון.</p>
+ <ul>
+  <li><b>ראיית חום:</b> עד 20 מ׳. <b>גילוי:</b> דלתות סודיות ונסתרות בתוצאה של 1–2 בק6.</li>
+  <li><b>חסינות:</b> לשיתוק של גועלים. <b>שפות:</b> אלפית, שפת הנולים, שפת ההובגובלינים, אורקית.</li>
+ </ul>
+ <h4>בן־מחצית</h4>
+ <p>קטן ובן הכפר. דורש זריזות 9 וחוסן 9. שריון שהותאם לו ומגן.</p>
+ <ul>
+  <li><b>נשק:</b> נשק קרב קטן או בינוני, קשת קצרה ורובה קשת קל. בלי נשק דו־ידני.</li>
+  <li><b>בקרב:</b> +2 לדרג השריון מול יצורים גדולים מאדם, +1 לפגוע בנשק ירי, +1 ליוזמה אישית.</li>
+  <li><b>הסתתרות:</b> בטבע 90% כשאינו זז; בתוך מבנה 33%, בצל עמוק.</li>
+ </ul>
+ </details>
+
+ <details><summary>טבלאות 1–3: תכונות, שפות וכריזמה</summary>
+ <h4>טבלה 1: תוספים ועונשים לתכונות</h4>
+ <div class="tw"><table><tr><th>ערך</th><th>3</th><th>4–5</th><th>6–8</th><th>9–12</th><th>13–15</th><th>16–17</th><th>18</th></tr>
+ <tr><td>תוסף</td><td>−3</td><td>−2</td><td>−1</td><td>אין</td><td>+1</td><td>+2</td><td>+3</td></tr></table></div>
+ <h4>טבלה 2: תבונה ושפות</h4>
+ <div class="tw"><table><tr><th>תבונה</th><th>שפות</th></tr>
+ <tr><td>3</td><td>מתקשה לדבר, אינו קורא ואינו כותב</td></tr><tr><td>4–5</td><td>אינו קורא ואינו כותב את השפה המשותפת</td></tr><tr><td>6–8</td><td>כותב מילים פשוטות בשפה המשותפת</td></tr><tr><td>9–12</td><td>קורא וכותב את שפות האם</td></tr><tr><td>13–15</td><td>שפה נוספת אחת</td></tr><tr><td>16–17</td><td>שתי שפות נוספות</td></tr><tr><td>18</td><td>שלוש שפות נוספות</td></tr></table></div>
+ <p><b>שפות לבחירה (ק10):</b> 1 אלפית, 2 גמדית, 3 לטאישית, 4 ענקית, 5 דרקונית, 6 אורקית, 7 גובלינית, 8 הרפית, 9 שפת יצורי יער, 10 טרולית.</p>
+ <h4>טבלה 3: כריזמה</h4>
+ <div class="tw"><table><tr><th>כריזמה</th><th>תוסף תגובה</th><th>מספר מלווים</th><th>נאמנות המלווים</th></tr>
+ <tr><td>3</td><td>−3</td><td>1</td><td>4</td></tr><tr><td>4–5</td><td>−2</td><td>2</td><td>5</td></tr><tr><td>6–8</td><td>−1</td><td>3</td><td>6</td></tr><tr><td>9–12</td><td>אין</td><td>4</td><td>7</td></tr><tr><td>13–15</td><td>+1</td><td>5</td><td>8</td></tr><tr><td>16–17</td><td>+2</td><td>6</td><td>9</td></tr><tr><td>18</td><td>+3</td><td>7</td><td>10</td></tr></table></div>
+ </details>
+
+ <details><summary>טבלאות 4–6: מקצועות, תוסף נק"ן ונק"ן לדרגה</summary>
+ <h4>טבלה 4: המקצועות</h4>
+ <div class="tw"><table><tr><th>מקצוע</th><th>תכונה ראשית</th><th>דרישות</th><th>קוביית פגיעה</th><th>נק"פ לכל דרגה מעל 9</th><th>דרגה מרבית</th></tr>
+ <tr><td>כוהן</td><td>חוכמה</td><td>אין</td><td>ק6</td><td>1</td><td>14</td></tr>
+ <tr><td>לוחם</td><td>כוח</td><td>אין</td><td>ק8</td><td>2</td><td>14</td></tr>
+ <tr><td>קוסם</td><td>תבונה</td><td>אין</td><td>ק4</td><td>1</td><td>14</td></tr>
+ <tr><td>גנב</td><td>זריזות</td><td>אין</td><td>ק4</td><td>2</td><td>14</td></tr>
+ <tr><td>גמד</td><td>כוח</td><td>חוסן 9</td><td>ק8</td><td>3</td><td>12</td></tr>
+ <tr><td>אלף</td><td>כוח ותבונה</td><td>תבונה 9</td><td>ק6</td><td>1 (בדרגה 10)</td><td>10</td></tr>
+ <tr><td>בן־מחצית</td><td>כוח וזריזות</td><td>זריזות 9, חוסן 9</td><td>ק6</td><td>—</td><td>8</td></tr>
+ <tr><td>דרואיד</td><td>חוכמה</td><td>נטיית ניטרליות</td><td>ק6</td><td>1</td><td>14</td></tr>
+ <tr><td>מיסטיקן</td><td>כוח וזריזות</td><td>חוכמה 13, זריזות 13</td><td>ק6</td><td>2</td><td>14</td></tr>
+ <tr><td>פלדין</td><td>כוח וכריזמה</td><td>כוח 13, כריזמה 17</td><td>ק8</td><td>2</td><td>14</td></tr>
+ <tr><td>סייר</td><td>חוסן וחוכמה</td><td>חוסן 9, חוכמה 9</td><td>ק6</td><td>2</td><td>14</td></tr></table></div>
+ <h4>טבלה 5: תוסף נק"ן</h4>
+ <div class="tw"><table><tr><th>מקצוע</th><th>תכונה ראשית ותוסף</th></tr>
+ <tr><td>כוהן, לוחם, קוסם, גנב, גמד, דרואיד</td><td>3–5: −20% · 6–8: −10% · 13–15: +5% · 16–18: +10%</td></tr>
+ <tr><td>אלף</td><td>כוח 13 ומעלה ותבונה 13–15: +5% · כוח 13 ומעלה ותבונה 16–18: +10%</td></tr>
+ <tr><td>בן־מחצית</td><td>כוח או זריזות 13 ומעלה: +5% · שתיהן 13 ומעלה: +10%</td></tr>
+ <tr><td>מיסטיקן, סייר, פלדין</td><td>אין תוסף נק"ן</td></tr></table></div>
+ <h4>טבלה 6: נק"ן לכל דרגה</h4>
+ <div class="tw"><table><tr><th>דרגה</th><th>כוהן ודרואיד</th><th>לוחם</th><th>קוסם</th><th>גנב</th><th>גמד</th><th>אלף</th><th>בן־מחצית</th><th>מיסטיקן</th></tr>
+ <tr><td>1</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+ <tr><td>2</td><td>1,500</td><td>2,000</td><td>2,500</td><td>1,200</td><td>2,200</td><td>4,000</td><td>2,000</td><td>2,000</td></tr>
+ <tr><td>3</td><td>3,000</td><td>4,000</td><td>5,000</td><td>2,400</td><td>4,400</td><td>8,000</td><td>4,000</td><td>4,000</td></tr>
+ <tr><td>4</td><td>6,000</td><td>8,000</td><td>10,000</td><td>4,800</td><td>8,800</td><td>16,000</td><td>8,000</td><td>8,000</td></tr>
+ <tr><td>5</td><td>12,000</td><td>16,000</td><td>20,000</td><td>9,600</td><td>17,000</td><td>32,000</td><td>16,000</td><td>16,000</td></tr>
+ <tr><td>6</td><td>25,000</td><td>32,000</td><td>40,000</td><td>20,000</td><td>35,000</td><td>64,000</td><td>32,000</td><td>32,000</td></tr>
+ <tr><td>7</td><td>50,000</td><td>64,000</td><td>80,000</td><td>40,000</td><td>70,000</td><td>120,000</td><td>64,000</td><td>64,000</td></tr>
+ <tr><td>8</td><td>100,000</td><td>120,000</td><td>150,000</td><td>80,000</td><td>140,000</td><td>250,000</td><td>120,000</td><td>120,000</td></tr>
+ <tr><td>9</td><td>200,000</td><td>240,000</td><td>300,000</td><td>160,000</td><td>270,000</td><td>400,000</td><td>—</td><td>240,000</td></tr>
+ <tr><td>10</td><td>300,000</td><td>360,000</td><td>450,000</td><td>280,000</td><td>400,000</td><td>600,000</td><td>—</td><td>360,000</td></tr>
+ <tr><td>11</td><td>400,000</td><td>480,000</td><td>600,000</td><td>400,000</td><td>530,000</td><td>—</td><td>—</td><td>480,000</td></tr>
+ <tr><td>12</td><td>500,000</td><td>600,000</td><td>750,000</td><td>520,000</td><td>660,000</td><td>—</td><td>—</td><td>600,000</td></tr>
+ <tr><td>13</td><td>600,000</td><td>720,000</td><td>900,000</td><td>640,000</td><td>—</td><td>—</td><td>—</td><td>720,000</td></tr>
+ <tr><td>14</td><td>700,000</td><td>840,000</td><td>1,050,000</td><td>760,000</td><td>—</td><td>—</td><td>—</td><td>840,000</td></tr></table></div>
+ <p class="hint">סייר ופלדין משתמשים בעמודה של הלוחם.</p>
+ </details>
+
+ <details><summary>טבלאות 7–9: גירוש אל־מתים, תוסף קרב והצלות</summary>
+ <h4>טבלה 7: גירוש אל־מתים</h4>
+ <p class="hint">2ק6, צריך להגיע למספר או יותר. ג = גירוש אוטומטי של 2ק6 קב"פ למשך שעה. ה = השמדה של 2ק6 קב"פ. ניסיון שנכשל אי אפשר לחזור עליו מול אותם אל־מתים.</p>
+ <div class="tw"><table><tr><th>קב"פ האל־מת</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th><th>8</th><th>9+</th></tr>
+ <tr><td>1</td><td>7</td><td>ג</td><td>ג</td><td>ה</td><td>ה</td><td>ה</td><td>ה</td><td>ה</td><td>ה</td></tr>
+ <tr><td>2</td><td>9</td><td>7</td><td>ג</td><td>ג</td><td>ה</td><td>ה</td><td>ה</td><td>ה</td><td>ה</td></tr>
+ <tr><td>2+</td><td>11</td><td>9</td><td>7</td><td>ג</td><td>ג</td><td>ה</td><td>ה</td><td>ה</td><td>ה</td></tr>
+ <tr><td>3–4</td><td>—</td><td>11</td><td>9</td><td>7</td><td>ג</td><td>ג</td><td>ה</td><td>ה</td><td>ה</td></tr>
+ <tr><td>5</td><td>—</td><td>—</td><td>11</td><td>9</td><td>7</td><td>ג</td><td>ג</td><td>ה</td><td>ה</td></tr>
+ <tr><td>5+</td><td>—</td><td>—</td><td>—</td><td>11</td><td>9</td><td>7</td><td>ג</td><td>ג</td><td>ג</td></tr>
+ <tr><td>6</td><td>—</td><td>—</td><td>—</td><td>—</td><td>11</td><td>9</td><td>7</td><td>ג</td><td>ג</td></tr>
+ <tr><td>7</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>11</td><td>9</td><td>7</td><td>ג</td></tr>
+ <tr><td>8+</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>11</td><td>9</td><td>7</td></tr></table></div>
+ <p class="hint">העמודות הן דרגת הכוהן. פלדין מגרש כמו כוהן בשתי דרגות פחות, מדרגה 3.</p>
+ <h4>טבלה 8: תוסף קרב</h4>
+ <div class="tw"><table><tr><th>דרגה</th><th>1–3</th><th>4</th><th>5</th><th>6</th><th>7–8</th><th>9</th><th>10</th><th>11–12</th><th>13–14</th></tr>
+ <tr><td>לוחם*</td><td>0</td><td>+2</td><td>+2</td><td>+2</td><td>+4</td><td>+4</td><td>+6</td><td>+6</td><td>+8</td></tr>
+ <tr><td>כוהן, גנב, דרואיד</td><td>0</td><td>0</td><td>+2</td><td>+2</td><td>+2</td><td>+4</td><td>+4</td><td>+4</td><td>+6</td></tr>
+ <tr><td>קוסם</td><td>0</td><td>0</td><td>0</td><td>+2</td><td>+2</td><td>+2</td><td>+2</td><td>+4</td><td>+4</td></tr></table></div>
+ <p class="hint">* לוחם כולל גם פלדין, סייר, גמד, אלף, בן־מחצית ומיסטיקן.</p>
+ <h4>טבלה 9: גלגולי הצלה</h4>
+ <div class="tw"><table><tr><th>מקצוע</th><th>דרגות</th><th>מוות או רעל</th><th>שרביט קסם</th><th>שיתוק או התאבנות</th><th>נשיפת דרקון</th><th>מוט, מטה או לחש</th></tr>
+ <tr><td>כוהן ודרואיד</td><td>1–4</td><td>11</td><td>12</td><td>14</td><td>16</td><td>15</td></tr>
+ <tr><td>כוהן ודרואיד</td><td>5–8</td><td>9</td><td>10</td><td>12</td><td>14</td><td>13</td></tr>
+ <tr><td>כוהן ודרואיד</td><td>9–12</td><td>7</td><td>8</td><td>10</td><td>12</td><td>11</td></tr>
+ <tr><td>כוהן ודרואיד</td><td>13–14</td><td>6</td><td>7</td><td>8</td><td>10</td><td>9</td></tr>
+ <tr><td>לוחם ומיסטיקן</td><td>1–3</td><td>12</td><td>13</td><td>14</td><td>15</td><td>16</td></tr>
+ <tr><td>לוחם ומיסטיקן</td><td>4–6</td><td>10</td><td>11</td><td>12</td><td>13</td><td>14</td></tr>
+ <tr><td>לוחם ומיסטיקן</td><td>7–9</td><td>8</td><td>9</td><td>10</td><td>11</td><td>12</td></tr>
+ <tr><td>לוחם ומיסטיקן</td><td>10–12</td><td>6</td><td>7</td><td>8</td><td>9</td><td>10</td></tr>
+ <tr><td>לוחם ומיסטיקן</td><td>13–14</td><td>6</td><td>6</td><td>7</td><td>8</td><td>9</td></tr>
+ <tr><td>קוסם</td><td>1–5</td><td>13</td><td>14</td><td>13</td><td>16</td><td>15</td></tr>
+ <tr><td>קוסם</td><td>6–10</td><td>11</td><td>12</td><td>11</td><td>14</td><td>12</td></tr>
+ <tr><td>קוסם</td><td>11–14</td><td>9</td><td>10</td><td>9</td><td>12</td><td>9</td></tr>
+ <tr><td>גנב</td><td>1–4</td><td>13</td><td>14</td><td>13</td><td>16</td><td>15</td></tr>
+ <tr><td>גנב</td><td>5–8</td><td>11</td><td>12</td><td>11</td><td>14</td><td>13</td></tr>
+ <tr><td>גנב</td><td>9–12</td><td>9</td><td>10</td><td>9</td><td>12</td><td>11</td></tr>
+ <tr><td>גנב</td><td>13–14</td><td>7</td><td>8</td><td>7</td><td>10</td><td>9</td></tr>
+ <tr><td>גמד</td><td>1–3</td><td>8</td><td>9</td><td>10</td><td>13</td><td>12</td></tr>
+ <tr><td>גמד</td><td>4–6</td><td>6</td><td>7</td><td>8</td><td>10</td><td>9</td></tr>
+ <tr><td>גמד</td><td>7–9</td><td>4</td><td>5</td><td>6</td><td>7</td><td>6</td></tr>
+ <tr><td>גמד</td><td>10–12</td><td>2</td><td>3</td><td>4</td><td>4</td><td>3</td></tr>
+ <tr><td>אלף</td><td>1–3</td><td>12</td><td>13</td><td>13</td><td>15</td><td>15</td></tr>
+ <tr><td>אלף</td><td>4–6</td><td>8</td><td>10</td><td>10</td><td>11</td><td>11</td></tr>
+ <tr><td>אלף</td><td>7–9</td><td>4</td><td>7</td><td>7</td><td>7</td><td>7</td></tr>
+ <tr><td>אלף</td><td>10</td><td>2</td><td>4</td><td>4</td><td>3</td><td>3</td></tr>
+ <tr><td>בן־מחצית</td><td>1–3</td><td>8</td><td>9</td><td>10</td><td>13</td><td>12</td></tr>
+ <tr><td>בן־מחצית</td><td>4–6</td><td>5</td><td>6</td><td>7</td><td>9</td><td>8</td></tr>
+ <tr><td>בן־מחצית</td><td>7–8</td><td>2</td><td>3</td><td>4</td><td>5</td><td>4</td></tr></table></div>
+ <p class="hint">סייר מגלגל כמו גנב, פלדין כמו לוחם (ועם +2 לכל ההצלות). תוסף החוכמה חל על הצלות מפני לחשים.</p>
+ </details>
+
+ <details><summary>טבלאות 10–13: לחשים ליום, יכולות גנב ומיסטיקן</summary>
+ <h4>טבלה 10: לחשים ליום, כוהן ודרואיד</h4>
+ <div class="tw"><table><tr><th>דרגה</th><th>עוצמה 1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th></tr>
+ <tr><td>1</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td></tr><tr><td>2</td><td>1</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td></tr><tr><td>3</td><td>2</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td></tr><tr><td>4</td><td>2</td><td>1</td><td>—</td><td>—</td><td>—</td><td>—</td></tr><tr><td>5</td><td>2</td><td>2</td><td>—</td><td>—</td><td>—</td><td>—</td></tr><tr><td>6</td><td>2</td><td>2</td><td>1</td><td>—</td><td>—</td><td>—</td></tr><tr><td>7</td><td>3</td><td>2</td><td>2</td><td>—</td><td>—</td><td>—</td></tr><tr><td>8</td><td>3</td><td>3</td><td>2</td><td>1</td><td>—</td><td>—</td></tr><tr><td>9</td><td>3</td><td>3</td><td>3</td><td>2</td><td>—</td><td>—</td></tr><tr><td>10</td><td>4</td><td>4</td><td>3</td><td>2</td><td>1</td><td>—</td></tr><tr><td>11</td><td>4</td><td>4</td><td>3</td><td>3</td><td>2</td><td>—</td></tr><tr><td>12</td><td>4</td><td>4</td><td>4</td><td>3</td><td>2</td><td>1</td></tr><tr><td>13</td><td>5</td><td>5</td><td>4</td><td>3</td><td>2</td><td>2</td></tr><tr><td>14</td><td>5</td><td>5</td><td>5</td><td>3</td><td>3</td><td>2</td></tr></table></div>
+ <h4>טבלה 11: לחשים ליום, קוסם ואלף</h4>
+ <div class="tw"><table><tr><th>דרגה</th><th>עוצמה 1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th></tr>
+ <tr><td>1</td><td>1</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td></tr><tr><td>2</td><td>2</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td></tr><tr><td>3</td><td>2</td><td>1</td><td>—</td><td>—</td><td>—</td><td>—</td></tr><tr><td>4</td><td>2</td><td>2</td><td>—</td><td>—</td><td>—</td><td>—</td></tr><tr><td>5</td><td>2</td><td>2</td><td>1</td><td>—</td><td>—</td><td>—</td></tr><tr><td>6</td><td>2</td><td>2</td><td>2</td><td>—</td><td>—</td><td>—</td></tr><tr><td>7</td><td>3</td><td>2</td><td>2</td><td>1</td><td>—</td><td>—</td></tr><tr><td>8</td><td>3</td><td>3</td><td>2</td><td>2</td><td>—</td><td>—</td></tr><tr><td>9</td><td>3</td><td>3</td><td>3</td><td>2</td><td>1</td><td>—</td></tr><tr><td>10</td><td>3</td><td>3</td><td>3</td><td>3</td><td>2</td><td>—</td></tr><tr><td>11</td><td>4</td><td>3</td><td>3</td><td>3</td><td>2</td><td>1</td></tr><tr><td>12</td><td>4</td><td>4</td><td>4</td><td>3</td><td>2</td><td>1</td></tr><tr><td>13</td><td>4</td><td>4</td><td>4</td><td>3</td><td>2</td><td>2</td></tr><tr><td>14</td><td>4</td><td>4</td><td>4</td><td>4</td><td>3</td><td>2</td></tr></table></div>
+ <p class="hint">לאלף אותם לחשים כמו לקוסם, עד דרגה 10.</p>
+ <h4>טבלה 12: יכולות גנב (באחוזים)</h4>
+ <div class="tw"><table><tr><th>דרגה</th><th>פתיחת מנעולים</th><th>מציאת מלכודות</th><th>פירוק מלכודות</th><th>טיפוס</th><th>תנועה בדממה</th><th>הסתתרות בצללים</th><th>כיוס</th><th>שמיעת רעש</th></tr>
+ <tr><td>1</td><td>15</td><td>10</td><td>10</td><td>87</td><td>20</td><td>10</td><td>20</td><td>30</td></tr>
+ <tr><td>2</td><td>20</td><td>15</td><td>15</td><td>88</td><td>25</td><td>15</td><td>25</td><td>35</td></tr>
+ <tr><td>3</td><td>25</td><td>20</td><td>20</td><td>89</td><td>30</td><td>20</td><td>30</td><td>40</td></tr>
+ <tr><td>4</td><td>30</td><td>25</td><td>25</td><td>90</td><td>35</td><td>24</td><td>35</td><td>45</td></tr>
+ <tr><td>5</td><td>35</td><td>30</td><td>30</td><td>91</td><td>40</td><td>28</td><td>40</td><td>50</td></tr>
+ <tr><td>6</td><td>40</td><td>35</td><td>34</td><td>92</td><td>44</td><td>32</td><td>45</td><td>54</td></tr>
+ <tr><td>7</td><td>45</td><td>40</td><td>38</td><td>93</td><td>48</td><td>35</td><td>50</td><td>58</td></tr>
+ <tr><td>8</td><td>50</td><td>45</td><td>42</td><td>94</td><td>52</td><td>38</td><td>55</td><td>62</td></tr>
+ <tr><td>9</td><td>54</td><td>50</td><td>46</td><td>95</td><td>55</td><td>41</td><td>60</td><td>66</td></tr>
+ <tr><td>10</td><td>58</td><td>54</td><td>50</td><td>96</td><td>58</td><td>44</td><td>65</td><td>70</td></tr>
+ <tr><td>11</td><td>62</td><td>58</td><td>54</td><td>97</td><td>61</td><td>47</td><td>70</td><td>74</td></tr>
+ <tr><td>12</td><td>66</td><td>62</td><td>58</td><td>98</td><td>64</td><td>50</td><td>75</td><td>78</td></tr>
+ <tr><td>13</td><td>69</td><td>66</td><td>61</td><td>99</td><td>66</td><td>53</td><td>80</td><td>81</td></tr>
+ <tr><td>14</td><td>72</td><td>70</td><td>64</td><td>100</td><td>68</td><td>56</td><td>85</td><td>84</td></tr></table></div>
+ <h4>טבלה 13: המיסטיקן</h4>
+ <div class="tw"><table><tr><th>דרגה</th><th>דרג שריון</th><th>התקפות בסבב</th><th>נזק בידיים</th></tr>
+ <tr><td>1</td><td>10</td><td>1</td><td>ק4</td></tr><tr><td>2</td><td>11</td><td>1</td><td>ק4 +1</td></tr><tr><td>3</td><td>12</td><td>1</td><td>ק6</td></tr><tr><td>4</td><td>13</td><td>1</td><td>ק6 +1</td></tr><tr><td>5</td><td>14</td><td>2</td><td>ק8</td></tr><tr><td>6</td><td>15</td><td>2</td><td>ק8 +1</td></tr><tr><td>7</td><td>16</td><td>2</td><td>ק10</td></tr><tr><td>8</td><td>17</td><td>2</td><td>ק12</td></tr><tr><td>9</td><td>18</td><td>3</td><td>2ק8</td></tr><tr><td>10</td><td>19</td><td>3</td><td>2ק10</td></tr><tr><td>11</td><td>20</td><td>3</td><td>2ק12</td></tr><tr><td>12</td><td>21</td><td>3</td><td>3ק8 +1</td></tr><tr><td>13</td><td>22</td><td>4</td><td>4ק6 +2</td></tr><tr><td>14</td><td>23</td><td>4</td><td>5ק6</td></tr></table></div>
+ </details>
+
+ <details><summary>טבלאות 14–17: נשק, שריון, תחמושת, ציוד וחיות רכיבה</summary>
+ <h4>טבלה 14: נשק</h4>
+ <div class="tw"><table><tr><th>נשק</th><th>נזק</th><th>מחיר (מ"ז)</th><th>טווח (מ׳)</th><th>גודל</th><th>הערות</th></tr>
+ <tr><td>אבן מושלכת</td><td>ק3</td><td>1 מ"כ</td><td>16</td><td>קטן</td><td>אבן שהושלכה ביד</td></tr>
+ <tr><td>אלה</td><td>ק4</td><td>—</td><td>—</td><td>בינוני</td><td>אלה חזקה מעץ</td></tr>
+ <tr><td>בולה</td><td>ק2</td><td>5</td><td>5</td><td>בינוני</td><td>ראו חוקים כלליים</td></tr>
+ <tr><td>גרזן יד</td><td>ק6</td><td>4</td><td>10</td><td>קטן</td><td>אפשר להטיל</td></tr>
+ <tr><td>גרזן קרב</td><td>ק8</td><td>7</td><td>—</td><td>בינוני</td><td>שתי ידיים</td></tr>
+ <tr><td>חנית</td><td>ק6</td><td>3</td><td>20</td><td>בינוני</td><td>אפשר להטיל</td></tr>
+ <tr><td>חרב (ארוכה)</td><td>ק8</td><td>10</td><td>—</td><td>בינוני</td><td>החרב הקלאסית</td></tr>
+ <tr><td>חרב דו־ידנית</td><td>ק10</td><td>15</td><td>—</td><td>גדול</td><td>שתי ידיים</td></tr>
+ <tr><td>חרב ממזרית, ביד אחת</td><td>ק6 +1</td><td>15</td><td>—</td><td>גדול</td><td></td></tr>
+ <tr><td>חרב ממזרית, בשתי ידיים</td><td>ק8 +1</td><td>15</td><td>—</td><td>גדול</td><td>בלי מגן</td></tr>
+ <tr><td>חרב קצרה</td><td>ק6</td><td>7</td><td>—</td><td>קטן</td><td></td></tr>
+ <tr><td>כפפת קרב</td><td>ק3</td><td>5</td><td>—</td><td>קטן</td><td>לא מחזיקים איתה נשק</td></tr>
+ <tr><td>לפיד</td><td>ק4</td><td>2 מ"כ</td><td>—</td><td>קטן</td><td>ראו חוקים כלליים</td></tr>
+ <tr><td>מטה</td><td>ק6</td><td>1</td><td>—</td><td>בינוני</td><td>שתי ידיים</td></tr>
+ <tr><td>מים קדושים</td><td>ק8</td><td>25</td><td>16</td><td>קטן</td><td>רק נגד אל־מתים</td></tr>
+ <tr><td>פגיון</td><td>ק4</td><td>3</td><td>10</td><td>קטן</td><td>אפשר להטיל</td></tr>
+ <tr><td>פגיון כסף</td><td>ק4</td><td>30</td><td>10</td><td>קטן</td><td>אפשר להטיל</td></tr>
+ <tr><td>פטיש הטלה</td><td>ק4</td><td>4</td><td>10</td><td>בינוני</td><td>אפשר להטיל</td></tr>
+ <tr><td>פטיש מלחמה</td><td>ק6</td><td>5</td><td>—</td><td>בינוני</td><td>מרסק גם קירות</td></tr>
+ <tr><td>מוט נשיפה ארוך</td><td>אין</td><td>6</td><td>10</td><td>בינוני</td><td>שתי ידיים</td></tr>
+ <tr><td>קלע</td><td>ק4</td><td>2</td><td>50</td><td>קטן</td><td>כולל 30 אבנים</td></tr>
+ <tr><td>קלשון</td><td>ק6</td><td>5</td><td>10</td><td>בינוני</td><td>אפשר להטיל</td></tr>
+ <tr><td>קשת ארוכה</td><td>ק6</td><td>40</td><td>65</td><td>גדול</td><td>שתי ידיים, 20 חיצים</td></tr>
+ <tr><td>קשת קצרה</td><td>ק6</td><td>25</td><td>45</td><td>בינוני</td><td>שתי ידיים, 20 חיצים</td></tr>
+ <tr><td>רובה קשת כבד</td><td>2ק4</td><td>50</td><td>65</td><td>גדול</td><td>שתי ידיים, סבב להטעין</td></tr>
+ <tr><td>רובה קשת קל</td><td>ק6</td><td>30</td><td>45</td><td>בינוני</td><td>שתי ידיים, 30 חיצי רובה</td></tr>
+ <tr><td>שמן בוער</td><td>ק8</td><td>2</td><td>15</td><td>קטן</td><td>בוער שני סבבים</td></tr></table></div>
+ <p class="hint">בני מחצית וגמדים – רק נשק קטן או בינוני. נשק בשתי ידיים מונע מגן ומפסיד ביוזמה מול מי שאינו משתמש בנשק כזה. רובה קשת כבד יורה כל סבב שני.</p>
+ <h4>טבלת שריון</h4>
+ <div class="tw"><table><tr><th>שריון</th><th>בלי</th><th>עור</th><th>קשקשים</th><th>שרשראות</th><th>רצועות</th><th>לוחות</th><th>גוף מלא</th><th>מגן</th></tr>
+ <tr><td>דרג שריון</td><td>10</td><td>12</td><td>13</td><td>14</td><td>15</td><td>16</td><td>19</td><td>+1</td></tr>
+ <tr><td>מחיר (מ"ז)</td><td>—</td><td>20</td><td>30</td><td>40</td><td>50</td><td>60</td><td>250</td><td>10</td></tr></table></div>
+ <h4>טבלה 15: תחמושת</h4>
+ <div class="tw"><table><tr><th>תחמושת</th><th>כמות</th><th>מחיר (מ"ז)</th><th>לנשק</th></tr>
+ <tr><td>חיצים</td><td>20</td><td>5</td><td>קשת</td></tr><tr><td>חץ עם ראש כסף</td><td>1</td><td>5</td><td>קשת</td></tr><tr><td>חיצי רובה קשת</td><td>30</td><td>10</td><td>רובה קשת</td></tr><tr><td>חץ רובה מכסף</td><td>1</td><td>5</td><td>רובה קשת</td></tr><tr><td>אבנים</td><td>30</td><td>1</td><td>קלע</td></tr><tr><td>כדור כסף</td><td>1</td><td>5</td><td>קלע</td></tr><tr><td>חיצים קטנים</td><td>5</td><td>1</td><td>מוט נשיפה</td></tr></table></div>
+ <h4>טבלה 16: ציוד מסע</h4>
+ <div class="tw"><table><tr><th>פריט</th><th>מחיר</th><th>הערות</th></tr>
+ <tr><td>אוהל</td><td>10 מ"ז</td><td>ל־3 אנשים</td></tr><tr><td>אקוניטון</td><td>10 מ"ז</td><td>מרחיק אנשי־זאב</td></tr><tr><td>אשפת חיצים</td><td>1 מ"ז</td><td>לחיצים או לחיצי רובה</td></tr><tr><td>בגדים מהודרים</td><td>20 מ"ז</td><td></td></tr><tr><td>בגדים פשוטים</td><td>5 מ"כ</td><td></td></tr><tr><td>חבל</td><td>1 מ"ז</td><td>15 מ׳</td></tr><tr><td>חגורה</td><td>2 מ"כ</td><td>עשויה עור</td></tr><tr><td>יין</td><td>1 מ"ז</td><td>ליטר, בלי בקבוק</td></tr><tr><td>יתדות ברזל</td><td>1 מ"ז</td><td>12 יתדות</td></tr><tr><td>יתדות עץ ופטיש</td><td>3 מ"ז</td><td>3 יתדות</td></tr><tr><td>כלי גנב</td><td>25 מ"ז</td><td>פתיחות, חוט וכדומה</td></tr><tr><td>לפידים</td><td>1 מ"ז</td><td>5 יחידות</td></tr><tr><td>מגפי רכיבה</td><td>5 מ"ז</td><td>עם דורבנות</td></tr><tr><td>מוט עץ</td><td>1 מ"ז</td><td>4 מ׳, מתקפל</td></tr><tr><td>מזון משומר</td><td>15 מ"ז</td><td>לאדם לשבוע</td></tr><tr><td>מזון רגיל</td><td>5 מ"ז</td><td>לשבוע, מתקלקל במבוך</td></tr><tr><td>מים קדושים</td><td>25 מ"ז</td><td>צלוחית שבירה</td></tr><tr><td>מראה</td><td>5 מ"ז</td><td>מפלדה, בגודל כף יד</td></tr><tr><td>מימייה</td><td>1 מ"ז</td><td>ליטר</td></tr><tr><td>נעליים</td><td>5 מ"כ</td><td>פשוטות</td></tr><tr><td>סמל קדוש</td><td>25 מ"ז</td><td>עשוי ברזל</td></tr><tr><td>עששית</td><td>10 מ"ז</td><td>בוערת על שמן</td></tr><tr><td>ערכת הצתה</td><td>3 מ"ז</td><td>צור, פלדה ועץ הצתה</td></tr><tr><td>קרס טיפוס</td><td>25 מ"ז</td><td>עשוי ברזל</td></tr><tr><td>שמן</td><td>2 מ"ז</td><td>צלוחית</td></tr><tr><td>שק גדול</td><td>2 מ"ז</td><td></td></tr><tr><td>שק שינה</td><td>1 מ"ז</td><td></td></tr><tr><td>תיק גב</td><td>5 מ"ז</td><td></td></tr></table></div>
+ <h4>טבלה 17: חיות רכיבה וכלי תחבורה</h4>
+ <div class="tw"><table><tr><th>פריט</th><th>מחיר (מ"ז)</th></tr>
+ <tr><td>גמל</td><td>100</td></tr><tr><td>סוס עבודה</td><td>40</td></tr><tr><td>סוס רכיבה</td><td>75</td></tr><tr><td>סוס מלחמה</td><td>250</td></tr><tr><td>פרד</td><td>30</td></tr><tr><td>סוס פוני</td><td>35</td></tr><tr><td>אוכף ורתמה</td><td>25</td></tr><tr><td>שקי אוכף</td><td>5</td></tr><tr><td>עגלה (שני גלגלים)</td><td>100</td></tr><tr><td>קרונה (ארבעה גלגלים)</td><td>200</td></tr></table></div>
+ </details>
+ </div>
+ <p class="hint" id="clsNone" hidden>לא נמצא דבר שמתאים לחיפוש.</p>
+</div>
+
+<div class="panel hide" id="pTreasure">
+ <h2><span class="no">2</span>אוצר</h2>
+ <div class="gen">
+  <h3>מחולל אוצר לפי סוג</h3>
+  <div class="row">
+   <label>סוג האוצר <select id="trType"><option value="A">A (ממוצע 18,000 מ״ז)</option><option value="B">B (ממוצע 2,000 מ״ז)</option><option value="C">C (ממוצע 1,000 מ״ז)</option><option value="D">D (ממוצע 3,900 מ״ז)</option><option value="E">E (ממוצע 2,300 מ״ז)</option><option value="F">F (ממוצע 7,700 מ״ז)</option><option value="G">G (ממוצע 23,000 מ״ז)</option><option value="H">H (ממוצע 60,000 מ״ז)</option><option value="I">I (ממוצע 11,000 מ״ז)</option><option value="J">J (ממוצע 25 מ״ז)</option><option value="K">K (ממוצע 180 מ״ז)</option><option value="L">L (ממוצע 240 מ״ז)</option><option value="M">M (ממוצע 50,000 מ״ז)</option><option value="N">N (ממוצע 0 מ״ז)</option><option value="O">O (ממוצע 0 מ״ז)</option><option value="P">P (ממוצע 0.1 מ״ז)</option><option value="Q">Q (ממוצע 1 מ״ז)</option><option value="R">R (ממוצע 3 מ״ז)</option><option value="S">S (ממוצע 5 מ״ז)</option><option value="T">T (ממוצע 17 מ״ז)</option><option value="U">U (ממוצע 160 מ״ז)</option><option value="V">V (ממוצע 330 מ״ז)</option></select></label>
+   <label id="trCntL">כמה יצורים <select id="trCnt"><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option>8</option><option>9</option><option>10</option><option>11</option><option>12</option><option>13</option><option>14</option><option>15</option><option>16</option><option>17</option><option>18</option><option>19</option><option>20</option></select></label>
+   <button type="button" class="act" id="trGo">גלגל אוצר</button>
+  </div>
+  <p class="hint2">באוצר אישי (P עד T) מגלגלים לכל יצור בנפרד. ערכי אבני החן והתכשיטים מגולגלים לכל פריט.</p>
+  <div id="trOut" aria-live="polite"></div>
+ </div>
+ <div class="gen">
+  <h3>אוצר בלי מפלצת, לפי קומה במבוך</h3>
+  <div class="row">
+   <label>קומה <select id="flFloor"><option value="0">קומה 1</option><option value="1">קומה 2 עד 3</option><option value="2">קומה 4 עד 5</option><option value="3">קומה 6 עד 7</option><option value="4">קומה 8 ומעלה</option></select></label>
+   <button type="button" class="act" id="flGo">גלגל אוצר</button>
+  </div>
+  <p class="hint2">אוצר כזה תמיד מוסתר או נעול.</p>
+  <div id="flOut" aria-live="polite"></div>
+ </div>
+ <div class="rsearch"><label for="trQ">חיפוש באוצר</label><input id="trQ" type="search" placeholder="למשל: G, אבני חן, תכשיט"></div>
+ <div class="rbody" id="trBody">
+ <details open id="sec-treasure-types"><summary>סוגי אוצר: גלגול האוצר</summary>
+  <p>קיצורי המטבעות: מ״נ = מטבע נחושת, מ״כ = מטבע כסף, מ״א = מטבע אלקטרום, מ״ז = מטבע זהב, מ״פ = מטבע פלטינה.</p>
+  <p>כל סוג אוצר מפרט סוג אחד או יותר של מטבעות או פריטים. לכל שורה ברשימה:</p>
+  <ol><li>אם מופיע אחוז, מגלגלים ק100 כדי לראות אם הפריט קיים.</li><li>אם מופיעות קוביות (למשל ק6 כפול 1,000 מ״נ), מגלגלים אותן כדי לקבוע את הכמות.</li><li>את הערך והתכונות של אבני חן, תכשיטים וחפצי קסם קובעים לפי הפרקים הבאים.</li></ol>
+  <p><b>התאמה ידנית:</b> אם ערך האוצר שיצא גבוה או נמוך בהרבה מהממוצע של סוג האוצר, המנחה רשאי לתקן אותו.</p>
+  <p><b>ערך ממוצע:</b> הערך שליד כל סוג הוא הממוצע של המטבעות, אבני החן והתכשיטים, בלי חפצי קסם (שאין להם מחיר מכירה קבוע).</p>
+ </details>
+ <details><summary>אוצרות מאורה A עד O</summary>
+  <p>סוגי אוצר אלה הם כל העושר של מפלצת גדולה, או של קהילה של מפלצות קטנות. האוצר מוסתר בדרך כלל במאורה.</p>
+  <p><b>מאורה קטנה:</b> אם מספר המפלצות במאורה נמוך מהממוצע, ומ״מ במאורה הוא ק4 או יותר, אפשר להקטין את האוצר בהתאם.</p>
+  <table><thead><tr><th>סוג</th><th>ערך ממוצע</th><th>תוכן</th></tr></thead><tbody><tr><td><b>A</b></td><td>18,000 מ״ז</td><td>25%: ק6 כפול 1,000 מ״נ · 30%: ק6 כפול 1,000 מ״כ · 20%: ק4 כפול 1,000 מ״א · 35%: 2ק6 כפול 1,000 מ״ז · 25%: ק2 כפול 1,000 מ״פ · 50%: 6ק6 אבני חן · 50%: 6ק6 תכשיטים · 30%: 3 חפצי קסם</td></tr><tr><td><b>B</b></td><td>2,000 מ״ז</td><td>50%: ק8 כפול 1,000 מ״נ · 25%: ק6 כפול 1,000 מ״כ · 25%: ק4 כפול 1,000 מ״א · 25%: ק3 כפול 1,000 מ״ז · 25%: ק6 אבני חן · 25%: ק6 תכשיטים · 10%: חרב, שריון או כלי נשק קסום אחד</td></tr><tr><td><b>C</b></td><td>1,000 מ״ז</td><td>20%: ק12 כפול 1,000 מ״נ · 30%: ק4 כפול 1,000 מ״כ · 10%: ק4 כפול 1,000 מ״א · 25%: ק4 אבני חן · 25%: ק4 תכשיטים · 10%: 2 חפצי קסם</td></tr><tr><td><b>D</b></td><td>3,900 מ״ז</td><td>10%: ק8 כפול 1,000 מ״נ · 15%: ק12 כפול 1,000 מ״כ · 60%: ק6 כפול 1,000 מ״ז · 30%: ק8 אבני חן · 30%: ק8 תכשיטים · 15%: 2 חפצי קסם ועוד שיקוי אחד</td></tr><tr><td><b>E</b></td><td>2,300 מ״ז</td><td>5%: ק10 כפול 1,000 מ״נ · 30%: ק12 כפול 1,000 מ״כ · 25%: ק4 כפול 1,000 מ״א · 25%: ק8 כפול 1,000 מ״ז · 10%: ק10 אבני חן · 10%: ק10 תכשיטים · 25%: 3 חפצי קסם ועוד מגילה אחת</td></tr><tr><td><b>F</b></td><td>7,700 מ״ז</td><td>10%: 2ק10 כפול 1,000 מ״כ · 20%: ק8 כפול 1,000 מ״א · 45%: ק12 כפול 1,000 מ״ז · 30%: ק3 כפול 1,000 מ״פ · 20%: 2ק12 אבני חן · 10%: ק12 תכשיטים · 30%: 3 חפצי קסם (לא כלי נשק), ועוד שיקוי אחד ומגילה אחת</td></tr><tr><td><b>G</b></td><td>23,000 מ״ז</td><td>50%: ק4 כפול 10,000 מ״ז · 50%: ק6 כפול 1,000 מ״פ · 25%: 3ק6 אבני חן · 25%: ק10 תכשיטים · 35%: 4 חפצי קסם ועוד מגילה אחת</td></tr><tr><td><b>H</b></td><td>60,000 מ״ז</td><td>25%: 3ק8 כפול 1,000 מ״נ · 50%: ק100 כפול 1,000 מ״כ · 50%: ק4 כפול 10,000 מ״א · 50%: ק6 כפול 10,000 מ״ז · 25%: 5ק4 כפול 1,000 מ״פ · 50%: ק100 אבני חן · 50%: ק4 כפול 10 תכשיטים · 15%: 4 חפצי קסם, ועוד שיקוי אחד ומגילה אחת</td></tr><tr><td><b>I</b></td><td>11,000 מ״ז</td><td>30%: ק8 כפול 1,000 מ״פ · 50%: 2ק6 אבני חן · 50%: 2ק6 תכשיטים · 15%: חפץ קסם אחד</td></tr><tr><td><b>J</b></td><td>25 מ״ז</td><td>25%: ק4 כפול 1,000 מ״נ · 10%: ק3 כפול 1,000 מ״כ</td></tr><tr><td><b>K</b></td><td>180 מ״ז</td><td>30%: ק6 כפול 1,000 מ״כ · 10%: ק2 כפול 1,000 מ״א</td></tr><tr><td><b>L</b></td><td>240 מ״ז</td><td>50%: ק4 אבני חן</td></tr><tr><td><b>M</b></td><td>50,000 מ״ז</td><td>40%: 2ק4 כפול 1,000 מ״ז · 50%: 5ק6 כפול 1,000 מ״פ · 55%: 5ק4 אבני חן · 45%: 2ק6 תכשיטים</td></tr><tr><td><b>N</b></td><td>0 מ״ז</td><td>40%: 2ק4 שיקויים</td></tr><tr><td><b>O</b></td><td>0 מ״ז</td><td>50%: ק4 מגילות</td></tr></tbody></table>
+ </details>
+ <details><summary>אוצר אישי P עד T</summary>
+  <p><b>מפלצות נבונות:</b> כל אחת נושאת עליה את האוצר הזה. <b>מפלצות שאינן נבונות:</b> האוצר הגיע מגופות הקורבנות שלהן.</p>
+  <table><thead><tr><th>סוג</th><th>ערך ממוצע</th><th>תוכן</th></tr></thead><tbody><tr><td><b>P</b></td><td>0.1 מ״ז</td><td>3ק8 מ״נ</td></tr><tr><td><b>Q</b></td><td>1 מ״ז</td><td>3ק6 מ״כ</td></tr><tr><td><b>R</b></td><td>3 מ״ז</td><td>2ק6 מ״א</td></tr><tr><td><b>S</b></td><td>5 מ״ז</td><td>2ק4 מ״ז</td></tr><tr><td><b>T</b></td><td>17 מ״ז</td><td>ק6 מ״פ</td></tr></tbody></table>
+ </details>
+ <details><summary>אוצר קבוצתי U עד V</summary>
+  <p><b>מפלצות נבונות:</b> הקבוצה כולה נושאת את האוצר הזה ביחד. <b>מפלצות שאינן נבונות:</b> האוצר הגיע מגופות הקורבנות שלהן.</p>
+  <table><thead><tr><th>סוג</th><th>ערך ממוצע</th><th>תוכן</th></tr></thead><tbody><tr><td><b>U</b></td><td>160 מ״ז</td><td>10%: ק100 מ״נ · 10%: ק100 מ״כ · 5%: ק100 מ״ז · 5%: ק4 אבני חן · 5%: ק4 תכשיטים · 2%: חפץ קסם אחד</td></tr><tr><td><b>V</b></td><td>330 מ״ז</td><td>10%: ק100 מ״כ · 5%: ק100 מ״א · 10%: ק100 מ״ז · 5%: ק100 מ״פ · 10%: ק4 אבני חן · 10%: ק4 תכשיטים · 5%: חפץ קסם אחד</td></tr></tbody></table>
+ </details>
+ <details id="sec-gems"><summary>אבני חן ותכשיטים</summary>
+  <h4>אבני חן</h4>
+  <table><thead><tr><th>ק20</th><th>ערך אבן החן</th></tr></thead><tbody><tr><td>1 עד 4</td><td>10 מ״ז</td></tr><tr><td>5 עד 9</td><td>50 מ״ז</td></tr><tr><td>10 עד 15</td><td>100 מ״ז</td></tr><tr><td>16 עד 19</td><td>500 מ״ז</td></tr><tr><td>20</td><td>1,000 מ״ז</td></tr></tbody></table>
+  <h4>תכשיטים</h4>
+  <p>כל תכשיט שסוג האוצר מציין שווה 3ק6 כפול 100 מ״ז. לדמויות מעל דרגה 3 המנחה רשאי לתת תכשיטים יקרים יותר.</p>
+  <p><b>תכשיטים פגומים:</b> יחס גס לתכשיט (מעיכה, חום עז או אש, ברק) יכול לפגום בו ולהוריד את ערכו בחצי.</p>
+  <h4>שילוב ערכים</h4>
+  <p>כשסוג האוצר מציין כמה אבני חן או תכשיטים, המנחה רשאי לאחד את הערכים כרצונו. למשל, חמש אבני חן של 50 מ״ז יכולות להפוך לאבן אחת של 250 מ״ז, או לאבן של 100 מ״ז ושלוש אבנים של 50 מ״ז, או כל שילוב אחר.</p>
+ </details>
+ <details id="sec-floor-treasure"><summary>אוצר בלי מפלצת לפי קומה</summary>
+  <p>אוצר של מפלצת נקבע לפי סוג האוצר שלה. אוצר שאין לידו מפלצת נקבע כך, ותמיד הוא מוסתר או נעול:</p>
+  <table><thead><tr><th>קומה במבוך</th><th>מ״כ</th><th>מ״ז</th><th>אבני חן</th><th>תכשיטים</th><th>חפץ קסם</th></tr></thead><tbody><tr><td>1</td><td>ק6 כפול 100</td><td>50%: ק6 כפול 10</td><td>5%: ק6</td><td>2%: ק6</td><td>2%</td></tr><tr><td>2 עד 3</td><td>ק12 כפול 100</td><td>50%: ק6 כפול 100</td><td>10%: ק6</td><td>5%: ק6</td><td>8%</td></tr><tr><td>4 עד 5</td><td>ק6 כפול 1,000</td><td>ק6 כפול 200</td><td>20%: ק6</td><td>10%: ק6</td><td>10%</td></tr><tr><td>6 עד 7</td><td>ק6 כפול 2,000</td><td>ק6 כפול 500</td><td>30%: ק6</td><td>15%: ק6</td><td>15%</td></tr><tr><td>8 ומעלה</td><td>ק6 כפול 5,000</td><td>ק6 כפול 1,000</td><td>40%: ק12</td><td>20%: ק12</td><td>20%</td></tr></tbody></table>
+ </details>
+ </div>
+ <p class="hide" id="trNone">לא נמצא דבר.</p>
+</div>
+<div class="panel hide" id="pDungeon">
+ <h2><span class="no">2</span>חדרים, תחבולות ומלכודות</h2>
+ <div class="gen">
+  <h3>מחולל תכולת חדרים</h3>
+  <div class="row">
+   <label>קומה <select id="rmFloor"><option value="0">קומה 1</option><option value="1">קומה 2 עד 3</option><option value="2">קומה 4 עד 5</option><option value="3">קומה 6 עד 7</option><option value="4">קומה 8 ומעלה</option></select></label>
+   <label>כמה חדרים <select id="rmCnt"><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option selected>6</option><option>7</option><option>8</option><option>9</option><option>10</option><option>11</option><option>12</option><option>13</option><option>14</option><option>15</option><option>16</option><option>17</option><option>18</option><option>19</option><option>20</option></select></label>
+   <button type="button" class="act" id="rmGo">גלגל חדרים</button>
+  </div>
+  <p class="hint2">ק6 ראשון קובע מה בחדר, ק6 שני קובע אם יש אוצר. במלכודת ובחדר מיוחד נבחרים מלכודת או תחבולה מהנספח. לחיצה על חדר מגלגלת אותו מחדש.</p>
+  <div id="rmOut" aria-live="polite"></div>
+ </div>
+ <div class="gen">
+  <h3>תחבולה או מלכודת אקראית</h3>
+  <div class="row">
+   <button type="button" class="act" data-tt="tricks">תחבולה</button>
+   <button type="button" class="act alt" data-tt="traps">מלכודת</button>
+  </div>
+  <div id="ttOut" aria-live="polite"></div>
+ </div>
+ <div class="rsearch"><label for="dgQ">חיפוש בתחבולות ובמלכודות</label><input id="dgQ" type="search" placeholder="למשל: בור, דלת, מדרגות, גז"></div>
+ <div class="rbody" id="dgBody">
+ <details id="sec-room-contents"><summary>תכולת חדר במבוך</summary>
+  <p>מגלגלים ק6 פעמיים. הראשון קובע מה בחדר, והשני קובע אם יש בו אוצר.</p>
+  <table><thead><tr><th>קובייה ראשונה</th><th>תכולה</th><th>יש אוצר כשבקובייה השנייה יצא</th></tr></thead><tbody><tr><td>1 עד 2</td><td>ריק</td><td>1</td></tr><tr><td>3</td><td>מלכודת</td><td>1 עד 2</td></tr><tr><td>4 עד 5</td><td>מפלצת</td><td>1 עד 3</td></tr><tr><td>6</td><td>מיוחד</td><td>בדרך כלל אין</td></tr></tbody></table>
+  <p>אוצר של מפלצת נקבע לפי סוג האוצר שלה. אוצר שאין לידו מפלצת נקבע לפי הקומה (ראו "אוצר בלי מפלצת לפי קומה").</p>
+ </details>
+ <details open id="sec-tricks"><summary>נספח: תחבולות (56)</summary>
+  <p>עולם המעמקים אינו כפוף לחוקי הטבע של העולם שמעל. הדוגמה המוכרת ביותר היא דלתות שמתנגדות להרפתקנים אבל נפתחות בקלות לשוכני המקום, וכן מלאי האוצרות שנראה בלתי נגמר. על המנחה לנצל כל הזדמנות כדי להזכיר לשחקנים כמה זר ועוין הוא המקום שאליו הדמויות שלהם יורדות. חלק מהתחבולות עלולות להרוג דמויות, אבל מטרתן העיקרית היא לבלבל ולשעשע. לעיתים הפחד מהמוות עדיף על סכנה ממשית, אלא אם החבורה רגילה להחליף דמויות לעיתים קרובות. כמובן, על המנחה לוודא שהפחד אמיתי – גם כשהסכנה אינה.</p>
+  <p><b>בדיקת תכונה:</b> כשהפרק מבקש בדיקת זריזות, כוח או תכונה אחרת, מגלגלים ק20. תוצאה שווה לערך התכונה או נמוכה ממנו היא הצלחה.</p>
+  <ul class="tl"><li data-k="tricks"><b>אוצר אשלייתי.</b> מטמון שנראה אמיתי הוא אשליה בלבד. אי אפשר להזיז אותו, אבל גם נגיעה בו אינה מעלימה אותו.</li><li data-k="tricks"><b>אוצר בלתי נראה.</b> מטמון של זהב, אבני חן או אוצר אחר מונח בגלוי, ועליו לחש היעלמות.</li><li data-k="tricks"><b>אוצר מזויף.</b> מטמון שנראה יקר הוא זיוף משכנע: אבנים חצי־יקרות וזכוכית, מטבעות עופרת מצופים זהב ותכשיטים זולים. חלק מהפריטים מזוהים כקסומים, אבל אין להם שום כוח מועיל.</li><li data-k="tricks"><b>אוצר מחושמל.</b> כספת ברזל תלויה בשרשרת מעל רצפת חדר מוצף. זרם עובר בשרשרת ובכספת, וכל מי שנוגע באחת מהן כשהוא עומד במים מגלגל הצלה מפני שיתוק או מאבד את הכרתו ל־ק6 תורות. בכספת אולי יש חפץ יקר, ואולי לא.</li><li data-k="tricks"><b>אנשים מוקסמים.</b> אנשים נאמנים שהוקסמו בידי מטיל לחשים רשע, אויב של החבורה או מישהו שמטרותיו מנוגדות לטובת הממלכה. למשל: אבירה של המקדש שמטעה את מי שמחפש את &quot;חברה&quot;; כוהן העיירה שמשמש שדכן בין בת האדון לבין &quot;חברו&quot; החדש; או דרקון נבון שמשוכנע ש&quot;חברתו&quot; – נסיכת השדים – חזרה בתשובה, ושהנערות שהוא שולח אליה נמצאות בידיים טובות.</li><li data-k="tricks"><b>בור חד־כיווני.</b> בור בעל קירות חלקים יורד אל המעמקים, ובצד אחד שלו שלבי ברזל. משהו מנצנץ בתחתית. משקל של יותר מ־45 ק״ג על קרקעית הבור מכניס את השלבים לתוך הקיר, וכל מי שבתחתית נשאר תקוע בלי דרך לעלות. הנצנוץ בא מחפצים שהשאירו חוקרים קודמים.</li><li data-k="tricks"><b>גן נסתר.</b> גן ירוק ושופע שוכן בלוע הר געש או במכתש, מתחת לאשליה של סלע שומם. אולי זה עולם אבוד מלא ביצורים שנכחדו מזמן, ואולי מקלט לגזע של יצורים יפים ותמימים.</li><li data-k="tricks"><b>דלת בתוך בית שימוש.</b> דלת נסתרת בפיר של בית שימוש. רק יצורים קטנים נכנסים בקלות. יצור בגודל אדם מגלגל הצלה מפני נשיפת דרקון, או נתקע. יצור גדול יותר אינו נכנס בכלל. מי שנכנס מגלגל הצלה מפני מוות או רעל, או סובל מבחילה.</li><li data-k="tricks"><b>דלת בתוך גללים.</b> דלת סתרים רגילה שמובילה לחדר או למבוך מתחת לאדמה, אבל מוסתרת מתחת לשכבת גללים בדיר של בעלי חיים. מי שחופר מגלגל הצלה מפני מוות או רעל, או סובל מבחילה.</li><li data-k="tricks"><b>דלת חד־כיוונית.</b> אחרי שהדמויות עוברות בה, הדלת נסגרת ואי אפשר לפתוח אותה שוב. אולי היא נתקעת, אולי נעלמת לגמרי, ואולי נפתחת כרגיל – אבל מאחוריה יש רק קיר חלק.</li><li data-k="tricks"><b>דלת מגבילה.</b> דלת שנפתחת רק למקצוע מסוים, לקבוצת מקצועות, לנטייה או לגזע מסוימים.</li><li data-k="tricks"><b>דלת משגרת.</b> מי שעובר בדלת משוגר למקום אחר: באותו מבנה, במקום רחוק מאוד, או אפילו לעולם אחר. מה שנראה מבעד לדלת יכול להיות היעד האמיתי, או סתם חדר רגיל. אי אפשר לחזור דרכה, אלא בדרכים רגילות.</li><li data-k="tricks"><b>דלת נבונה.</b> דלת חושבת, שיכולה לעזור, להציק או להזיק. אולי היא מדברת, בטלפתיה או דרך מקוש מדבר, ואולי לא.</li><li data-k="tricks"><b>הצלה שמתהפכת.</b> מצב שבו הדמויות כמעט בוודאות יצילו מישהו, וההצלה מביאה עליהן קרב בדיוק כשהן הכי פחות מוכנות. למשל, אישה יפה בעלת נטיית תוהו ישנה שינה מסוממת בחדר שינה, בידי מטיל לחשים אחר של התוהו. אם הדמויות יצילו אותה, בסוף היא תתקוף אותן.</li><li data-k="tricks"><b>זוהר.</b> חלקים רבים בעולם המעמקים מאירים בעצמם: צמחים ופטריות זוהרים, גבישים מאירים או אור מוזר אחר. האור יכול להיות קודר ועצוב, מרגיע, או מסנוור.</li><li data-k="tricks"><b>חדר מבלבל.</b> כמה חדרים עגולים זהים, מחוברים זה לזה, ובכל אחד שתי דלתות בצדדים מנוגדים. במרכז הרצפה החלקה יש שתי ידיות זו לצד זו. משיכה או דחיפה של ידית מסובבת את החדר בשקט, עד שדלתותיו עומדות מול דלתות של חדר אחר. מי שמחפש מרגיש בתנועה בתוצאה של 1 בק6 (גמד: 1–2). הדמויות נוטות להאמין שהן עוברות בין חדרים שכבר ביקרו בהם.</li><li data-k="tricks"><b>חדר מחליק.</b> במסדרון ארוך יש כמה דלתות צדדיות לחדרים קטנים. כשנכנסים לאחד מהם וסוגרים את הדלת, החדר מחליק בשקט לאורך המסדרון. כשהדמויות יוצאות, הן נמצאות בקטע אחר של המסדרון.</li><li data-k="tricks"><b>חדר מסורבל.</b> כל מי שבחדר יורד לזריזות (3, אלא אם הזריזות שלו נמוכה יותר כבר), ויכול רק למעוד או לזחול. כדי לצאת מהחדר צריך הצלה מפני לחש. ההשפעה נשארת עם הנפגעים 6 תורות.</li><li data-k="tricks"><b>חדר מעלית.</b> קירות החדר העגול חלקים לגמרי, וכך גם הצד הפנימי של הדלתות (מתייחסים אליהן כמו לדלתות סתרים). במרכז התקרה תלוי חבל, ו־9 מ׳ ממנו מגולגלים על הרצפה. כשנכנסים, הדלתות נסגרות. משיכה אחת בחבל מורידה את החדר, שתיים מעלות אותו ושלוש עוצרות אותו. גמד מרגיש בתנועה בתוצאה של 1 בק6. החדר הוא בעצם פיר בין קומות עליונות לתחתונות, ובנקודות שונות לאורכו יש דלתות סתרים. אם יורדים הרבה יותר מ־9 מ׳, החבל יוצא מהישג יד והחדר ממשיך לרדת.</li><li data-k="tricks"><b>חדר משגר.</b> כשעושים פעולה מסוימת – פותחים דלת, נוגעים בחפץ, דורכים על אבן מסוימת – כל מי שבחדר משוגר לחדר זהה, באותה קומה, בקומה אחרת או אפילו בחלק אחר של העולם.</li><li data-k="tricks"><b>חדר משחקים.</b> אולם הימורים שאפשר לזכות בו באוצרות גדולים. המשחקים מכורים, וההימורים גבוהים – ולפעמים קטלניים.</li><li data-k="tricks"><b>חדר משכפל.</b> כל דמות שנכנסת לחדר מתפצלת מיד לשתי דמויות זהות, והעותק עוין ובעל נטייה הפוכה. השתיים נלחמות עד שאחת מנצחת, והמפסידה נעלמת. המנצחת שומרת על הנטייה שלה מהקרב.</li><li data-k="tricks"><b>חדר נוטה.</b> רצפת החדר נשענת על ציר במרכזה. כשנכנסים מאחת הדלתות, גוש מחליק מתחת לרצפה תומך בצד הזה. כששני יצורים בגודל אדם או יותר מגיעים קרוב לדלת שבצד השני, הרצפה נוטה וכל מי שבחדר מחליק במגלשה לקומה שמתחת. בדיקת זריזות מונעת את ההחלקה, אבל הרצפה אינה מתאזנת עד שכולם חוזרים לצד השני – טיפוס קשה לכל מי שאינו גנב.</li><li data-k="tricks"><b>חדר פיתוי.</b> החדר נראה כאילו יש בו משהו שמושך הרפתקנים: אוצר בינוני, ציוד שימושי, כמה קובולדים מזלזלים. הכול אשליה, וגם הרצפה. מי שממהר פנימה נופל, אבל אינו נפגע, כי הוא נוחת על שכבה עבה של עובש צהוב.</li><li data-k="tricks"><b>חדר רועד.</b> כשהדמויות נכנסות, הדלתות נטרקות והחדר רועד ומרעיש כאילו הוא יורד במהירות. בפועל הוא לא זז.</li><li data-k="tricks"><b>חדר שואב.</b> בתקרת החדר הנקי מאוד יש סבכה, ומעליה משפך הפוך שמוביל לצינור. כשנכנסים, הדלת נטרקת ושאיבה אדירה מצמידה את כולם לתקרה. חפצים קטנים וחפצים שמוחזקים ביד עלולים להישאב דרך הסבכה. כולם סופגים ק6 נזק מהמכה בסבכה, ועוד ק6 כשהשאיבה נפסקת אחרי תור והם נופלים לרצפה.</li><li data-k="tricks"><b>חדר שוקע.</b> כשהדמויות נכנסות, הדלתות נטרקות והחדר יורד קומה או יותר. אפשר להרגיש בזה ברעידות, בשפשוף או בסחרחורת – או שלא להרגיש כלל.</li><li data-k="tricks"><b>חוזה.</b> מסכה או פנים חצובים בקיר פוקחים עיניים ומדברים כשמפעילים אותם: כשנכנסים לחדר, משפשפים את העיניים, מאירים עליהן או בדרך אחרת. אולי יש כתובת שמסבירה מה לעשות, ואולי לא. כשהפנים מתעוררים, הם אומרים: &quot;דבר, ואענה&quot;. הם עונים על שאלה סבירה אחת, ואז אומרים: &quot;עניתי פעם אחת. לך מכאן, היום לא אדבר עוד&quot;.</li><li data-k="tricks"><b>חיה מדברת.</b> עורב, תוכי, דולפין או יצור מדבר אחר מציע עצות, חוכמה או עלבונות לעוברים. הוא יכול לעזור, להטעות, להזיק או סתם לבזבז זמן.</li><li data-k="tricks"><b>טרול קפוא.</b> אספקת בשר קפוא במזווה היא בעצם בשר של טרול. אם הוא מפשיר, כל חתיכה צומחת בסוף לטרול שלם – וזועם.</li><li data-k="tricks"><b>ידית דלת מחושמלת.</b> מי שנוגע בידית המתכת ביד חשופה או בכפפת שריון מתכת סופג 2ק4 נזק מהלם חשמלי. יש מתג סודי שמנתק את הזרם.</li><li data-k="tricks"><b>ידית דלת ממולכדת.</b> משיכה בידית מפעילה מלכודת (גז רעיל או אחרת). דחיפה של הדלת פותחת אותה בבטחה.</li><li data-k="tricks"><b>כתובות ותחתיות כפולות.</b> תיבות, מגירות, ארונות ומדפים יכולים להסתיר גב או תחתית כפולים, ומאחוריהם תא נסתר, חדר סודי או מעבר לעולם אחר.</li><li data-k="tricks"><b>מדרגות חד־כיווניות.</b> מדרגות שנראות עולות, אבל מובילות לחלקים עמוקים ומסוכנים יותר של עולם המעמקים. אי אפשר לחזור: הדרך נחסמת בסורגים או בגושי אבן, או פשוט נעלמת מאחורי הדמויות.</li><li data-k="tricks"><b>מדרגות מטעות.</b> מדרגות שמובילות למעבר בשיפוע עדין. החוקרים חושבים שהם עלו או ירדו קומה, אבל הם עדיין באותה קומה – או שעלו או ירדו בלי לשים לב.</li><li data-k="tricks"><b>מדרגות נעות.</b> מדרגות שזזות למעלה או למטה, בשקט או בגלוי. מי שהולך נגד כיוון התנועה אינו מתקדם אלא אם הוא רץ. מי שעומד במקום נע איתן. מי שהולך בכיוון התנועה מתקדם מהר מהרגיל.</li><li data-k="tricks"><b>מדרגות שווא.</b> מדרגות רדודות שנראות עולות או יורדות, אבל אינן מגיעות לקומה אחרת. גמדים ובני גזעים אחרים שמבינים בבנייה עשויים לגלות זאת.</li><li data-k="tricks"><b>מכשיר.</b> מתקן שנראה מכני (אבל אולי קסום), עם כפתורים, ידיות או מחוגים. אולי הוא לא עושה כלום, ואולי משהו אקראי: יורה קליעים לנקודה בחדר, משגר למקום אחר, פותח דלתות סתרים או בורות, מפעיל אזעקה, פולט אוצר או מזון, משנה את הנטייה או את המין של דמות, פוצע או מרפא.</li><li data-k="tricks"><b>מסדרון מעוות.</b> המסדרון נראה קצר או ארוך יותר ממה שהוא באמת. הדמויות שבו מאיצות או מאטות בלי לשים לב, כך שהעיוות אינו גלוי.</li><li data-k="tricks"><b>מסדרון נע.</b> מסדרון שזז לכיוון אחד, בשקט או בגלוי. מי שהולך נגד הכיוון אינו מתקדם אלא אם הוא רץ. מי שעומד במקום נע לאט לאורך המסדרון. מי שהולך עם הכיוון מתקדם מהר יותר.</li><li data-k="tricks"><b>מסדרון סגור.</b> מסדרון שהדמויות כבר עברו בו נחסם בקיר מוצק בפעם הבאה שהן מגיעות, והקיר משתלב בבנייה הקיימת כמעט בלי סימן.</li><li data-k="tricks"><b>מערה חיה.</b> מערכת מערות שהיא בעצם תוכו של יצור חי. הכניסה היא הפה, החדרים הם מערכת העיכול, והיציאה היא…</li><li data-k="tricks"><b>מערה ימית.</b> מערה מוצפת שמחוברת לים ישירות, או דרך מעבר מתחת לאדמה או מנהרה מוצפת. היא יכולה לשמש מאורה למבריחים, לשודדי ים או לפולשים מארצות רחוקות ואפילו ממעמקי הים. מתחת למים אורב כמעט תמיד יצור מסוכן: תמנון ענק, נחש ים או חבורה של אנשי כריש.</li><li data-k="tricks"><b>מערה נוגדת־קסם.</b> מערה מסלע כחול שזוהר באור חיוור. כל קסם נחסם בתוכה: חפצים קסומים מפסיקים לפעול, לחשים פעילים נגמרים מיד, ולחשים שמוטלים מבחוץ נעלמים בגבולותיה. השפעות קבועות חוזרות לפעול מחוץ למערה, אבל לחשים והשפעות בעלי משך אינם חוזרים.</li><li data-k="tricks"><b>נהר תת־קרקעי.</b> דמות בעלת כוח נמוך מ־15 נסחפת בזרם. מי שלובש שריון מתכת שוקע, אלא אם הוא מוריד אותו מיד (1–3 בק6). הנסחפים סופגים ק6 נזק על כל 15 מ׳ של זרם, ומגלגלים הצלה מפני מוות או רעל על כל 15 מ׳. הנהר יכול לעבור במקום אחר באותה קומה, לרדת לקומה עמוקה יותר, או לצאת מהאזור לגמרי – אולי במפל.</li><li data-k="tricks"><b>סדנה קסומה.</b> חדר שבו יצורים רבי עוצמה מייצרים כמעט כל חפץ קסום תמורת מחיר מופקע בזהב או בשירותים – או קוסם מוזר שעובד תמורת תשלום הוגן.</li><li data-k="tricks"><b>פסל מכושף.</b> פסלים שעושים משהו כשמתקרבים אליהם עד 6 מ׳: מצביעים לעבר האוצר הקרוב או לכיוון אקראי, מדקלמים שירה גרועה או חידה שרומזת על מטרת החבורה, מציעים חפץ קסום אמיתי או מזויף, מרפאים במגע, רודפים ותוקפים, או כל דבר אחר שהמנחה בוחר.</li><li data-k="tricks"><b>פסל נייד.</b> פסל שאפשר להזיז או לסובב, או שיש בו מתג או ידית מוסתרים היטב. כשמפעילים אותו נחשפת דלת סתרים או תא נסתר. אם מפעילים אותו לא נכון, אולי מופעלת מלכודת, כמו אזעקה או גז.</li><li data-k="tricks"><b>פסל שבור.</b> לפסל חסר חלק. אם מוצאים את החלק ומחברים אותו, הפסל מתעורר: אולי מתגמל את הדמויות, אולי בורח, ואולי תוקף.</li><li data-k="tricks"><b>קיר אשלייתי.</b> קטע קיר רגיל למראה הוא בעצם שער או דלת. אולי האשליה נעלמת במגע, ואולי אפשר לעבור דרכה כאילו אינה. אולי צריך להצליח בהצלה מפני לחש כדי להבין שהיא לא אמיתית, ועד אז הקיר מרגיש מוצק לגמרי.</li><li data-k="tricks"><b>קיר דק.</b> קיר דק כנייר מסתיר חדר קטן. אולי יש בו שומר חמוש שמציץ דרך חריץ, אסיר שמת מזמן (או שאינו מת), אוצר, גז רעיל או כל הפתעה אחרת.</li><li data-k="tricks"><b>רהיטים דביקים.</b> מי שיושב על הרהיטים האלה, או אפילו נוגע בהם, נדבק לגמרי. שום דבר אינו שובר או ממיס את הדבק. אפשר להשתחרר אם מורידים את הבגדים. אם העור נדבק, אפשר לחתוך את עצמו בזהירות (תור, ק6 נזק) או להיתלש בכוח (סבב, 2ק6 נזק). הרהיטים אולי חופשיים, ואולי מחוברים לרצפה.</li><li data-k="tricks"><b>רהיטים חיים.</b> שטיחים שמכשילים, לוכדים או חונקים; כיסאות ושולחנות שזזים, נוטים או תוקפים; שטיחי קיר שמסנוורים או לוכדים.</li><li data-k="tricks"><b>שדה כוח.</b> שדה בלתי נראה בכל צורה: מגן על חפץ, שומר על אוצר, חוסם חדר או מקיף עיירה שלמה. אולי הוא רק בלתי חדיר, ואולי הוא מחשמל או שורף במגע, או מחזיר כל התקפה אל התוקף. אולי יש בצד אחד או בשני הצדדים מתגים שמפעילים אותו, ומי שמשחק בהם בלי לדעת עלול לסבול מכל השפעה, ממזיקה במעט ועד קטלנית.</li><li data-k="tricks"><b>תיבת פנדורה.</b> תיבה, חדר, כספת או מבצר שנועדו לשמור על משהו בפנים, ולא למנוע כניסה מבחוץ. בפנים אולי שד, צבא של אל־מתים או מגפה קטלנית.</li><li data-k="tricks"><b>תרסיס מושך.</b> תרסיס שנראה תמים מרסס את מי שנמצא בשטח של 3 מ׳. מי שמחפש מבחין בו בתוצאה של 1–2 בק6. התרסיס חסר ריח, צבע וטעם, אבל מושך יצורים אחרים. הוא יכול לפעול על כולם – למשל ריח שרק יצורים עם חוש ריח חד מרגישים, או זוהר שיצורים עם ראייה בחושך רואים ממרחק כפול – או למשוך ולהרגיז סוג מסוים, כמו כלבי שאול.</li></ul>
+ </details>
+ <details open id="sec-traps"><summary>נספח: מלכודות (22)</summary>
+  <p>מלבד המחטים המורעלות במנעולים ובורות המלכודת הנסתרים, יש אינספור איומים שקטים אחרים על חייהן ובריאותן של הדמויות. כשמלכודת &quot;תוקפת&quot;, היא תוקפת כמו מפלצת עם מספר קוביות פגיעה שהמנחה בוחר, לפי הקומה.</p>
+  <ul class="tl"><li data-k="traps"><b>אזעקה.</b> קטע של החדר משמיע אזעקה כשיצור בגודל בן־מחצית או גדול ממנו דורך עליו. האזעקה יכולה להיות מחרישת אוזניים ולמשוך את כל המפלצות המשוטטות בסביבה, או שקטה לגמרי, כך שרק מי שמקשיב לה יודע.</li><li data-k="traps"><b>בועה מתפוצצת.</b> בועות ענק בצבעי הקשת מרחפות באקראי, ומתפוצצות כשהן נוגעות ביצור חי: 3ק6 נזק למי שנגע, ו־ק10 נזק לכל מי שבטווח 3 מ׳.</li><li data-k="traps"><b>בועה רודפת.</b> בועה לבנה ענקית מרחפת ורודפת אחרי דמות. אם היא נוגעת בה, הדמות מגלגלת הצלה מפני שיתוק, ואם נכשלה היא נבלעת בבועה ונלקחת מחוסרת הכרה.</li><li data-k="traps"><b>בור דלת סתרים.</b> דלת סתרים שמוסווית כחלק מהרצפה, על צירים, מפילה לבור כל יצור בגודל בן־מחצית או גדול ממנו בתוצאה של 1–2 בק6. הדלת קפיצית ונסגרת מיד.</li><li data-k="traps"><b>בור משגר.</b> מי שנופל לבור משוגר למקום אחר, למשל לתא בבית הכלא של המבוך. אולי הוא נפגע מהנפילה, ואולי לא.</li><li data-k="traps"><b>בור עם יתדות.</b> יתדות מחודדות בתחתית הבור מוסיפות 4ק4 נזק למי שנופל.</li><li data-k="traps"><b>בור קובייה ג׳לטינית.</b> קצת זהב ואוצר מפוזרים בתחתית בור שנראה ריק. בפועל, הבור כולו מלא בקובייה ג׳לטינית.</li><li data-k="traps"><b>בור רפש אפור.</b> רפש אפור ממלא בור עד שפתו, וכמעט אי אפשר להבחין בו על רקע הסלע הלח. מי שנופל לתוכו סופג מיד 2ק6 נזק מהרפש, ובכל סבב עושה בדיקת זריזות כדי לצאת (או טיפוס על קיר חלק, אצל גנב). מי שנכשל ממשיך לספוג נזק.</li><li data-k="traps"><b>בור שלולית.</b> אחת מכמה שלוליות של מים עכורים היא בעצם בור בעומק 6 מ׳.</li><li data-k="traps"><b>גז מבלבל.</b> מי שנחשף לגז הופך לאלים כלפי חבריו, נתקף תאוות בצע, נכנס תחת לחש שליחות או קללה, משוכנע שהוא בן גזע אחר או מין אחר – או כל טירוף אחר שהמנחה ממציא.</li><li data-k="traps"><b>טפילים.</b> כשמפלצת נהרגת, טפילים מסוכנים עוברים ממנה אל הדמויות. לפי גודל המפלצת, הם יכולים להיות קטנים, בלי שירגישו בהם עד שהם גורמים לגירוד או למחלה – או מפלצות בפני עצמן, כמו קרציות ענקיות.</li><li data-k="traps"><b>יצורים ארסיים.</b> פתח נסתר בתקרה נפתח כשנוגעים בחוט, ועקרבים, נחשים או עכבישים ארסיים נופלים על מי שמתחתיו. הוא מגלגל הצלה מפני מוות או רעל.</li><li data-k="traps"><b>מדרגות גלגלת.</b> חוט מתוח ליד ראש מדרגות ארוכות משחרר כדור אבן גדול. כל מי שעל המדרגות סופג 3ק12 נזק כשהכדור מתגלגל למטה. הצלה מפני נשיפת דרקון מורידה את הנזק לחצי.</li><li data-k="traps"><b>מדרגות מגלשה.</b> כשדורכים על המדרגה העליונה, כל המדרגות מסתובבות ויוצרות מגלשה חלקה, וכל מי שעליהן מחליק לתחתית וסופג ק6 נזק.</li><li data-k="traps"><b>מלכודת פיתיון.</b> מלכודת שהקורבן מפעיל בעצמו. למשל: חבל שנראה כמו דרך החוצה מבור, אבל מפיל מפולת אבנים; תיבת אוצר גלויה שיש בה רק גז רעיל; או מלכודת עכברים פשוטה, עם פיתיון.</li><li data-k="traps"><b>מפולת.</b> חלק מהתקרה מוכן לקרוס כשהדמויות עוברות מתחתיו: ק6 עד 3ק6 נזק, לפי המנחה. הצלה מפני נשיפת דרקון מורידה את הנזק לחצי.</li><li data-k="traps"><b>נשק גיליוטינה.</b> להב נסתר במשקוף של דלת או בפתח אחר. כל מה שנמצא בפתח נפגע ב־3ק6 נזק. יד או איבר אחר שהוכנס לפתח נכרת, וצריך לחבר אותו או להצמיח אותו מחדש בדרך כלשהי.</li><li data-k="traps"><b>נשק דורבן.</b> דורבן חד יוצא מסדק נסתר (1–2 בק6 לכל מי שעובר) וחוזר מיד למקומו. גם אחרי שהופעל קשה למצוא אותו: 1 בק6 (גמד: 1–2).</li><li data-k="traps"><b>נשק להב.</b> להב מגל מתנדנד מהתקרה וחותך את מי שבדרכו: 2ק6 נזק.</li><li data-k="traps"><b>נשק קליעים.</b> מתקן בתוך הקיר יורה ק6 חצים, קליעי רובה קשת או כידונים דרך חורים נסתרים. כל קליע הוא התקפה מרחוק.</li><li data-k="traps"><b>צמחייה חיה.</b> צמחייה רגילה למראה (עשב, עצים, שיחים, מטפסים או פטל) זורקת קליעים, צורחת, מצליפה (ק4 נזק), לוכדת (בדיקת כוח כדי להשתחרר), מכשילה (בדיקת זריזות כדי להימנע) או מלטפת.</li><li data-k="traps"><b>צמחייה פולטת.</b> צמחים פולטים בושם או נבגים שגורמים לצחוק, לשכחה, לשינה, למוות, לריפוי וכו׳. אם אפשר לשמור ממגע איתם, אולי הם שווים הרבה לבשמים או למרעילים.</li></ul>
+ </details>
+ </div>
+ <p class="hide" id="dgNone">לא נמצא דבר.</p>
+</div>
+<div class="panel hide" id="pDm">
+ <h2><span class="no">2</span>למנחה ונספחים</h2>
+ <div class="gen">
+  <h3>מחוללים מהירים</h3>
+  <div class="row">
+   <button type="button" class="act" id="reGo">תגובת מפלצות</button>
+   <label>תוסף <select id="reMod"><option value="-3">−3</option><option value="-2">−2</option><option value="-1">−1</option><option value="0" selected>0</option><option value="1">+1</option><option value="2">+2</option><option value="3">+3</option></select></label>
+  </div>
+  <div class="row">
+   <label>גזע <select id="nmRace"><option>אדם</option><option>גמד</option><option>אלף</option><option>בן־מחצית</option></select></label>
+   <label>מין <select id="nmSex"><option>זכר</option><option>נקבה</option></select></label>
+   <button type="button" class="act alt" id="nmGo">5 שמות</button>
+   <button type="button" class="act alt" id="adGo">רעיון להרפתקה</button>
+  </div>
+  <div class="row">
+   <label>מקצוע <select id="sgCls"><option value="0">לוחם</option><option value="1">כוהן</option><option value="2">קוסם</option><option value="3">גנב</option><option value="4">דרואיד</option><option value="5">סייר</option><option value="6">פלדין</option><option value="7">מיסטיקן</option><option value="8">גמד</option><option value="9">אלף</option><option value="10">בן־מחצית</option></select></label>
+   <button type="button" class="act alt" id="sgGo">ציוד התחלתי</button>
+  </div>
+  <div id="dmOut" aria-live="polite"></div>
+ </div>
+ <div class="rsearch"><label for="dmQ">חיפוש בפרק</label><input id="dmQ" type="search" placeholder="למשל: תגובה, שמות, מחקר, קוסם"></div>
+ <div class="rbody" id="dmBody">
+ <details open id="sec-reaction"><summary>טבלאות למנחה: תגובת מפלצות</summary>
+  <p>תגובת מפלצות (2ק6), אם המנחה לא קבע מראש איך המפלצות מגיבות. מחוות ידידות של הדמויות עשויות לתת תוסף, ואיומים או גסות רוח עשויים לתת קנס.</p>
+  <table><thead><tr><th>2ק6</th><th>תגובה</th></tr></thead><tbody><tr><td>2 עד 3</td><td>תוקפת</td></tr><tr><td>4 עד 6</td><td>תוקפנית (נוהמת, מאיימת). מגלגלים שוב בסבב הבא עם 4 פחות</td></tr><tr><td>7 עד 9</td><td>זהירה. מגלגלים שוב בסבב הבא</td></tr><tr><td>10 עד 11</td><td>נייטרלית. מגלגלים שוב בסבב הבא עם 4 עוד</td></tr><tr><td>12</td><td>ידידותית</td></tr></tbody></table>
+  <p>תכולת חדר במבוך ואוצר לפי קומה נמצאים בפרקים "חדרים, תחבולות ומלכודות" ו"אוצר".</p>
+ </details>
+ <details id="sec-research"><summary>מחקר קסם</summary>
+  <p>קוסמים חייבים להחזיק בספרי לחשים שמתוכם הם משננים את לחשיהם. קוסם מתחיל מקבל ספר כזה אוטומטית. לקוסם יש בדרך כלל ספר לחשים יחיד המכיל את הלחשים שהוא למד.</p>
+  <p><b>מחקר מאגי:</b> מחקר של לחש חדש הוא תהליך יקר, הן בזמן והן בזהב. יש להשקיע שבוע עבודה מלא אחד עבור כל עוצמה של הלחש הנחקר. עלות המחקר היא 2,000 מ״ז מצטבר לכל עוצמת לחש (2,000 מ״ז ללחש עוצמה 1, 4,000 מ״ז לעוצמה 2, 8,000 מ״ז לעוצמה 3, וכן הלאה).</p>
+  <p>השחקן נדרש להגדיר ולתאר את הלחש החדש, ועל המנחה לאשר אותו; המנחה רשאי לשנות את הלחש כראות עיניו, כולל העלאת העוצמה שלו במידת הצורך. דמויות אינן יכולות לחקור לחשים בעוצמה שגבוהה מעוצמת הלחשים שהן מסוגלות להטיל בפועל.</p>
+  <p><b>סיכויי ההצלחה:</b> סיכוי הבסיס להצלחה הוא 20%. השחקן יכול לשפר את הסיכוי אם הוא משקיע פי כמה מהעלות והזמן: פי 2 נותן 40%, פי 3 נותן 60%, ופי 4 נותן 80%.</p>
+  <p>לחשים חדשים שנוצרו בדרך זו נשארים סודיים ובבעלותו הפרטית של היוצר, אלא אם כן הוא מחליט לחלוק את הידע הזה עם אחרים. המנחה רשאי להעלות את עלות המחקר באופן משמעותי אם הדמות נמצאת הרחק באזור פראי ולא מיושב, מכיוון שהחומרים הדרושים יהיו קשים בהרבה להשגה. במקרים כאלה המחיר עלול לעלות עד פי 10 מהעלות המקורית.</p>
+  <div class="calc row">
+   <label>עוצמת הלחש <select id="mrLvl"><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option></select></label>
+   <label>השקעה <select id="mrMul"><option value="1">רגילה (20%)</option><option value="2">פי 2 (40%)</option><option value="3">פי 3 (60%)</option><option value="4">פי 4 (80%)</option></select></label>
+   <label><input type="checkbox" id="mrWild"> באזור פראי (פי 10 בעלות)</label>
+   <button type="button" class="act alt" id="mrGo">חשב וגלגל</button>
+  </div>
+  <div id="mrOut" aria-live="polite"></div>
+ </details>
+ <details id="sec-adventures"><summary>רשימת דוגמאות להרפתקאות פשוטות</summary>
+  <ol><li><b>גירוש רוע עתיק:</b> נוכחות מרושעת (למשל מפלצת או דמות ללא שחקן) חייבת להיות מגורשת או מושמדת. ייתכן שהיא הייתה רדומה במשך שנים רבות, והתעוררה רק לאחרונה (אולי כתוצאה מהתערבות של חבורה אחרת).</li><li><b>טיהור חורבות:</b> מתיישבים מתכננים לעבור ליישוב או למבצר נטוש. לפני שהם מגיעים, על דמויות השחקן לסייר באזור ולטהר אותו מכל מפלצת או סכנה אחרת שנמצאת בו. החורבות אינן חייבות להיות באזור מרוחק — הן יכולות להיות אפילו בתוך (או מתחת) ליישוב מרכזי.</li><li><b>יצירת קשר עם ציוויליזציה אבודה:</b> דמויות השחקן מגלות גזע שאבד מזמן במיקום פנטסטי. ייתכן שהם היו פעם בני אדם, אך כעת הם מותאמים לסביבתם המוזרה. לדוגמה, הם עשויים לחזור להתנהגות חייתית או להיות מותאמים לחיים תת־קרקעיים, עם עור חיוור וראיית חום.</li><li><b>בריחה משבי:</b> דמויות השחקן נלקחו בשבי על ידי אויב ומתחילות את ההרפתקה בשבי, ייתכן שגורל אכזרי מצפה להן בעתיד הקרוב. עליהן לזכות בחירותן בחזרה.</li><li><b>חקירת טריטוריה לא ידועה:</b> דמות ללא שחקן שוכרת את החבורה לחקור ולמפות אזור לא ידוע. זה עשוי להיות אזור שלא מופה בעבר או שינוי שחל לאחרונה באזור מוכר (למשל טירה קסומה שמופיעה במישור ריק).</li><li><b>ביצוע משימה:</b> ישות אלוהית או דמות ללא שחקן רבת עוצמה (למשל מלך) שולחת את דמויות השחקן למשימה. זה עשוי לכלול השבת חפצים קדושים או קסומים.</li><li><b>חילוץ שבויים:</b> דמויות ללא שחקן חשובות נחטפו על ידי שודדים, מפלצות מרושעות או קוסם רשע. דמויות השחקן מנסות לחלץ את האסירים, בין אם בחיפוש אחר פרס או בגלל קשר אישי עם השבויים חסרי המזל. ייתכן גם שדמויות השחקן יישכרו כשומרי ראש לדמויות ללא שחקן המנהלות משא ומתן עם החוטפים.</li><li><b>סיור במוצב אויב:</b> פלישה ממשמשת ובאה (או כבר בעיצומה). על דמויות השחקן מוטלת המשימה להסתנן למוצב של האויב, לאסוף מודיעין לגבי תוכניותיהם, נקודות החוזק ונקודות התורפה שלהם, ו(אם אפשר) להשמידם.</li><li><b>חיפוש אחר שער קסום:</b> קיים שער שמאפשר מעבר קסום (חד־כיווני או דו־כיווני) בין מיקומים מרוחקים או אפילו עולמות אחרים. על דמויות השחקן מוטלת המשימה לאתר שער אבוד או לסגור שער המשמש את האויבים. השער עשוי להיות גם אמצעי התנועה היחיד ליעד פנטסטי שעל דמויות השחקן לבקר בו.</li><li><b>ביקור באתר קדוש:</b> על מנת להתייעץ עם אורקל, להסיר קללה או למצוא שריד קדוש, על דמויות השחקן לצאת למסע אל אתר קדוש (למשל מקדש או מזבח). המיקום המדויק של האתר הוא בדרך כלל בגדר השערה בלבד.</li></ol>
+  <h4>האלמנט הטרגי (תזכורת שמתאימה למנחים מסוימים)</h4>
+  <p>יש מנחים שפונים לאלמנטים הפשוטים בקיום האנושי ולאו דווקא לפנטסטי (או משלבים ממנו): הרפתקאות שמבוססות על רגשות אנושיים ומניעים שתמיד הופיעו בסיפורי האדם – קנאה, אהבה, רצון לעוצמה וכו&#x27;. לדוגמה: מריבה בין אחים על ירושה, זוג שרוצה להתחתן ללא רשות ההורים, עלבון שמוביל לרצון לנקמה. בהרפתקאות כאלו המפלצות הן לרוב אנושיות, והמפלצות הפנטסטיות יותר הן ברקע. חשוב לתת בהן דגש על הדמויות ללא שחקן בעלילה.</p>
+ </details>
+ <details id="sec-names"><summary>שמות נפוצים לדמויות</summary>
+  <table><thead><tr><th>גזע</th><th>שמות לזכר</th><th>שמות לנקבה</th></tr></thead><tbody><tr><td><b>אדם</b></td><td>אולדריק, תורוון, קאלאן, בראנוק, ולמיר, דוראן, סאלדור, אריון, גרימה, מורבן, אוסריק, ראדוק, זאנדור, קאדמיר, קורווין, אינדל, תאלון, הלמרק, פנדריל, רוביק</td><td>קיסלה, אלוורה, סירנה, מירבל, תאליסה, ליריאן, אווינה, קסאלין, נאריס, אלסינה, ברינדה, ורנה, סלאני, דאריאל, מורגווין, לאוריס, פיאלה, אינרה, זאירה, קלרווין</td></tr><tr><td><b>גמד</b></td><td>דורגן, תרבק, גרומדל, בראלגר, קאזרק, הרגן, תוראג, אורום, דולמק, ברונדר</td><td>הלדרה, בריגה, תורגה, דאגנה, ורנדה, אסגרה, קלדרינה, מורגה, גרתילדה, ברנדסינה</td></tr><tr><td><b>אלף</b></td><td>אלנדיר, סילו־ראן, תליאן, אריאנדור, פאלאסר, ניאלוס, איתרין, קאלאדן, וירנאל, מיראדון, ניג׳ס־ת׳אלאס</td><td>אילוונה, סאלירה, נימאריס, אלאתיה, פירינדה, ליאנאל, אוריסה, תינואל, קאליסרה, מאלווינארה</td></tr><tr><td><b>בן־מחצית</b></td><td>תובי, מרלו, פדריג, תאדו, וילמר, קוביל, הוגל, רודבר, פינבל, דאמפל</td><td>ליליבל, דייזל, טילדה, ניבה, פרמה, סאלווי, קוריבל, בריניה, וילנה</td></tr></tbody></table>
+ </details>
+ <details id="sec-start-gear"><summary>ציוד התחלתי לדמויות לפי מקצוע (השיטה המהירה)</summary>
+  <p>המחיר במ״ז הוא העלות במידה והדמות הייתה צריכה לקנות את הציוד. כל דמות גם מתחילה עם 10 מ״ז.</p>
+  <table><thead><tr><th>מקצוע</th><th>מחיר</th><th>ציוד</th></tr></thead><tbody><tr><td><b>לוחם</b></td><td>90 מ״ז</td><td>שריון שרשראות, מגן, חרב ארוכה, פגיון, מימייה, לפידים, ערכת הצתה, מזון משומר, חבל, שק שינה, תיק גב</td></tr><tr><td><b>כוהן</b></td><td>107 מ״ז</td><td>שריון שרשראות, מגן, פטיש מלחמה, סמל קדוש, מימייה, לפידים, ערכת הצתה, מזון משומר, חבל, שק שינה, תיק גב</td></tr><tr><td><b>קוסם</b></td><td>47 מ״ז</td><td>פגיון, מימייה, לפידים, ערכת הצתה, מזון משומר, שק שינה, שמן, חבל, מראה, עששית, תיק גב</td></tr><tr><td><b>גנב</b></td><td>106 מ״ז</td><td>שריון עור, חרב קצרה, פגיון, כלי גנב, קרס טיפוס, חבל, מימייה, ערכת הצתה, מזון משומר, לפידים, תיק גב</td></tr><tr><td><b>דרואיד</b></td><td>56 מ״ז</td><td>שריון עור, מטה, קלע, מימייה, ערכת הצתה, מזון משומר, שק שינה, לפידים, חבל, שק גדול, תיק גב</td></tr><tr><td><b>סייר</b></td><td>98 מ״ז</td><td>שריון עור, קשת ארוכה, אשפת חיצים, חרב ארוכה, מימייה, ערכת הצתה, מזון משומר, שק שינה, חבל, לפידים, תיק גב</td></tr><tr><td><b>פלדין</b></td><td>112 מ״ז</td><td>שריון שרשראות, מגן, חרב ארוכה, סמל קדוש, מימייה, לפידים, ערכת הצתה, מזון משומר, חבל, שק שינה, תיק גב</td></tr><tr><td><b>מיסטיקן</b></td><td>60 מ״ז</td><td>קרס טיפוס, מימייה, לפידים, ערכת הצתה, מזון משומר, שק שינה, חבל, מוט עץ, מראה, שק גדול, תיק גב</td></tr><tr><td><b>גמד</b></td><td>86 מ״ז</td><td>שריון שרשראות, מגן, פטיש מלחמה, גרזן יד, מימייה, לפידים, ערכת הצתה, מזון משומר, שק שינה, תיק גב, חבל</td></tr><tr><td><b>אלף</b></td><td>103 מ״ז</td><td>שריון שרשראות, חרב ארוכה, קשת קצרה, אשפת חיצים, מימייה, ערכת הצתה, מזון משומר, לפידים, חבל, שק שינה, תיק גב</td></tr><tr><td><b>בן־מחצית</b></td><td>66 מ״ז</td><td>שריון עור, מגן, חרב קצרה, קלע, מימייה, ערכת הצתה, מזון משומר, לפידים, חבל, שק שינה, תיק גב</td></tr></tbody></table>
+  <h4>חפץ קסום התחלתי</h4>
+  <p>לכל דמות יש סיכוי של 5% להתחיל עם חפץ קסום אקראי, ולקוסם 10%. מגלגלים ק100: תוצאה של 01 עד 05 (אצל קוסם 01 עד 10) פירושה שיש חפץ. אחר כך מגלגלים בטבלת "סוג חפץ הקסם", בעמודת "בסיסי", ואז בטבלה של הסוג שיצא. חפץ שהדמות אינה רשאית להשתמש בו (למשל חרב אצל כוהן) מגלגלים מחדש.</p>
+ </details>
+ <details id="sec-words-player"><summary>כמה מילים לשחקן</summary><p>אם שיחקתם במשחקי תפקידים מודרניים, השיטה הזאת תרגיש לכם אחרת. הדמות שלכם אינה גיבור מהרגע הראשון. היא הרפתקן חסר ניסיון, שעוד צריך להפוך לגיבור, אם ישרוד מספיק זמן.</p><h4>מה השיטה מבקשת מכם</h4><p><b>חשבו כמו שודדי קברים, לא כמו אבירים</b> (למרות שמומלץ שכן! יותר כיף ומתגמל אם זה עובד). רוב הניסיון בא מאוצר שהבאתם הביתה, לא ממפלצות שהרגתם. קרב הוא מחיר, לא מטרה. אם אפשר לעקוף את השומר, לשחד אותו או לפתות אותו להתרחק, זה כמעט תמיד עדיף.</p><p><b>התשובה לא כתובה על דף הדמות.</b> אין מיומנות &quot;חיפוש&quot; או &quot;חקירה&quot;. כשאתם רוצים לדעת אם יש מלכודת, אל תשאלו &quot;אני מגלגל חיפוש?&quot;. תארו מה אתם עושים: &quot;אני מקיש במוט על הרצפה לפניי&quot;, &quot;אני מאזין לדלת עם כוס&quot;. ככל שהתיאור מדויק יותר, כך המנחה יכול לתת לכם יותר.</p><p><b>הציוד הוא הכלי שלכם.</b> מוט של 4 מטרים מתקפל, חבל, גיר, מראת פלדה, שמן וקוצי ברזל מצילים יותר חיים מחרב טובה. מראה מאפשרת להסתכל מעבר לפינה, ומגינה מבזיליסק. גיר מסמן את הדרך חזרה. שמן בוער עוצר רודפים במסדרון.</p><p><b>לברוח זה לגיטימי.</b> אויבים בורחים כשהמוראל שלהם נשבר, וגם אתם רשאים. חבורה שנסוגה, מתאוששת וחוזרת עם תוכנית, מנצחת יותר מחבורה שנלחמת עד הסוף.</p><p><b>דברו עם מה שאתם פוגשים.</b> לא כל יצור במבוך רוצה להרוג אתכם. גלגול התגובה עשוי להפתיע. שאלו לפני שאתם שולפים נשק.</p><p><b>שכרו עזרה.</b> נושאי לפידים, סבלים ושכירי חרב עולים מעט מאוד, ומוסיפים הרבה. הכריזמה קובעת כמה מלווים תוכלו לגייס. התייחסו אליהם בהגינות, כי שכירים מושפלים בורחים ברגע הלא נכון.</p><h4>מה כדאי לדעת מראש</h4><p><b>הדמות שלכם עלולה למות, וזה בסדר.</b> בדרגה 1 חץ אחד יכול להספיק. אל תשקיעו את כל הנשמה בסיפור הרקע לפני שהדמות שרדה כמה הרפתקאות. הסיפור שלה ייכתב בזמן המשחק. מומלץ להחזיק רעיון לדמות חלופית.</p><p><b>ההתקדמות איטית.</b> עליית דרגה דורשת אלפי מטבעות זהב. זה מכוון: כל דרגה היא הישג.</p><p><b>הריפוי יקר.</b> לחשי ריפוי מוגבלים, והמנוחה איטית. שמרו על חיים מראש במקום לסמוך על ריפוי בדיעבד. עשבי המרפא שבנספח ב יכולים להציל מצב, אז כדאי שמישהו בחבורה ילמד את המלאכה.</p><p><b>לכל מקצוע יש תפקיד.</b> הלוחם מחזיק את הקו, הגנב מוצא את מה שמוסתר, הכוהן מחזיק את החבורה בחיים, והקוסם הוא נשק סודי שנחשף ברגע הנכון. קוסם בדרגה נמוכה שנכנס לקרב פנים אל פנים מת מהר. חבורה מאוזנת שורדת.</p><p><b>חפץ קסם לא מזוהה מסוכן.</b> שיקוי שלא בדקתם, מגילה שלא קראתם בעזרת לחש וטבעת שענדתם באקראי עלולים להיות מקוללים.</p><h4>רשימת בדיקה לפני שיוצאים למבוך</h4><ul><li>מספיק אור: לפידים, שמן ועששית.</li><li>מנות שדה ומים לכל הדרך, וגם לדרך חזרה.</li><li>חבל, מוט וגיר.</li><li>מישהו שמשרטט מפה.</li><li>סדר הליכה מוסכם: מי בחזית, מי בעורף, ומי שומר בזמן מנוחה.</li><li>תוכנית נסיגה: לאן בורחים אם הכול משתבש.</li><li>שק ריק לאוצר. זו הסיבה שבאתם.</li></ul><p>ולבסוף: שאלו את המנחה שאלות. הוא היחיד שרואה את העולם, ואתם העיניים והידיים של הדמויות שלכם בתוכו.</p></details>
+ <details id="sec-words-dm"><summary>כמה מילים למנחה</summary><p>השיטה הזאת ותיקה מרוב כמות השחקנים ששיחקו בה לאורך השנים, והיא מתגמלת סגנון משחק מסוים. הרפתקה טובה בנויה לפי החוזקות שלה, ומכינה מראש מענה לחולשות שלה.</p><h4>מה השיטה עושה היטב</h4><p><b>האוצר הוא הניסיון.</b> רוב נקודות הניסיון באות ממטבעות שחולצו והובאו למקום מבטחים, ולא ממפלצות שנהרגו. לכן מטרת ההרפתקה האמיתית היא להגיע לאוצר ולצאת חיים, ולא לנצח בכל קרב. כתבו מבוכים שבהם אפשר לעקוף, להערים, לשחד ולברוח. חבורה שהתחמקה מהטרול וגנבה את ערימת הזהב שלו הרוויחה יותר מחבורה שנלחמה בו.</p><p><b>המוות אמיתי.</b> לקוסם בדרגה 1 יש בממוצע 2–3 נק״פ, ויש גלגולי הצלה שבהם כישלון הוא מוות. הסכנה הזאת היא שמעניקה משקל לכל החלטה. אל תסתירו אותה. תנו סימנים מוקדמים לסכנה: עצמות ליד הפתח, שריטות על הרצפה, כפרי שמזהיר מפני הביצה. מוות שהשחקנים יכלו לצפות נתפס כהוגן. מוות פתאומי בלי אזהרה נתפס כשרירותי.</p><p><b>הזמן הוא משאב.</b> כל תור נמשך עשר דקות, ובכל תור מתקדמות מפלצות משוטטות, נשרפים לפידים, נגמרים לחשים ומתקרבת המנוחה ההכרחית. עקבו אחרי הזמן באמת. כך גם חיפוש דלתות סודיות נעשה החלטה עם מחיר.</p><p><b>לא כל מפגש הוא קרב.</b> גלגולי תגובה ובדיקות מוראל הופכים מפלצות ליצורים עם רצונות. גובלינים רעבים יעדיפו עסקה, והשודדים יברחו כשמנהיגם ייפול. אכלסו את ההרפתקה בפלגים עם מטרות, והשחקנים ימצאו בעצמם בעלי ברית ואויבים.</p><p><b>החוקים קצרים, וההכרעה של המנחה.</b> אין כאן כלל לכל מצב. כשדמות רוצה לקפוץ מנברשת, פסקו מיד: גלגול זריזות, סיכוי באחוזים או פשוט &quot;זה מצליח&quot;. הרפתקה טובה כוללת מכשולים שנפתרים בתיאור ובחשיבה, ולא בגלגול אחד.</p><h4>איפה השיטה חורקת</h4><p><b>הדרגות הנמוכות שבירות.</b> דמות אחת יכולה למות מחץ בודד. אם אתם לא רוצים שזה יקרה, כתבו הרפתקה פותחת עם שכירים ונושאי לפידים, ועם מקדש קרוב שאפשר לחזור אליו. השתמשו גם בנספח ב, כדי שהריפוי לא יהיה תלוי רק בכוהן.</p><p><b>ההחלמה איטית.</b> בלי קסם, נקודת פגיעה אחת ליום לא מספיקה כדי לסיים מבוך. תכננו מבוכים שאפשר לבקר בהם כמה פעמים. שנו אותם בין ביקור לביקור: הגובלינים מציבים שמירה, והמתים מוחלפים.</p><p><b>מלכודות בלי מיומנויות.</b> אין לדמויות מיומנות &quot;חיפוש מלכודות&quot;. לכן תארו את המלכודות כך שאפשר לגלות אותן בחקירה: לוח רצפה בצבע אחר, חור קטן בקיר. שחקן שאומר &quot;אני מקיש במוט על הרצפה&quot; צריך למצוא את הבור, בלי שום גלגול.</p><p><b>הדרגות הגבוהות מסתבכות.</b> שיגור, משאלה, הקמת מתים ומילות עוצמה מוחקים בעיות שלמות. מדרגה 9 והלאה, העבירו את ההרפתקאות למישור אחר: מבצרים, צבאות, פוליטיקה ומישורים אחרים.</p><h4>רשימת בדיקה להרפתקה</h4><p>לפני המשחק, בדקו שבהרפתקה יש:</p><ul><li>אוצר ששווה את הסכנה, ובחלקו גם קשה להוצאה (פסל זהב כבד, תיבה במעמקי אגם).</li><li>לפחות שתי דרכים להגיע ליעד.</li><li>פלג אחד שאפשר לדבר איתו.</li><li>סכנה אחת קטלנית באמת, עם סימני אזהרה לפניה.</li><li>טבלת מפלצות משוטטות שמתאימה למקום ומספרת עליו משהו.</li><li>סוד אחד שמתגלה רק למי שחוקר.</li></ul><p>וזכור הו מנחה יקר: אתה לא כותב סיפור שהשחקנים יעברו בו. אתה בונה מקום, והסיפור הוא מה שהם יעשו בו.</p></details>
+ </div>
+ <p class="hide" id="dmNone">לא נמצא דבר.</p>
+</div>
 <div class="panel hide" id="pSpells">
  <h2><span class="no">2</span>לחשים</h2>
  <div class="spell-controls">
@@ -539,7 +1141,7 @@ function buildAreas(){
  $('areaHint').textContent=S.where==='dungeon'?'קומת המבוך היא בערך הדרגה של הדמויות שמתאימות לה.':'אוויר: תמיד טבלת המעופפים. עולם קדום: טבלת בעלי החיים של העולם הקדום.';
  list.forEach(function(a){var b=document.createElement('button');b.type='button';b.dataset.v=a;b.textContent=a;b.setAttribute('aria-pressed','false');box.appendChild(b);});
 }
-$('optWhere').addEventListener('click',function(ev){var b=ev.target.closest('button');if(!b)return;S.where=b.dataset.v;S.area=null;S.last=null;if(S.where==='spells'){press('optWhere','spells');['pArea','pRoll','pList','pNpc','pWm','pSite','pShow','pMagic'].forEach(function(id){$(id).classList.add('hide');});$('pSpells').classList.remove('hide');$('pSpells').scrollIntoView({block:'start',behavior:'auto'});return;} $('pSpells').classList.add('hide');press('optWhere',S.where);buildAreas();
+$('optWhere').addEventListener('click',function(ev){var b=ev.target.closest('button');if(!b)return;S.where=b.dataset.v;S.area=null;S.last=null;var REF={spells:'pSpells',rules:'pRules',classes:'pClasses',treasure:'pTreasure',rooms:'pDungeon',dm:'pDm'};['pSpells','pRules','pClasses','pTreasure','pDungeon','pDm'].forEach(function(id){$(id).classList.add('hide');});if(REF[S.where]){press('optWhere',S.where);['pArea','pRoll','pList','pNpc','pWm','pSite','pShow','pMagic'].forEach(function(id){$(id).classList.add('hide');});$(REF[S.where]).classList.remove('hide');$(REF[S.where]).scrollIntoView({block:'start',behavior:'auto'});return;}press('optWhere',S.where);buildAreas();
  $('pArea').classList.remove('hide');$('areaDesc').classList.add('hide');$('pList').classList.add('hide');
  $('pNpc').classList.toggle('hide',S.where!=='npc');if(S.where==='npc')$('pArea').classList.add('hide');
  $('pSite').classList.toggle('hide',S.where!=='site');if(S.where==='site')$('pArea').classList.add('hide');
@@ -797,7 +1399,8 @@ function monCard(R,L,noX){
  return o;
 }
 $('bShow').onclick=show;
-$('out').addEventListener('click',function(ev){var nb=ev.target.closest('[data-npc]');if(nb){S.where='npc';press('optWhere','npc');['pArea','pRoll','pShow','pList','pSite','pWm','pMagic'].forEach(function(x){$(x).classList.add('hide');});$('pNpc').classList.remove('hide');window.NPCGEN.preset(nb.dataset.npc,nb.dataset.lv,+nb.dataset.n);$('pNpc').scrollIntoView({block:'start'});return;}var tl=ev.target.closest('[data-tlv]');if(tl)TLV=tl.dataset.tlv;if((ev.target.id==='bTre'||tl)&&S.tre){$('treBox').innerHTML=treasureHtml(S.tre.code,S.tre.cnt,!!tl);}});
+$('out').addEventListener('click',function(ev){var nb=ev.target.closest('[data-npc]');if(nb){S.where='npc';press('optWhere','npc');['pArea','pRoll','pShow','pList','pSite','pWm','pMagic','pSpells','pRules','pClasses','pTreasure','pDungeon','pDm'].forEach(function(x){$(x).classList.add('hide');});$('pNpc').classList.remove('hide');window.NPCGEN.preset(nb.dataset.npc,nb.dataset.lv,+nb.dataset.n);$('pNpc').scrollIntoView({block:'start'});return;}var tl=ev.target.closest('[data-tlv]');if(tl)TLV=tl.dataset.tlv;if((ev.target.id==='bTre'||tl)&&S.tre){$('treBox').innerHTML=treasureHtml(S.tre.code,S.tre.cnt,!!tl);}});
+window.HOMU_mon=function(n){var R=resolve(n);if(!R||R.missing)return false;$('pRoll').classList.add('hide');$('showRow').classList.add('hide');$('showTitle').textContent='המפלצת';$('pShow').classList.remove('hide');$('out').innerHTML=monCard(R,{na:null},true);$('pShow').scrollIntoView({block:'start'});return true;};
 })();
 </script>
 <script>
@@ -1043,7 +1646,7 @@ function renderSpells(){
 }
 ['spellClass','spellLevel'].forEach(function(id){el(id).addEventListener('change',renderSpells);});
 el('spellSearch').addEventListener('input',renderSpells);
-renderSpells();
+renderSpells();window.SPELLS_DATA=SPELLS_DATA;window.renderSpells=renderSpells;
 })();
 </script>
 
@@ -1108,6 +1711,201 @@ $('mgClear').onclick=function(){$('mgOut').innerHTML='';};
 window.MAGICROLL=function(cat,lv,allow){var oL=LV,oC=CAT;LV=lv;CAT=cat==='any'?'random':cat;var h;try{h=roll(allow);}finally{LV=oL;CAT=oC;}return {html:h,name:LAST.name,title:LAST.title};};
 })();
 </script>
-<footer class="site-footer">by gargoylian. 2026. contact: bookofxal@gmail.com</footer>
+<footer class="site-footer">by Tammiro. 2026. contact: bookofxal@gmail.com</footer>
 
-</body></html>
+</body></html><script>
+(function(){
+function norm(t){return String(t||'').toLowerCase();}
+function setup(inp,body,none){var I=document.getElementById(inp),B=document.getElementById(body),N=document.getElementById(none);if(!I||!B)return;
+ var ds=[].slice.call(B.children).filter(function(x){return x.tagName==='DETAILS';});var init=ds.map(function(d){return d.open;});
+ I.addEventListener('input',function(){var q=norm(I.value).trim(),any=false;
+  ds.forEach(function(d,i){var rows=[].slice.call(d.querySelectorAll('tr'));
+   if(!q){d.hidden=false;d.open=init[i];rows.forEach(function(x){x.hidden=false;});return;}
+   var hit=norm(d.textContent).indexOf(q)>=0;d.hidden=!hit;if(!hit)return;any=true;d.open=true;
+   var head=norm(d.querySelector('summary').textContent).indexOf(q)>=0;
+   rows.forEach(function(x){x.hidden=!(head||x.querySelector('th')||norm(x.closest('table').textContent).indexOf(q)<0||norm(x.textContent).indexOf(q)>=0);});
+  });
+  if(N)N.hidden=!q||any;});}
+setup('rulesQ','rulesBody','rulesNone');setup('clsQ','clsBody','clsNone');
+})();
+</script>
+<button type="button" id="homuBack" hidden>→ חזרה</button>
+<script type="application/json" id="newData">{"TT": {"A": [[25, "מ״נ", "ק6", 1000], [30, "מ״כ", "ק6", 1000], [20, "מ״א", "ק4", 1000], [35, "מ״ז", "2ק6", 1000], [25, "מ״פ", "ק2", 1000], [50, "gem", "6ק6", 1], [50, "jew", "6ק6", 1], [30, "magic", "3 חפצי קסם", 0]], "B": [[50, "מ״נ", "ק8", 1000], [25, "מ״כ", "ק6", 1000], [25, "מ״א", "ק4", 1000], [25, "מ״ז", "ק3", 1000], [25, "gem", "ק6", 1], [25, "jew", "ק6", 1], [10, "magic", "חרב, שריון או כלי נשק קסום אחד", 0]], "C": [[20, "מ״נ", "ק12", 1000], [30, "מ״כ", "ק4", 1000], [10, "מ״א", "ק4", 1000], [25, "gem", "ק4", 1], [25, "jew", "ק4", 1], [10, "magic", "2 חפצי קסם", 0]], "D": [[10, "מ״נ", "ק8", 1000], [15, "מ״כ", "ק12", 1000], [60, "מ״ז", "ק6", 1000], [30, "gem", "ק8", 1], [30, "jew", "ק8", 1], [15, "magic", "2 חפצי קסם ועוד שיקוי אחד", 0]], "E": [[5, "מ״נ", "ק10", 1000], [30, "מ״כ", "ק12", 1000], [25, "מ״א", "ק4", 1000], [25, "מ״ז", "ק8", 1000], [10, "gem", "ק10", 1], [10, "jew", "ק10", 1], [25, "magic", "3 חפצי קסם ועוד מגילה אחת", 0]], "F": [[10, "מ״כ", "2ק10", 1000], [20, "מ״א", "ק8", 1000], [45, "מ״ז", "ק12", 1000], [30, "מ״פ", "ק3", 1000], [20, "gem", "2ק12", 1], [10, "jew", "ק12", 1], [30, "magic", "3 חפצי קסם (לא כלי נשק), ועוד שיקוי אחד ומגילה אחת", 0]], "G": [[50, "מ״ז", "ק4", 10000], [50, "מ״פ", "ק6", 1000], [25, "gem", "3ק6", 1], [25, "jew", "ק10", 1], [35, "magic", "4 חפצי קסם ועוד מגילה אחת", 0]], "H": [[25, "מ״נ", "3ק8", 1000], [50, "מ״כ", "ק100", 1000], [50, "מ״א", "ק4", 10000], [50, "מ״ז", "ק6", 10000], [25, "מ״פ", "5ק4", 1000], [50, "gem", "ק100", 1], [50, "jew", "ק4", 10], [15, "magic", "4 חפצי קסם, ועוד שיקוי אחד ומגילה אחת", 0]], "I": [[30, "מ״פ", "ק8", 1000], [50, "gem", "2ק6", 1], [50, "jew", "2ק6", 1], [15, "magic", "חפץ קסם אחד", 0]], "J": [[25, "מ״נ", "ק4", 1000], [10, "מ״כ", "ק3", 1000]], "K": [[30, "מ״כ", "ק6", 1000], [10, "מ״א", "ק2", 1000]], "L": [[50, "gem", "ק4", 1]], "M": [[40, "מ״ז", "2ק4", 1000], [50, "מ״פ", "5ק6", 1000], [55, "gem", "5ק4", 1], [45, "jew", "2ק6", 1]], "N": [[40, "pot", "2ק4", 1]], "O": [[50, "scr", "ק4", 1]], "P": [[100, "מ״נ", "3ק8", 1]], "Q": [[100, "מ״כ", "3ק6", 1]], "R": [[100, "מ״א", "2ק6", 1]], "S": [[100, "מ״ז", "2ק4", 1]], "T": [[100, "מ״פ", "ק6", 1]], "U": [[10, "מ״נ", "ק100", 1], [10, "מ״כ", "ק100", 1], [5, "מ״ז", "ק100", 1], [5, "gem", "ק4", 1], [5, "jew", "ק4", 1], [2, "magic", "חפץ קסם אחד", 0]], "V": [[10, "מ״כ", "ק100", 1], [5, "מ״א", "ק100", 1], [10, "מ״ז", "ק100", 1], [5, "מ״פ", "ק100", 1], [10, "gem", "ק4", 1], [10, "jew", "ק4", 1], [5, "magic", "חפץ קסם אחד", 0]]}, "FLOOR": [["1", [[100, "מ״כ", "ק6", 100], [50, "מ״ז", "ק6", 10], [5, "gem", "ק6", 1], [2, "jew", "ק6", 1], [2, "magic", "חפץ קסם אחד", 0]]], ["2 עד 3", [[100, "מ״כ", "ק12", 100], [50, "מ״ז", "ק6", 100], [10, "gem", "ק6", 1], [5, "jew", "ק6", 1], [8, "magic", "חפץ קסם אחד", 0]]], ["4 עד 5", [[100, "מ״כ", "ק6", 1000], [100, "מ״ז", "ק6", 200], [20, "gem", "ק6", 1], [10, "jew", "ק6", 1], [10, "magic", "חפץ קסם אחד", 0]]], ["6 עד 7", [[100, "מ״כ", "ק6", 2000], [100, "מ״ז", "ק6", 500], [30, "gem", "ק6", 1], [15, "jew", "ק6", 1], [15, "magic", "חפץ קסם אחד", 0]]], ["8 ומעלה", [[100, "מ״כ", "ק6", 5000], [100, "מ״ז", "ק6", 1000], [40, "gem", "ק12", 1], [20, "jew", "ק12", 1], [20, "magic", "חפץ קסם אחד", 0]]]], "TR": {"tricks": [["אוצר אשלייתי", "מטמון שנראה אמיתי הוא אשליה בלבד. אי אפשר להזיז אותו, אבל גם נגיעה בו אינה מעלימה אותו."], ["אוצר בלתי נראה", "מטמון של זהב, אבני חן או אוצר אחר מונח בגלוי, ועליו לחש היעלמות."], ["אוצר מזויף", "מטמון שנראה יקר הוא זיוף משכנע: אבנים חצי־יקרות וזכוכית, מטבעות עופרת מצופים זהב ותכשיטים זולים. חלק מהפריטים מזוהים כקסומים, אבל אין להם שום כוח מועיל."], ["אוצר מחושמל", "כספת ברזל תלויה בשרשרת מעל רצפת חדר מוצף. זרם עובר בשרשרת ובכספת, וכל מי שנוגע באחת מהן כשהוא עומד במים מגלגל הצלה מפני שיתוק או מאבד את הכרתו ל־ק6 תורות. בכספת אולי יש חפץ יקר, ואולי לא."], ["אנשים מוקסמים", "אנשים נאמנים שהוקסמו בידי מטיל לחשים רשע, אויב של החבורה או מישהו שמטרותיו מנוגדות לטובת הממלכה. למשל: אבירה של המקדש שמטעה את מי שמחפש את \"חברה\"; כוהן העיירה שמשמש שדכן בין בת האדון לבין \"חברו\" החדש; או דרקון נבון שמשוכנע ש\"חברתו\" – נסיכת השדים – חזרה בתשובה, ושהנערות שהוא שולח אליה נמצאות בידיים טובות."], ["בור חד־כיווני", "בור בעל קירות חלקים יורד אל המעמקים, ובצד אחד שלו שלבי ברזל. משהו מנצנץ בתחתית. משקל של יותר מ־45 ק״ג על קרקעית הבור מכניס את השלבים לתוך הקיר, וכל מי שבתחתית נשאר תקוע בלי דרך לעלות. הנצנוץ בא מחפצים שהשאירו חוקרים קודמים."], ["גן נסתר", "גן ירוק ושופע שוכן בלוע הר געש או במכתש, מתחת לאשליה של סלע שומם. אולי זה עולם אבוד מלא ביצורים שנכחדו מזמן, ואולי מקלט לגזע של יצורים יפים ותמימים."], ["דלת בתוך בית שימוש", "דלת נסתרת בפיר של בית שימוש. רק יצורים קטנים נכנסים בקלות. יצור בגודל אדם מגלגל הצלה מפני נשיפת דרקון, או נתקע. יצור גדול יותר אינו נכנס בכלל. מי שנכנס מגלגל הצלה מפני מוות או רעל, או סובל מבחילה."], ["דלת בתוך גללים", "דלת סתרים רגילה שמובילה לחדר או למבוך מתחת לאדמה, אבל מוסתרת מתחת לשכבת גללים בדיר של בעלי חיים. מי שחופר מגלגל הצלה מפני מוות או רעל, או סובל מבחילה."], ["דלת חד־כיוונית", "אחרי שהדמויות עוברות בה, הדלת נסגרת ואי אפשר לפתוח אותה שוב. אולי היא נתקעת, אולי נעלמת לגמרי, ואולי נפתחת כרגיל – אבל מאחוריה יש רק קיר חלק."], ["דלת מגבילה", "דלת שנפתחת רק למקצוע מסוים, לקבוצת מקצועות, לנטייה או לגזע מסוימים."], ["דלת משגרת", "מי שעובר בדלת משוגר למקום אחר: באותו מבנה, במקום רחוק מאוד, או אפילו לעולם אחר. מה שנראה מבעד לדלת יכול להיות היעד האמיתי, או סתם חדר רגיל. אי אפשר לחזור דרכה, אלא בדרכים רגילות."], ["דלת נבונה", "דלת חושבת, שיכולה לעזור, להציק או להזיק. אולי היא מדברת, בטלפתיה או דרך מקוש מדבר, ואולי לא."], ["הצלה שמתהפכת", "מצב שבו הדמויות כמעט בוודאות יצילו מישהו, וההצלה מביאה עליהן קרב בדיוק כשהן הכי פחות מוכנות. למשל, אישה יפה בעלת נטיית תוהו ישנה שינה מסוממת בחדר שינה, בידי מטיל לחשים אחר של התוהו. אם הדמויות יצילו אותה, בסוף היא תתקוף אותן."], ["זוהר", "חלקים רבים בעולם המעמקים מאירים בעצמם: צמחים ופטריות זוהרים, גבישים מאירים או אור מוזר אחר. האור יכול להיות קודר ועצוב, מרגיע, או מסנוור."], ["חדר מבלבל", "כמה חדרים עגולים זהים, מחוברים זה לזה, ובכל אחד שתי דלתות בצדדים מנוגדים. במרכז הרצפה החלקה יש שתי ידיות זו לצד זו. משיכה או דחיפה של ידית מסובבת את החדר בשקט, עד שדלתותיו עומדות מול דלתות של חדר אחר. מי שמחפש מרגיש בתנועה בתוצאה של 1 בק6 (גמד: 1–2). הדמויות נוטות להאמין שהן עוברות בין חדרים שכבר ביקרו בהם."], ["חדר מחליק", "במסדרון ארוך יש כמה דלתות צדדיות לחדרים קטנים. כשנכנסים לאחד מהם וסוגרים את הדלת, החדר מחליק בשקט לאורך המסדרון. כשהדמויות יוצאות, הן נמצאות בקטע אחר של המסדרון."], ["חדר מסורבל", "כל מי שבחדר יורד לזריזות (3, אלא אם הזריזות שלו נמוכה יותר כבר), ויכול רק למעוד או לזחול. כדי לצאת מהחדר צריך הצלה מפני לחש. ההשפעה נשארת עם הנפגעים 6 תורות."], ["חדר מעלית", "קירות החדר העגול חלקים לגמרי, וכך גם הצד הפנימי של הדלתות (מתייחסים אליהן כמו לדלתות סתרים). במרכז התקרה תלוי חבל, ו־9 מ׳ ממנו מגולגלים על הרצפה. כשנכנסים, הדלתות נסגרות. משיכה אחת בחבל מורידה את החדר, שתיים מעלות אותו ושלוש עוצרות אותו. גמד מרגיש בתנועה בתוצאה של 1 בק6. החדר הוא בעצם פיר בין קומות עליונות לתחתונות, ובנקודות שונות לאורכו יש דלתות סתרים. אם יורדים הרבה יותר מ־9 מ׳, החבל יוצא מהישג יד והחדר ממשיך לרדת."], ["חדר משגר", "כשעושים פעולה מסוימת – פותחים דלת, נוגעים בחפץ, דורכים על אבן מסוימת – כל מי שבחדר משוגר לחדר זהה, באותה קומה, בקומה אחרת או אפילו בחלק אחר של העולם."], ["חדר משחקים", "אולם הימורים שאפשר לזכות בו באוצרות גדולים. המשחקים מכורים, וההימורים גבוהים – ולפעמים קטלניים."], ["חדר משכפל", "כל דמות שנכנסת לחדר מתפצלת מיד לשתי דמויות זהות, והעותק עוין ובעל נטייה הפוכה. השתיים נלחמות עד שאחת מנצחת, והמפסידה נעלמת. המנצחת שומרת על הנטייה שלה מהקרב."], ["חדר נוטה", "רצפת החדר נשענת על ציר במרכזה. כשנכנסים מאחת הדלתות, גוש מחליק מתחת לרצפה תומך בצד הזה. כששני יצורים בגודל אדם או יותר מגיעים קרוב לדלת שבצד השני, הרצפה נוטה וכל מי שבחדר מחליק במגלשה לקומה שמתחת. בדיקת זריזות מונעת את ההחלקה, אבל הרצפה אינה מתאזנת עד שכולם חוזרים לצד השני – טיפוס קשה לכל מי שאינו גנב."], ["חדר פיתוי", "החדר נראה כאילו יש בו משהו שמושך הרפתקנים: אוצר בינוני, ציוד שימושי, כמה קובולדים מזלזלים. הכול אשליה, וגם הרצפה. מי שממהר פנימה נופל, אבל אינו נפגע, כי הוא נוחת על שכבה עבה של עובש צהוב."], ["חדר רועד", "כשהדמויות נכנסות, הדלתות נטרקות והחדר רועד ומרעיש כאילו הוא יורד במהירות. בפועל הוא לא זז."], ["חדר שואב", "בתקרת החדר הנקי מאוד יש סבכה, ומעליה משפך הפוך שמוביל לצינור. כשנכנסים, הדלת נטרקת ושאיבה אדירה מצמידה את כולם לתקרה. חפצים קטנים וחפצים שמוחזקים ביד עלולים להישאב דרך הסבכה. כולם סופגים ק6 נזק מהמכה בסבכה, ועוד ק6 כשהשאיבה נפסקת אחרי תור והם נופלים לרצפה."], ["חדר שוקע", "כשהדמויות נכנסות, הדלתות נטרקות והחדר יורד קומה או יותר. אפשר להרגיש בזה ברעידות, בשפשוף או בסחרחורת – או שלא להרגיש כלל."], ["חוזה", "מסכה או פנים חצובים בקיר פוקחים עיניים ומדברים כשמפעילים אותם: כשנכנסים לחדר, משפשפים את העיניים, מאירים עליהן או בדרך אחרת. אולי יש כתובת שמסבירה מה לעשות, ואולי לא. כשהפנים מתעוררים, הם אומרים: \"דבר, ואענה\". הם עונים על שאלה סבירה אחת, ואז אומרים: \"עניתי פעם אחת. לך מכאן, היום לא אדבר עוד\"."], ["חיה מדברת", "עורב, תוכי, דולפין או יצור מדבר אחר מציע עצות, חוכמה או עלבונות לעוברים. הוא יכול לעזור, להטעות, להזיק או סתם לבזבז זמן."], ["טרול קפוא", "אספקת בשר קפוא במזווה היא בעצם בשר של טרול. אם הוא מפשיר, כל חתיכה צומחת בסוף לטרול שלם – וזועם."], ["ידית דלת מחושמלת", "מי שנוגע בידית המתכת ביד חשופה או בכפפת שריון מתכת סופג 2ק4 נזק מהלם חשמלי. יש מתג סודי שמנתק את הזרם."], ["ידית דלת ממולכדת", "משיכה בידית מפעילה מלכודת (גז רעיל או אחרת). דחיפה של הדלת פותחת אותה בבטחה."], ["כתובות ותחתיות כפולות", "תיבות, מגירות, ארונות ומדפים יכולים להסתיר גב או תחתית כפולים, ומאחוריהם תא נסתר, חדר סודי או מעבר לעולם אחר."], ["מדרגות חד־כיווניות", "מדרגות שנראות עולות, אבל מובילות לחלקים עמוקים ומסוכנים יותר של עולם המעמקים. אי אפשר לחזור: הדרך נחסמת בסורגים או בגושי אבן, או פשוט נעלמת מאחורי הדמויות."], ["מדרגות מטעות", "מדרגות שמובילות למעבר בשיפוע עדין. החוקרים חושבים שהם עלו או ירדו קומה, אבל הם עדיין באותה קומה – או שעלו או ירדו בלי לשים לב."], ["מדרגות נעות", "מדרגות שזזות למעלה או למטה, בשקט או בגלוי. מי שהולך נגד כיוון התנועה אינו מתקדם אלא אם הוא רץ. מי שעומד במקום נע איתן. מי שהולך בכיוון התנועה מתקדם מהר מהרגיל."], ["מדרגות שווא", "מדרגות רדודות שנראות עולות או יורדות, אבל אינן מגיעות לקומה אחרת. גמדים ובני גזעים אחרים שמבינים בבנייה עשויים לגלות זאת."], ["מכשיר", "מתקן שנראה מכני (אבל אולי קסום), עם כפתורים, ידיות או מחוגים. אולי הוא לא עושה כלום, ואולי משהו אקראי: יורה קליעים לנקודה בחדר, משגר למקום אחר, פותח דלתות סתרים או בורות, מפעיל אזעקה, פולט אוצר או מזון, משנה את הנטייה או את המין של דמות, פוצע או מרפא."], ["מסדרון מעוות", "המסדרון נראה קצר או ארוך יותר ממה שהוא באמת. הדמויות שבו מאיצות או מאטות בלי לשים לב, כך שהעיוות אינו גלוי."], ["מסדרון נע", "מסדרון שזז לכיוון אחד, בשקט או בגלוי. מי שהולך נגד הכיוון אינו מתקדם אלא אם הוא רץ. מי שעומד במקום נע לאט לאורך המסדרון. מי שהולך עם הכיוון מתקדם מהר יותר."], ["מסדרון סגור", "מסדרון שהדמויות כבר עברו בו נחסם בקיר מוצק בפעם הבאה שהן מגיעות, והקיר משתלב בבנייה הקיימת כמעט בלי סימן."], ["מערה חיה", "מערכת מערות שהיא בעצם תוכו של יצור חי. הכניסה היא הפה, החדרים הם מערכת העיכול, והיציאה היא…"], ["מערה ימית", "מערה מוצפת שמחוברת לים ישירות, או דרך מעבר מתחת לאדמה או מנהרה מוצפת. היא יכולה לשמש מאורה למבריחים, לשודדי ים או לפולשים מארצות רחוקות ואפילו ממעמקי הים. מתחת למים אורב כמעט תמיד יצור מסוכן: תמנון ענק, נחש ים או חבורה של אנשי כריש."], ["מערה נוגדת־קסם", "מערה מסלע כחול שזוהר באור חיוור. כל קסם נחסם בתוכה: חפצים קסומים מפסיקים לפעול, לחשים פעילים נגמרים מיד, ולחשים שמוטלים מבחוץ נעלמים בגבולותיה. השפעות קבועות חוזרות לפעול מחוץ למערה, אבל לחשים והשפעות בעלי משך אינם חוזרים."], ["נהר תת־קרקעי", "דמות בעלת כוח נמוך מ־15 נסחפת בזרם. מי שלובש שריון מתכת שוקע, אלא אם הוא מוריד אותו מיד (1–3 בק6). הנסחפים סופגים ק6 נזק על כל 15 מ׳ של זרם, ומגלגלים הצלה מפני מוות או רעל על כל 15 מ׳. הנהר יכול לעבור במקום אחר באותה קומה, לרדת לקומה עמוקה יותר, או לצאת מהאזור לגמרי – אולי במפל."], ["סדנה קסומה", "חדר שבו יצורים רבי עוצמה מייצרים כמעט כל חפץ קסום תמורת מחיר מופקע בזהב או בשירותים – או קוסם מוזר שעובד תמורת תשלום הוגן."], ["פסל מכושף", "פסלים שעושים משהו כשמתקרבים אליהם עד 6 מ׳: מצביעים לעבר האוצר הקרוב או לכיוון אקראי, מדקלמים שירה גרועה או חידה שרומזת על מטרת החבורה, מציעים חפץ קסום אמיתי או מזויף, מרפאים במגע, רודפים ותוקפים, או כל דבר אחר שהמנחה בוחר."], ["פסל נייד", "פסל שאפשר להזיז או לסובב, או שיש בו מתג או ידית מוסתרים היטב. כשמפעילים אותו נחשפת דלת סתרים או תא נסתר. אם מפעילים אותו לא נכון, אולי מופעלת מלכודת, כמו אזעקה או גז."], ["פסל שבור", "לפסל חסר חלק. אם מוצאים את החלק ומחברים אותו, הפסל מתעורר: אולי מתגמל את הדמויות, אולי בורח, ואולי תוקף."], ["קיר אשלייתי", "קטע קיר רגיל למראה הוא בעצם שער או דלת. אולי האשליה נעלמת במגע, ואולי אפשר לעבור דרכה כאילו אינה. אולי צריך להצליח בהצלה מפני לחש כדי להבין שהיא לא אמיתית, ועד אז הקיר מרגיש מוצק לגמרי."], ["קיר דק", "קיר דק כנייר מסתיר חדר קטן. אולי יש בו שומר חמוש שמציץ דרך חריץ, אסיר שמת מזמן (או שאינו מת), אוצר, גז רעיל או כל הפתעה אחרת."], ["רהיטים דביקים", "מי שיושב על הרהיטים האלה, או אפילו נוגע בהם, נדבק לגמרי. שום דבר אינו שובר או ממיס את הדבק. אפשר להשתחרר אם מורידים את הבגדים. אם העור נדבק, אפשר לחתוך את עצמו בזהירות (תור, ק6 נזק) או להיתלש בכוח (סבב, 2ק6 נזק). הרהיטים אולי חופשיים, ואולי מחוברים לרצפה."], ["רהיטים חיים", "שטיחים שמכשילים, לוכדים או חונקים; כיסאות ושולחנות שזזים, נוטים או תוקפים; שטיחי קיר שמסנוורים או לוכדים."], ["שדה כוח", "שדה בלתי נראה בכל צורה: מגן על חפץ, שומר על אוצר, חוסם חדר או מקיף עיירה שלמה. אולי הוא רק בלתי חדיר, ואולי הוא מחשמל או שורף במגע, או מחזיר כל התקפה אל התוקף. אולי יש בצד אחד או בשני הצדדים מתגים שמפעילים אותו, ומי שמשחק בהם בלי לדעת עלול לסבול מכל השפעה, ממזיקה במעט ועד קטלנית."], ["תיבת פנדורה", "תיבה, חדר, כספת או מבצר שנועדו לשמור על משהו בפנים, ולא למנוע כניסה מבחוץ. בפנים אולי שד, צבא של אל־מתים או מגפה קטלנית."], ["תרסיס מושך", "תרסיס שנראה תמים מרסס את מי שנמצא בשטח של 3 מ׳. מי שמחפש מבחין בו בתוצאה של 1–2 בק6. התרסיס חסר ריח, צבע וטעם, אבל מושך יצורים אחרים. הוא יכול לפעול על כולם – למשל ריח שרק יצורים עם חוש ריח חד מרגישים, או זוהר שיצורים עם ראייה בחושך רואים ממרחק כפול – או למשוך ולהרגיז סוג מסוים, כמו כלבי שאול."]], "traps": [["אזעקה", "קטע של החדר משמיע אזעקה כשיצור בגודל בן־מחצית או גדול ממנו דורך עליו. האזעקה יכולה להיות מחרישת אוזניים ולמשוך את כל המפלצות המשוטטות בסביבה, או שקטה לגמרי, כך שרק מי שמקשיב לה יודע."], ["בועה מתפוצצת", "בועות ענק בצבעי הקשת מרחפות באקראי, ומתפוצצות כשהן נוגעות ביצור חי: 3ק6 נזק למי שנגע, ו־ק10 נזק לכל מי שבטווח 3 מ׳."], ["בועה רודפת", "בועה לבנה ענקית מרחפת ורודפת אחרי דמות. אם היא נוגעת בה, הדמות מגלגלת הצלה מפני שיתוק, ואם נכשלה היא נבלעת בבועה ונלקחת מחוסרת הכרה."], ["בור דלת סתרים", "דלת סתרים שמוסווית כחלק מהרצפה, על צירים, מפילה לבור כל יצור בגודל בן־מחצית או גדול ממנו בתוצאה של 1–2 בק6. הדלת קפיצית ונסגרת מיד."], ["בור משגר", "מי שנופל לבור משוגר למקום אחר, למשל לתא בבית הכלא של המבוך. אולי הוא נפגע מהנפילה, ואולי לא."], ["בור עם יתדות", "יתדות מחודדות בתחתית הבור מוסיפות 4ק4 נזק למי שנופל."], ["בור קובייה ג׳לטינית", "קצת זהב ואוצר מפוזרים בתחתית בור שנראה ריק. בפועל, הבור כולו מלא בקובייה ג׳לטינית."], ["בור רפש אפור", "רפש אפור ממלא בור עד שפתו, וכמעט אי אפשר להבחין בו על רקע הסלע הלח. מי שנופל לתוכו סופג מיד 2ק6 נזק מהרפש, ובכל סבב עושה בדיקת זריזות כדי לצאת (או טיפוס על קיר חלק, אצל גנב). מי שנכשל ממשיך לספוג נזק."], ["בור שלולית", "אחת מכמה שלוליות של מים עכורים היא בעצם בור בעומק 6 מ׳."], ["גז מבלבל", "מי שנחשף לגז הופך לאלים כלפי חבריו, נתקף תאוות בצע, נכנס תחת לחש שליחות או קללה, משוכנע שהוא בן גזע אחר או מין אחר – או כל טירוף אחר שהמנחה ממציא."], ["טפילים", "כשמפלצת נהרגת, טפילים מסוכנים עוברים ממנה אל הדמויות. לפי גודל המפלצת, הם יכולים להיות קטנים, בלי שירגישו בהם עד שהם גורמים לגירוד או למחלה – או מפלצות בפני עצמן, כמו קרציות ענקיות."], ["יצורים ארסיים", "פתח נסתר בתקרה נפתח כשנוגעים בחוט, ועקרבים, נחשים או עכבישים ארסיים נופלים על מי שמתחתיו. הוא מגלגל הצלה מפני מוות או רעל."], ["מדרגות גלגלת", "חוט מתוח ליד ראש מדרגות ארוכות משחרר כדור אבן גדול. כל מי שעל המדרגות סופג 3ק12 נזק כשהכדור מתגלגל למטה. הצלה מפני נשיפת דרקון מורידה את הנזק לחצי."], ["מדרגות מגלשה", "כשדורכים על המדרגה העליונה, כל המדרגות מסתובבות ויוצרות מגלשה חלקה, וכל מי שעליהן מחליק לתחתית וסופג ק6 נזק."], ["מלכודת פיתיון", "מלכודת שהקורבן מפעיל בעצמו. למשל: חבל שנראה כמו דרך החוצה מבור, אבל מפיל מפולת אבנים; תיבת אוצר גלויה שיש בה רק גז רעיל; או מלכודת עכברים פשוטה, עם פיתיון."], ["מפולת", "חלק מהתקרה מוכן לקרוס כשהדמויות עוברות מתחתיו: ק6 עד 3ק6 נזק, לפי המנחה. הצלה מפני נשיפת דרקון מורידה את הנזק לחצי."], ["נשק גיליוטינה", "להב נסתר במשקוף של דלת או בפתח אחר. כל מה שנמצא בפתח נפגע ב־3ק6 נזק. יד או איבר אחר שהוכנס לפתח נכרת, וצריך לחבר אותו או להצמיח אותו מחדש בדרך כלשהי."], ["נשק דורבן", "דורבן חד יוצא מסדק נסתר (1–2 בק6 לכל מי שעובר) וחוזר מיד למקומו. גם אחרי שהופעל קשה למצוא אותו: 1 בק6 (גמד: 1–2)."], ["נשק להב", "להב מגל מתנדנד מהתקרה וחותך את מי שבדרכו: 2ק6 נזק."], ["נשק קליעים", "מתקן בתוך הקיר יורה ק6 חצים, קליעי רובה קשת או כידונים דרך חורים נסתרים. כל קליע הוא התקפה מרחוק."], ["צמחייה חיה", "צמחייה רגילה למראה (עשב, עצים, שיחים, מטפסים או פטל) זורקת קליעים, צורחת, מצליפה (ק4 נזק), לוכדת (בדיקת כוח כדי להשתחרר), מכשילה (בדיקת זריזות כדי להימנע) או מלטפת."], ["צמחייה פולטת", "צמחים פולטים בושם או נבגים שגורמים לצחוק, לשכחה, לשינה, למוות, לריפוי וכו׳. אם אפשר לשמור ממגע איתם, אולי הם שווים הרבה לבשמים או למרעילים."]]}, "ADV": [["גירוש רוע עתיק", "נוכחות מרושעת (למשל מפלצת או דמות ללא שחקן) חייבת להיות מגורשת או מושמדת. ייתכן שהיא הייתה רדומה במשך שנים רבות, והתעוררה רק לאחרונה (אולי כתוצאה מהתערבות של חבורה אחרת)."], ["טיהור חורבות", "מתיישבים מתכננים לעבור ליישוב או למבצר נטוש. לפני שהם מגיעים, על דמויות השחקן לסייר באזור ולטהר אותו מכל מפלצת או סכנה אחרת שנמצאת בו. החורבות אינן חייבות להיות באזור מרוחק — הן יכולות להיות אפילו בתוך (או מתחת) ליישוב מרכזי."], ["יצירת קשר עם ציוויליזציה אבודה", "דמויות השחקן מגלות גזע שאבד מזמן במיקום פנטסטי. ייתכן שהם היו פעם בני אדם, אך כעת הם מותאמים לסביבתם המוזרה. לדוגמה, הם עשויים לחזור להתנהגות חייתית או להיות מותאמים לחיים תת־קרקעיים, עם עור חיוור וראיית חום."], ["בריחה משבי", "דמויות השחקן נלקחו בשבי על ידי אויב ומתחילות את ההרפתקה בשבי, ייתכן שגורל אכזרי מצפה להן בעתיד הקרוב. עליהן לזכות בחירותן בחזרה."], ["חקירת טריטוריה לא ידועה", "דמות ללא שחקן שוכרת את החבורה לחקור ולמפות אזור לא ידוע. זה עשוי להיות אזור שלא מופה בעבר או שינוי שחל לאחרונה באזור מוכר (למשל טירה קסומה שמופיעה במישור ריק)."], ["ביצוע משימה", "ישות אלוהית או דמות ללא שחקן רבת עוצמה (למשל מלך) שולחת את דמויות השחקן למשימה. זה עשוי לכלול השבת חפצים קדושים או קסומים."], ["חילוץ שבויים", "דמויות ללא שחקן חשובות נחטפו על ידי שודדים, מפלצות מרושעות או קוסם רשע. דמויות השחקן מנסות לחלץ את האסירים, בין אם בחיפוש אחר פרס או בגלל קשר אישי עם השבויים חסרי המזל. ייתכן גם שדמויות השחקן יישכרו כשומרי ראש לדמויות ללא שחקן המנהלות משא ומתן עם החוטפים."], ["סיור במוצב אויב", "פלישה ממשמשת ובאה (או כבר בעיצומה). על דמויות השחקן מוטלת המשימה להסתנן למוצב של האויב, לאסוף מודיעין לגבי תוכניותיהם, נקודות החוזק ונקודות התורפה שלהם, ו(אם אפשר) להשמידם."], ["חיפוש אחר שער קסום", "קיים שער שמאפשר מעבר קסום (חד־כיווני או דו־כיווני) בין מיקומים מרוחקים או אפילו עולמות אחרים. על דמויות השחקן מוטלת המשימה לאתר שער אבוד או לסגור שער המשמש את האויבים. השער עשוי להיות גם אמצעי התנועה היחיד ליעד פנטסטי שעל דמויות השחקן לבקר בו."], ["ביקור באתר קדוש", "על מנת להתייעץ עם אורקל, להסיר קללה או למצוא שריד קדוש, על דמויות השחקן לצאת למסע אל אתר קדוש (למשל מקדש או מזבח). המיקום המדויק של האתר הוא בדרך כלל בגדר השערה בלבד."]], "NAMES": {"אדם": {"זכר": ["אולדריק", "תורוון", "קאלאן", "בראנוק", "ולמיר", "דוראן", "סאלדור", "אריון", "גרימה", "מורבן", "אוסריק", "ראדוק", "זאנדור", "קאדמיר", "קורווין", "אינדל", "תאלון", "הלמרק", "פנדריל", "רוביק"], "נקבה": ["קיסלה", "אלוורה", "סירנה", "מירבל", "תאליסה", "ליריאן", "אווינה", "קסאלין", "נאריס", "אלסינה", "ברינדה", "ורנה", "סלאני", "דאריאל", "מורגווין", "לאוריס", "פיאלה", "אינרה", "זאירה", "קלרווין"]}, "גמד": {"זכר": ["דורגן", "תרבק", "גרומדל", "בראלגר", "קאזרק", "הרגן", "תוראג", "אורום", "דולמק", "ברונדר"], "נקבה": ["הלדרה", "בריגה", "תורגה", "דאגנה", "ורנדה", "אסגרה", "קלדרינה", "מורגה", "גרתילדה", "ברנדסינה"]}, "אלף": {"זכר": ["אלנדיר", "סילו־ראן", "תליאן", "אריאנדור", "פאלאסר", "ניאלוס", "איתרין", "קאלאדן", "וירנאל", "מיראדון", "ניג׳ס־ת׳אלאס"], "נקבה": ["אילוונה", "סאלירה", "נימאריס", "אלאתיה", "פירינדה", "ליאנאל", "אוריסה", "תינואל", "קאליסרה", "מאלווינארה"]}, "בן־מחצית": {"זכר": ["תובי", "מרלו", "פדריג", "תאדו", "וילמר", "קוביל", "הוגל", "רודבר", "פינבל", "דאמפל"], "נקבה": ["ליליבל", "דייזל", "טילדה", "ניבה", "פרמה", "סאלווי", "קוריבל", "בריניה", "וילנה"]}}, "GEAR": [["לוחם", 90, "שריון שרשראות, מגן, חרב ארוכה, פגיון, מימייה, לפידים, ערכת הצתה, מזון משומר, חבל, שק שינה, תיק גב"], ["כוהן", 107, "שריון שרשראות, מגן, פטיש מלחמה, סמל קדוש, מימייה, לפידים, ערכת הצתה, מזון משומר, חבל, שק שינה, תיק גב"], ["קוסם", 47, "פגיון, מימייה, לפידים, ערכת הצתה, מזון משומר, שק שינה, שמן, חבל, מראה, עששית, תיק גב"], ["גנב", 106, "שריון עור, חרב קצרה, פגיון, כלי גנב, קרס טיפוס, חבל, מימייה, ערכת הצתה, מזון משומר, לפידים, תיק גב"], ["דרואיד", 56, "שריון עור, מטה, קלע, מימייה, ערכת הצתה, מזון משומר, שק שינה, לפידים, חבל, שק גדול, תיק גב"], ["סייר", 98, "שריון עור, קשת ארוכה, אשפת חיצים, חרב ארוכה, מימייה, ערכת הצתה, מזון משומר, שק שינה, חבל, לפידים, תיק גב"], ["פלדין", 112, "שריון שרשראות, מגן, חרב ארוכה, סמל קדוש, מימייה, לפידים, ערכת הצתה, מזון משומר, חבל, שק שינה, תיק גב"], ["מיסטיקן", 60, "קרס טיפוס, מימייה, לפידים, ערכת הצתה, מזון משומר, שק שינה, חבל, מוט עץ, מראה, שק גדול, תיק גב"], ["גמד", 86, "שריון שרשראות, מגן, פטיש מלחמה, גרזן יד, מימייה, לפידים, ערכת הצתה, מזון משומר, שק שינה, תיק גב, חבל"], ["אלף", 103, "שריון שרשראות, חרב ארוכה, קשת קצרה, אשפת חיצים, מימייה, ערכת הצתה, מזון משומר, לפידים, חבל, שק שינה, תיק גב"], ["בן־מחצית", 66, "שריון עור, מגן, חרב קצרה, קלע, מימייה, ערכת הצתה, מזון משומר, לפידים, חבל, שק שינה, תיק גב"]]}</script>
+<script>(function(){
+'use strict';
+var ND=JSON.parse(document.getElementById('newData').textContent);
+function $(id){return document.getElementById(id);}
+function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
+function d(n){return Math.floor(Math.random()*n)+1;}
+function pick(a){return a[Math.floor(Math.random()*a.length)];}
+function roll(expr){var m=String(expr).match(/^(\d*)ק(\d+)$/);if(!m)return {v:+expr||0,r:[]};var n=+(m[1]||1),s=+m[2],t=0,r=[];for(var i=0;i<n;i++){var x=d(s);r.push(x);t+=x;}return {v:t,r:r};}
+function num(n){return Number(n).toLocaleString('en-US',{maximumFractionDigits:2});}
+function dz(t,v){return '<span class="dice" title="'+esc(t)+'">'+v+'</span>';}
+
+/* ===================== navigation ===================== */
+var ALL=['pArea','pRoll','pList','pNpc','pWm','pSite','pShow','pMagic','pSpells','pRules','pClasses','pTreasure','pDungeon','pDm'];
+var BTN={pSpells:'spells',pRules:'rules',pClasses:'classes',pTreasure:'treasure',pDungeon:'rooms',pDm:'dm',pMagic:'magic'};
+var hist=[];
+function current(){for(var i=0;i<ALL.length;i++){var e=$(ALL[i]);if(e&&!e.classList.contains('hide')&&ALL[i]!=='pShow')return ALL[i];}return null;}
+function pressBtn(v){[].forEach.call(document.querySelectorAll('#optWhere button'),function(b){b.setAttribute('aria-pressed',b.dataset.v===v?'true':'false');});}
+function go(id,keep){
+ if(!keep){var c=current();hist.push({p:c,y:window.scrollY,mon:!$('pShow').classList.contains('hide')?$('out').innerHTML:null,btn:(document.querySelector('#optWhere button[aria-pressed=true]')||{}).dataset});updBack();}
+ ALL.forEach(function(p){var e=$(p);if(e)e.classList.add('hide');});var lg=$('log');if(lg)lg.classList.add('hide');
+ $(id).classList.remove('hide');if(BTN[id])pressBtn(BTN[id]);
+}
+window.homuGo=go;
+function back(){var h=hist.pop();updBack();if(!h)return;
+ ALL.forEach(function(p){var e=$(p);if(e)e.classList.add('hide');});
+ if(h.p)$(h.p).classList.remove('hide');
+ if(h.mon){$('pShow').classList.remove('hide');$('out').innerHTML=h.mon;}
+ pressBtn(h.btn&&h.btn.v);window.scrollTo(0,h.y);}
+function updBack(){var b=$('homuBack');if(b)b.hidden=!hist.length;}
+function reveal(el){var p=el;while(p){if(p.tagName==='DETAILS'){p.hidden=false;p.open=true;}if(p.tagName==='TR'||p.tagName==='LI')p.hidden=false;p=p.parentElement;}
+ setTimeout(function(){el.scrollIntoView({block:'center'});el.classList.remove('flash');void el.offsetWidth;el.classList.add('flash');},30);}
+function panelOf(el){var p=el.closest('.panel');return p?p.id:null;}
+function goEl(el){var pid=panelOf(el);clearPanelSearch(pid);go(pid);reveal(el);}
+function clearPanelSearch(pid){var p=$(pid);if(!p)return;var i=p.querySelector('.rsearch input');if(i&&i.value){i.value='';i.dispatchEvent(new Event('input'));}}
+function showMon(n){if(!window.HOMU_mon)return;go('pShow');window.HOMU_mon(n);}
+function showSpell(n){go('pSpells');$('spellClass').value='all';$('spellLevel').value='all';$('spellSearch').value=n.replace(/\*$/,'');if(window.renderSpells)window.renderSpells();$('pSpells').scrollIntoView({block:'start'});}
+
+/* ===================== treasure ===================== */
+var RATE={'מ״נ':0.01,'מ״כ':0.1,'מ״א':0.5,'מ״ז':1,'מ״פ':5};
+function gemVal(){var r=d(20);return r<=4?10:r<=9?50:r<=15?100:r<=19?500:1000;}
+function magicBtn(){return ' <button type="button" class="lnk" data-go="magic">לגלגל חפץ קסם</button>';}
+function rollItems(items,cnt){
+ var out=[],total=0;
+ items.forEach(function(it){var pct=it[0],k=it[1],dice=it[2],mult=it[3],reps=cnt||1;
+  var p=null;if(pct<100){p=d(100);if(p>pct){out.push('<li class="miss">'+dz('ק100',p)+' '+pct+'%: '+lab(k,dice)+' – אין</li>');return;}}
+  var pre=p?dz('ק100',p)+' ':'';
+  if(k==='magic'){out.push('<li>'+pre+'<b>'+esc(dice)+'</b>'+magicBtn()+'</li>');return;}
+  var q=0,rs=[];for(var i=0;i<reps;i++){var x=roll(dice);q+=x.v;rs=rs.concat(x.r);}q*=mult;
+  if(RATE[k]!=null){var v=q*RATE[k];total+=v;out.push('<li>'+pre+dz(dice+(rs.length>1?': '+rs.join(', '):''),q/mult)+' <b>'+num(q)+' '+k+'</b>'+(k!=='מ״ז'?' <small>(שווים '+num(v)+' מ״ז)</small>':'')+'</li>');return;}
+  if(k==='gem'){var g={},gt=0;for(var j=0;j<q;j++){var gv=gemVal();g[gv]=(g[gv]||0)+1;gt+=gv;}total+=gt;
+   out.push('<li>'+pre+'<b>'+q+' אבני חן</b>, שוות '+num(gt)+' מ״ז: '+Object.keys(g).sort(function(a,b){return b-a;}).map(function(x){return g[x]+' × '+num(x)+' מ״ז';}).join(' · ')+'</li>');return;}
+  if(k==='jew'){var js=[],jt=0;for(var j2=0;j2<q;j2++){var jv=roll('3ק6').v*100;js.push(jv);jt+=jv;}total+=jt;
+   out.push('<li>'+pre+'<b>'+q+' תכשיטים</b>, שווים '+num(jt)+' מ״ז'+(q<=12?': '+js.sort(function(a,b){return b-a;}).map(num).join(', ')+' מ״ז':'')+'</li>');return;}
+  if(k==='pot'){out.push('<li>'+pre+'<b>'+q+' שיקויים</b>'+magicBtn()+'</li>');return;}
+  if(k==='scr'){out.push('<li>'+pre+'<b>'+q+' מגילות</b>'+magicBtn()+'</li>');return;}
+ });
+ return '<ul class="res">'+out.join('')+'</ul><p class="big">ערך כולל (בלי חפצי קסם): '+num(total)+' מ״ז</p>';
+}
+function lab(k,dice){if(k==='magic')return esc(dice);return esc(dice)+' '+({gem:'אבני חן',jew:'תכשיטים',pot:'שיקויים',scr:'מגילות'}[k]||k);}
+function trUpd(){var t=$('trType').value;$('trCntL').hidden='PQRST'.indexOf(t)<0;}
+$('trType').addEventListener('change',trUpd);trUpd();
+$('trGo').addEventListener('click',function(){var t=$('trType').value,c='PQRST'.indexOf(t)>=0?+$('trCnt').value:1;
+ $('trOut').innerHTML='<div class="card"><h3>אוצר מסוג '+t+(c>1?' ('+c+' יצורים)':'')+'</h3>'+rollItems(ND.TT[t],c)+'</div>';});
+$('flGo').addEventListener('click',function(){var f=ND.FLOOR[+$('flFloor').value];
+ $('flOut').innerHTML='<div class="card"><h3>אוצר בקומה '+esc(f[0])+'</h3><p>מוסתר או נעול.</p>'+rollItems(f[1],1)+'</div>';});
+
+/* ===================== rooms, tricks, traps ===================== */
+function tt(kind){var x=pick(ND.TR[kind]);return '<b>'+(kind==='traps'?'מלכודת':'תחבולה')+': '+esc(x[0])+'.</b> '+esc(x[1]);}
+function oneRoom(i,fl){var a=d(6),b=d(6),kind,has,extra='';
+ if(a<=2){kind='ריק';has=b===1;}else if(a===3){kind='מלכודת';has=b<=2;extra=tt('traps');}else if(a<=5){kind='מפלצת';has=b<=3;extra='גלגלו מפלצת משוטטת לפי הקומה. <button type="button" class="lnk" data-go="wander">מפלצות משוטטות במבוך</button>';}else{kind='מיוחד';has=false;extra=tt('tricks');}
+ var tre='';if(has){tre=kind==='מפלצת'?'<p><b>אוצר:</b> לפי סוג האוצר של המפלצת.</p>':'<p><b>אוצר (מוסתר או נעול):</b></p>'+rollItems(ND.FLOOR[fl][1],1);}
+ return '<div class="room" data-i="'+i+'" role="button" tabindex="0" title="לחיצה מגלגלת מחדש"><h4>חדר '+(i+1)+': '+kind+' '+dz('ק6',a)+dz('ק6 לאוצר',b)+'</h4>'+(extra?'<p>'+extra+'</p>':'')+(has?tre:(kind!=='מיוחד'?'<p class="miss">אין אוצר.</p>':''))+'</div>';}
+$('rmGo').addEventListener('click',function(){var n=+$('rmCnt').value,fl=+$('rmFloor').value,h='';for(var i=0;i<n;i++)h+=oneRoom(i,fl);$('rmOut').innerHTML='<div class="rooms">'+h+'</div>';});
+$('rmOut').addEventListener('click',function(e){if(e.target.closest('button'))return;var r=e.target.closest('.room');if(!r)return;var t=document.createElement('div');t.innerHTML=oneRoom(+r.dataset.i,+$('rmFloor').value);r.replaceWith(t.firstChild);});
+$('rmOut').addEventListener('keydown',function(e){if((e.key==='Enter'||e.key===' ')&&e.target.classList.contains('room')){e.preventDefault();e.target.click();}});
+[].forEach.call(document.querySelectorAll('[data-tt]'),function(b){b.addEventListener('click',function(){$('ttOut').innerHTML='<div class="card"><p>'+tt(b.dataset.tt)+'</p></div>';});});
+
+/* ===================== DM ===================== */
+$('reGo').addEventListener('click',function(){var a=d(6),b=d(6),m=+$('reMod').value,t=a+b+m,r;
+ r=t<=3?'תוקפת':t<=6?'תוקפנית (נוהמת, מאיימת). מגלגלים שוב בסבב הבא עם 4 פחות':t<=9?'זהירה. מגלגלים שוב בסבב הבא':t<=11?'נייטרלית. מגלגלים שוב בסבב הבא עם 4 עוד':'ידידותית';
+ $('dmOut').innerHTML='<div class="card"><h3>תגובה: '+t+'</h3><p>'+dz('ק6',a)+dz('ק6',b)+(m?' '+(m>0?'+'+m:'−'+(-m)):'')+'</p><p class="big">'+r+'</p></div>';});
+$('nmGo').addEventListener('click',function(){var L=ND.NAMES[$('nmRace').value][$('nmSex').value].slice(),o=[];while(o.length<5&&L.length)o.push(L.splice(Math.floor(Math.random()*L.length),1)[0]);
+ $('dmOut').innerHTML='<div class="card"><h3>שמות: '+esc($('nmRace').value)+', '+esc($('nmSex').value)+'</h3><p class="big">'+o.map(esc).join(' · ')+'</p></div>';});
+$('adGo').addEventListener('click',function(){var i=d(10),x=ND.ADV[i-1];$('dmOut').innerHTML='<div class="card"><h3>'+dz('ק10',i)+' '+esc(x[0])+'</h3><p>'+esc(x[1])+'</p></div>';});
+$('sgGo').addEventListener('click',function(){var g=ND.GEAR[+$('sgCls').value],p=d(100),lim=g[0]==='קוסם'?10:5;
+ $('dmOut').innerHTML='<div class="card"><h3>ציוד התחלתי: '+esc(g[0])+'</h3><p>'+esc(g[2])+'.</p><p>שווי הציוד '+g[1]+' מ״ז, ועוד 10 מ״ז בכיס.</p><p>'+dz('ק100',p)+' חפץ קסום התחלתי ('+lim+'%): '+(p<=lim?'<b>יש!</b> גלגלו בעמודת "בסיסי".'+magicBtn():'אין.')+'</p></div>';});
+$('mrGo').addEventListener('click',function(){var L=+$('mrLvl').value,m=+$('mrMul').value,w=$('mrWild').checked,cost=2000*Math.pow(2,L-1)*m*(w?10:1),wk=L*m,ch=20*m,r=d(100);
+ $('mrOut').innerHTML='<div class="card"><p>לחש בעוצמה '+L+': <b>'+num(cost)+' מ״ז</b> ו־<b>'+wk+' '+(wk===1?'שבוע':'שבועות')+'</b> עבודה. סיכוי הצלחה '+ch+'%.</p><p class="big">'+dz('ק100',r)+' '+(r<=ch?'המחקר הצליח!':'המחקר נכשל.')+'</p></div>';});
+
+/* ===================== link clicks ===================== */
+document.addEventListener('click',function(e){
+ var a=e.target.closest('[data-go],a.xl');if(!a)return;e.preventDefault();
+ var g=a.dataset.go;
+ if(g==='magic'){hist.push({p:current(),y:window.scrollY});updBack();document.querySelector('#optWhere button[data-v=magic]').click();$('pMagic').scrollIntoView({block:'start'});return;}
+ if(g==='wander'){var b=document.querySelector('#optWhere button[data-v=dungeon]');hist.push({p:current(),y:window.scrollY});updBack();b.click();return;}
+ var x=a.dataset.x||'',k=x.slice(0,3),v=x.slice(4);
+ if(k==='mon')showMon(v);else if(k==='spl')showSpell(v);else if(k==='tbl'||k==='sec'){var el=$(k==='tbl'?'tbl-'+v:v);if(el)goEl(el);}
+});
+$('homuBack').addEventListener('click',back);
+
+/* ===================== cross links ===================== */
+var D=JSON.parse(document.getElementById('data').textContent),M=D.mons||{};
+var SKIP={'מק':1,'צל':1,'אלף':1,'גמד':1,'בן־מחצית':1,'סוחר':1,'נווד':1,'שודד':1,'המון':1,'פיה':1,'רוק':1,'ענק':1,'אדם רגיל':1,'תול':1,'שודד ים':1,'לוחם משתולל':1,'רפאים':1,'פיל':1,'עוג':0};
+var MON=Object.keys(M).filter(function(n){return !SKIP[n];}).sort(function(a,b){return b.length-a.length;});
+function rx(s){return s.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');}
+var SECREF=[['סוגי אוצר','sec-treasure-types'],['גלגול התגובה','sec-reaction'],['תגובת מפלצות','sec-reaction'],['תכולת חדר במבוך','sec-room-contents'],['אוצר בלי מפלצת לפי קומה','sec-floor-treasure'],['מחקר קסם','sec-research'],['ציוד התחלתי','sec-start-gear']];
+// tables: give ids
+[].forEach.call(document.querySelectorAll('#pClasses h4'),function(h){var m=h.textContent.match(/^טבלה (\d+):/);if(m)h.id='tbl-'+m[1];});
+var monRe=new RegExp('(^|[^א-ת])(?<!נשיפת )([ובלמשהכ]{0,2})('+MON.map(rx).join('|')+')(?![א-ת])');
+var tblRe=/טבל(?:ה|ת|אות) (\d{1,2})(?![\d])/;
+var secRe=new RegExp('('+SECREF.map(function(s){return rx(s[0]);}).join('|')+')');
+function linkify(root){
+ var w=document.createTreeWalker(root,NodeFilter.SHOW_TEXT,{acceptNode:function(n){var p=n.parentElement;if(!n.nodeValue.trim())return NodeFilter.FILTER_REJECT;if(p.closest('a,summary,h4,h3,th,button,label,select,option,input,.gen,b'))return NodeFilter.FILTER_REJECT;return NodeFilter.FILTER_ACCEPT;}});
+ var nodes=[];while(w.nextNode())nodes.push(w.currentNode);
+ nodes.forEach(function(n){var inTd=!!n.parentElement.closest('td'),pid=panelOf(n.parentElement),s=n.nodeValue,frag=document.createDocumentFragment(),any=false,guard=0;
+  while(s&&guard++<40){var best=null;
+   var m1=s.match(tblRe);if(m1&&document.getElementById('tbl-'+m1[1]))best={i:m1.index,len:m1[0].length,txt:m1[0],x:'tbl:'+m1[1]};
+   var m3=s.match(secRe);if(m3){var id=SECREF.filter(function(q){return q[0]===m3[1];})[0][1],tgt=$(id);if(tgt&&!tgt.contains(n)&&(!best||m3.index<best.i))best={i:m3.index,len:m3[0].length,txt:m3[0],x:'sec:'+id};}
+   if(!inTd){var m2=s.match(monRe);if(m2){var st=m2.index+m2[1].length+m2[2].length;if(!best||st<best.i)best={i:st,len:m2[3].length,txt:m2[3],x:'mon:'+m2[3]};}}
+   if(!best)break;any=true;
+   frag.appendChild(document.createTextNode(s.slice(0,best.i)));
+   var a=document.createElement('a');a.href='#';a.className='xl';a.dataset.x=best.x;a.textContent=best.txt;frag.appendChild(a);
+   s=s.slice(best.i+best.len);}
+  if(!any)return;if(s)frag.appendChild(document.createTextNode(s));n.parentNode.replaceChild(frag,n);});
+}
+['pRules','pClasses','pTreasure','pDungeon','pDm'].forEach(function(p){if($(p))linkify($(p));});
+
+/* ===================== panel search ===================== */
+function norm(t){return String(t||'').replace(/[֑-ׇ]/g,'').replace(/[׳']/g,"'").replace(/[״"]/g,'"').replace(/[־\-]/g,' ').toLowerCase();}
+function setup(inp,body,none){var I=$(inp),B=$(body),N=$(none);if(!I||!B)return;
+ var ds=[].slice.call(B.children).filter(function(x){return x.tagName==='DETAILS';}),init=ds.map(function(x){return x.open;});
+ I.addEventListener('input',function(){var q=norm(I.value).trim(),any=false;
+  ds.forEach(function(dd,i){var rows=[].slice.call(dd.querySelectorAll('tr,li'));
+   if(!q){dd.hidden=false;dd.open=init[i];rows.forEach(function(x){x.hidden=false;});return;}
+   var hit=norm(dd.textContent).indexOf(q)>=0;dd.hidden=!hit;if(!hit)return;any=true;dd.open=true;
+   var head=norm(dd.querySelector('summary').textContent).indexOf(q)>=0;
+   rows.forEach(function(x){x.hidden=!(head||x.querySelector('th')||norm(x.textContent).indexOf(q)>=0);});});
+  if(N)N.classList.toggle('hide',!q||any);});}
+setup('trQ','trBody','trNone');setup('dgQ','dgBody','dgNone');setup('dmQ','dmBody','dmNone');
+
+/* ===================== global search ===================== */
+var IDX=null;
+function strip(h){var t=document.createElement('div');t.innerHTML=String(h).replace(/<\/(p|li|h\d|div)>|<br\s*\/?>/g,' ');return t.textContent;}
+function build(){IDX=[];
+ Object.keys(M).forEach(function(n){var e=M[n];IDX.push({c:'מפלצת',t:n,b:(e.desc||[]).concat(e.bul||[]).join(' '),go:{k:'mon',v:n}});});
+ (window.SPELLS_DATA||[]).forEach(function(s){IDX.push({c:'לחש '+({cleric:'כוהן',druid:'דרואיד',mage:'קוסם'}[s['class']]||'')+' '+s.level,t:s.name,b:s.desc+' '+(s.meta||''),go:{k:'spl',v:s.name}});});
+ try{var MD=JSON.parse($('magicData').textContent).S;Object.keys(MD).forEach(function(k){(MD[k].blocks||[]).forEach(function(bl){IDX.push({c:'חפץ קסם',t:bl.t,b:strip(bl.h),html:bl.h});});});}catch(e){}
+ var PN={pRules:'חוקים כלליים',pClasses:'מקצועות השחקן',pTreasure:'אוצר',pDungeon:'חדרים, תחבולות ומלכודות',pDm:'למנחה ונספחים'};
+ Object.keys(PN).forEach(function(pid){var P=$(pid);if(!P)return;
+  [].forEach.call(P.querySelectorAll('.rbody details'),function(dd){var sum=dd.querySelector('summary').textContent;
+   IDX.push({c:PN[pid],t:sum,b:'',el:dd.querySelector('summary')});
+   [].forEach.call(dd.querySelectorAll('li,p,tbody tr,h4'),function(u){if(u.closest('li')&&u.tagName!=='LI')return;
+    var title=sum,bb=u.querySelector('b');
+    if(u.tagName==='H4')title=u.textContent;
+    else if(u.tagName==='TR'){var tb=u.closest('table'),h=tb.previousElementSibling;while(h&&h.tagName!=='H4'&&h.tagName!=='P')h=h.previousElementSibling;title=(h&&h.tagName==='H4'?h.textContent:sum)+' · '+u.cells[0].textContent;}
+    else if(bb&&u.textContent.indexOf(bb.textContent)<3)title=bb.textContent.replace(/[:.]\s*$/,'');
+    IDX.push({c:PN[pid],t:title,b:u.textContent,el:u});});});});
+}
+function snip(b,q){var nb=norm(b),i=nb.indexOf(q[0]);if(i<0)return esc(b.slice(0,140))+(b.length>140?'…':'');var s=Math.max(0,i-50),t=b.slice(s,s+160);return (s?'…':'')+esc(t)+(s+160<b.length?'…':'');}
+function hl(h,q){q.forEach(function(w){if(w.length<2)return;h=h.replace(new RegExp('('+rx(esc(w))+')','gi'),'<mark>$1</mark>');});return h;}
+var LAST=[];
+function search(){var raw=$('gQ').value,q=norm(raw).trim().split(/\s+/).filter(Boolean),R=$('gRes');
+ if(!q.length||norm(raw).trim().length<2){R.innerHTML='';R.hidden=true;return;}
+ if(!IDX)build();
+ var res=[];IDX.forEach(function(x){var nt=norm(x.t),nb=norm(x.b),ok=q.every(function(w){return nt.indexOf(w)>=0||nb.indexOf(w)>=0;});if(!ok)return;
+  var sc=(nt===q.join(' ')?100:0)+(q.every(function(w){return nt.indexOf(w)>=0;})?50:0)+(nt.indexOf(q[0])===0?10:0)-x.t.length/100;res.push([sc,x]);});
+ res.sort(function(a,b){return b[0]-a[0];});LAST=res.slice(0,60).map(function(r){return r[1];});
+ R.hidden=false;
+ if(!LAST.length){R.innerHTML='<p class="hint2">לא נמצא דבר.</p>';return;}
+ R.innerHTML='<p class="hint2">'+(res.length>60?'60 מתוך '+res.length+' תוצאות':res.length+' תוצאות')+'</p><ol>'+LAST.map(function(x,i){return '<li><button type="button" data-r="'+i+'"><span class="tag">'+esc(x.c)+'</span> <b>'+hl(esc(x.t),q)+'</b><small>'+hl(snip(x.b,q),q)+'</small></button>'+(x.html?'<div class="itemd" hidden>'+x.html+'</div>':'')+'</li>';}).join('')+'</ol>';
+}
+var tmr;$('gQ').addEventListener('input',function(){clearTimeout(tmr);tmr=setTimeout(search,120);});
+$('gQ').addEventListener('keydown',function(e){if(e.key==='Escape'){$('gQ').value='';search();}if(e.key==='Enter'){var b=$('gRes').querySelector('button[data-r]');if(b)b.click();}});
+$('gRes').addEventListener('click',function(e){var b=e.target.closest('button[data-r]');if(!b)return;var x=LAST[+b.dataset.r];
+ if(x.html){var dv=b.nextElementSibling;dv.hidden=!dv.hidden;return;}
+ if(x.go&&x.go.k==='mon')showMon(x.go.v);else if(x.go&&x.go.k==='spl')showSpell(x.go.v);else if(x.el)goEl(x.el);});
+})();
+</script>
