@@ -163,6 +163,19 @@ ul.tl{padding-inline-start:20px}ul.tl li{margin:6px 0;line-height:1.5}
 @media print{.gsearch,#homuBack,.gen{display:none!important}}
 
 </style>
+<style id="sidelayout">
+.wrap{max-width:1240px}
+.amb-layout{display:flex;flex-wrap:wrap;gap:18px;align-items:flex-start}
+.amb-side{flex:1 1 280px;max-width:340px;position:sticky;top:12px;max-height:calc(100vh - 24px);overflow-y:auto}
+.amb-main{flex:999 1 560px;min-width:0}
+@media (max-width:900px){.amb-side{max-width:none;position:static;max-height:none}}
+#optWhere{display:flex;flex-direction:column;gap:6px}
+#optWhere button{width:100%;text-align:right}
+.opts button,.act,.act.alt,.tlvrow button,.lnk,.dice,.hp span,.tag,#homuBack,.gsearch input,input,select{border-radius:0!important}
+.site-footer{max-width:1240px;margin:18px auto 0}
+@media print{.amb-side{display:none}}
+</style>
+
 <meta name="claude:viewport-fit-sides" content="cover">
 <div class="wrap" dir="rtl" lang="he">
 <h1>הומונקולוס - כלי למנחה</h1>
@@ -1907,5 +1920,20 @@ $('gQ').addEventListener('keydown',function(e){if(e.key==='Escape'){$('gQ').valu
 $('gRes').addEventListener('click',function(e){var b=e.target.closest('button[data-r]');if(!b)return;var x=LAST[+b.dataset.r];
  if(x.html){var dv=b.nextElementSibling;dv.hidden=!dv.hidden;return;}
  if(x.go&&x.go.k==='mon')showMon(x.go.v);else if(x.go&&x.go.k==='spl')showSpell(x.go.v);else if(x.el)goEl(x.el);});
+})();
+</script>
+<script>
+(function(){
+var w=document.querySelector('.wrap');if(!w)return;
+var gs=w.querySelector('.gsearch'),sub=w.querySelector('.sub');
+var lay=document.createElement('div');lay.className='amb-layout';
+var side=document.createElement('aside');side.className='amb-side';side.setAttribute('aria-label','תפריט');
+var main=document.createElement('div');main.className='amb-main';
+var menu=document.getElementById('optWhere').closest('.panel');
+var rest=[];var n=gs?gs.nextSibling:sub.nextSibling;
+while(n){var nx=n.nextSibling;rest.push(n);n=nx;}
+w.appendChild(lay);lay.appendChild(side);lay.appendChild(main);
+rest.forEach(function(x){main.appendChild(x);});
+side.appendChild(menu);
 })();
 </script>
